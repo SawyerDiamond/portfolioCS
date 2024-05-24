@@ -1,0 +1,35 @@
+.project {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Center items horizontally */
+  margin-top: 2rem;
+}
+.project h1 {
+  font-weight: 800;
+}
+
+.project__container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the start */
+  width: 80vw; /* Set the width of the content */
+}
+
+.project__header {
+  display: flex;
+}
+.project__header img {
+  width: 3.6rem;
+  height: auto;
+}
+
+.project__list {
+  width: 100%;
+  height: 21rem;
+  background-color: purple;
+}
+
+.project__profile-item {
+  width: auto;
+}

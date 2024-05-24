@@ -1,0 +1,89 @@
+img {
+  width: 100px;
+}
+
+h1,
+h2,
+h3,
+a {
+  font-family: "Gilroy", Helvetica, Arial, sans-serif;
+  text-decoration: none;
+  font-synthesis: none;
+  color: white;
+}
+h1 {
+  font-size: 5.5rem;
+  font-weight: 800;
+  font-style: normal;
+}
+h2 {
+  font-weight: 700;
+}
+h3 {
+  font-weight: 600;
+}
+a {
+  font-weight: 600;
+  font-size: 1.15rem;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style-type: none;
+}
+p {
+  font-family: "Gilroy", Helvetica, Arial, sans-serif;
+  font-weight: 600;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex--h {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.flex--col {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.flex--v {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.flex--around {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+.flex--spaced {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrapper {
+  flex: 1;
+  width: 100%;
+  flex-direction: column;
+  padding: 4rem 2rem;
+  @media screen and (max-width: 450px) {
+    padding: 4rem 1rem 2rem;
+  }
+}
+.hidden {
+  display: none;
+}
