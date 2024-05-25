@@ -14,22 +14,58 @@
   flex-direction: column;
   align-items: flex-start; /* Align items to the start */
   width: 80vw; /* Set the width of the content */
+  height: 80vw;
+  margin-top: 4rem;
 }
 
 .project__header {
   display: flex;
+  margin-bottom: 1rem;
 }
 .project__header img {
-  width: 3.6rem;
+  width: 4.2vw;
   height: auto;
+  margin-right: 1.5rem;
 }
 
-.project__list {
+.project__grid {
+  aspect-ratio: 2/3;
+  display: grid;
+  gap: 2vw 2vw;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(3, 1fr);
+  grid-auto-flow: row;
+  grid-template-areas: "one one two" "one one three" "Six Five Five";
+}
+
+.project__profile-item img {
+  border-radius: 2.75vw;
   width: 100%;
-  height: 21rem;
-  background-color: purple;
+  height: 100%;
 }
 
-.project__profile-item {
-  width: auto;
+.project__profile-item:nth-child(1) {
+  aspect-ratio: 1/1;
+  grid-area: one;
+}
+
+.project__profile-item:nth-child(2) {
+  aspect-ratio: 1/1;
+  grid-area: two;
+}
+
+.project__profile-item:nth-child(3) {
+  grid-area: three;
+}
+
+.project__profile-item:nth-child(4) {
+  grid-area: four;
+}
+
+.project__profile-item:nth-child(5) {
+  grid-area: Five;
+}
+
+.project__profile-item:nth-child(6) {
+  grid-area: Six;
 }
