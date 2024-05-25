@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"; // Import useEffect
 
-import "./Work.scss";
+import "./Projects.scss";
 import { images, icons, links } from "../../constants";
 import { motion } from "framer-motion";
 import useDeviceDetect from "../../hooks/useDeviceDetect";

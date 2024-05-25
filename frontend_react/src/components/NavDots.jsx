@@ -1,18 +1,18 @@
 import React from "react";
 
-const NavDots = ({ active, setToggle }) => {
+const NavDots = ({ active }) => {
   return (
-    <div className="nav-dots">
-      {["Home", "Skills", "Projects", "Experience"].map((item, index) => (
-        <a
-          href={`#${item}`}
-          onClick={() => setToggle(false)}
-          key={item + index}
-          className="nav-dots__dot"
-          style={active === item ? { backgroundColor: "#072" } : {}}>
-          {item}
-        </a>
-      ))}
+    <div className="dots">
+      {["Home", "Skills", "Projects", "Experience", "Contact"].map(
+        (item, index) => (
+          <a
+            href={`#${item}`}
+            key={item + index}
+            className="dots__icon"
+            style={active === item ? { backgroundColor: "#313BAC" } : {}}
+          />
+        )
+      )}
     </div>
   );
 };

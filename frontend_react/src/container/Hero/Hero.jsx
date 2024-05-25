@@ -1,11 +1,12 @@
 import React from "react";
 
+import { Wrap } from "../../wrapper";
 import "./Hero.scss";
 import { images, icons, links } from "../../constants";
 import { motion } from "framer-motion";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 
-const Header = () => {
+const Hero = () => {
   const { isMobile, isTablet, isDesktop } = useDeviceDetect();
   const textAnimationProps = { y: [-300, 0], opacity: [0, 1] };
   const shelfAnimationProps = { y: [300, 0], opacity: [0, 1] };
@@ -66,4 +67,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Wrap(Hero, "home");
