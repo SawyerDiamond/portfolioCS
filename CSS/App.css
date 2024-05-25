@@ -90,14 +90,33 @@ p {
 }
 
 .wrapper {
-  flex: 1;
   width: 100%;
-  flex-direction: column;
-  padding: 4rem 2rem;
 }
-@media screen and (max-width: 450px) {
-  .wrapper {
-    padding: 4rem 1rem 2rem;
+
+.dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  z-index: 2;
+  padding: 1rem;
+}
+.dots .dots__icon {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #cbcbcb;
+  margin: 0.5rem;
+  transition: background-color 0.2s ease-in-out;
+}
+.dots .dots__icon:hover {
+  background-color: var(--secondary-color);
+}
+@media screen and (min-width: 2000px) {
+  .dots .dots__icon {
+    width: 20px;
+    height: 20px;
   }
 }
 
