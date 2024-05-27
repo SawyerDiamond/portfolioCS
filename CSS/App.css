@@ -55,7 +55,6 @@ p {
 
 .flex {
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
@@ -96,16 +95,17 @@ p {
 .dots {
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
   position: absolute;
-  z-index: 2;
+  z-index: 100;
   padding: 1rem;
+  right: 0%;
+  align-self: center;
 }
 .dots .dots__icon {
   width: 10px;
   height: 10px;
-  border-radius: 50%;
+  border-radius: 35%;
   background-color: #cbcbcb;
   margin: 0.5rem;
   transition: background-color 0.2s ease-in-out;

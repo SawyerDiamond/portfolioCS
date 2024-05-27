@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react"; // Import useEffect
 
+import { Wrap, MotionWrap } from "../../wrapper";
 import "./Projects.scss";
 import { images, icons, links } from "../../constants";
 import { motion } from "framer-motion";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { urlFor, client } from "../../client";
 
-const Work = () => {
+const Projects = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
@@ -43,4 +44,4 @@ const Work = () => {
   );
 };
 
-export default Work;
+export default Wrap(Projects, "project");
