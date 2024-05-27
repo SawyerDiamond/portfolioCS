@@ -3,11 +3,11 @@ import { NavDots } from "../components";
 const Wrap = (Component, idName, classNames) =>
   function HOC() {
     return (
-      <div id={idName} className={`${classNames}`}>
+      <div id={idName} className={`flex ${classNames}`}>
+        <NavDots active={idName} />
         <div className="wrapper">
           <Component />
         </div>
-        <NavDots active={idName} />
       </div>
     );
   };
