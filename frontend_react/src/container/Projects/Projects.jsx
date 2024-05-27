@@ -35,7 +35,7 @@ const Projects = () => {
               transition={{ duration: 0.5, type: "tween" }}
               className="project__profile-item">
               <img src={urlFor(project.imgUrl)} alt={project.title} />
-              <h3 className="hidden project__profile-title">{project.title}</h3>
+              <h2 className=" project__profile-title">{project.title}</h2>
             </motion.div>
           ))}
         </div>
