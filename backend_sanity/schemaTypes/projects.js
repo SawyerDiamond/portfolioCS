@@ -9,8 +9,13 @@ export default {
       type: 'string',
     },
     {
-      name: 'description',
-      title: 'Description',
+      name: 'projectLink',
+      title: 'Project Link',
+      type: 'string',
+    },
+    {
+      name: 'codeLink',
+      title: 'Code Link',
       type: 'string',
     },
     {

@@ -8,6 +8,7 @@ import Contact from "../assets/mail.svg";
 import Dribbble from "../assets/dribbble2.svg";
 import GitHub from "../assets/github-two.svg";
 import Resume from "../assets/resume.svg";
+import Link from "../assets/Link.svg";
 export default {
   Home,
   Skills,
@@ -19,4 +20,5 @@ export default {
   Dribbble,
   GitHub,
   Resume,
+  Link,
 };
