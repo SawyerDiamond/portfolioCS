@@ -81,8 +81,6 @@
 
 .project__profile-hover {
   position: absolute;
-  top: 0;
-  left: 0;
   bottom: 0;
   right: 0;
   width: 100%;
@@ -90,15 +88,26 @@
   z-index: 2;
   border-radius: 2.75vw;
   background-color: transparent;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
 .project__profile-hover div {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  border-radius: 1rem;
   background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
   margin: 1rem;
-  font-family: var(--font-base);
-  font-weight: 800;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.project__profile-hover div img {
+  width: 20px;
+  height: auto;
 }
