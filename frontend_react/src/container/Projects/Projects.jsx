@@ -38,8 +38,12 @@ const Projects = () => {
               <motion.div
                 initial={{ opacity: 0 }}
                 whileHover={{ opacity: 1 }}
-                transition={{ ease: "easeInOut", duration: 0.5 }}
-                className="project__profile-hover">
+                transition={{
+                  ease: "easeInOut",
+                  duration: 0.5,
+                  staggerChildren: 0.5,
+                }}
+                className={project.codeLink ? "project__profile-hover" : ""}>
                 <a href={project.projectLink} target="_blank" rel="noreferrer">
                   <motion.div
                     whileInView={{ scale: [0, 1] }}
