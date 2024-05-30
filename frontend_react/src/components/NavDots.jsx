@@ -1,6 +1,13 @@
 import React from "react";
+import useDeviceDetect from "../hooks/useDeviceDetect";
 
 const NavDots = ({ active }) => {
+  const { isMobile } = useDeviceDetect();
+
+  if (isMobile) {
+    return null;
+  }
+
   return (
     <div className="dots">
       {["hero", "skills", "project", "Experience", "Contact"].map(
