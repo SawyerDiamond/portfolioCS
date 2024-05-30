@@ -4,12 +4,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column; // Add this line to stack the children vertically
+
+  @media (min-width: 1025px) {
+    // Add this media query for desktop configuration
+    flex-direction: row; // Change the direction to row for desktop
+  }
 }
 .hero__left {
   @media (max-width: 1024px) {
     display: flex;
     align-items: center;
     flex-direction: column;
+    order: 1; // Add this line to make sure it's centered on the screen
   }
 }
 .bg {
@@ -21,6 +28,7 @@
 .hero__container {
   position: absolute;
   width: 100vw;
+  height: 100vh;
   display: flex;
   align-items: center;
 }
@@ -60,7 +68,7 @@
   line-height: 0.925;
   @media (max-width: 1024px) {
     text-align: center;
-    width: 52vw;
+    width: 55vw;
     font-size: 4.5vw;
   }
 }
@@ -69,6 +77,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  @media (max-width: 1024px) {
+    order: 2;
+    position: absolute; // Add this line to position the element
+    bottom: 10%;
+  }
 }
 .hero__logo {
   width: 11vw;

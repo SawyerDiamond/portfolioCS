@@ -8,8 +8,18 @@ import useDeviceDetect from "../../hooks/useDeviceDetect";
 
 const Hero = () => {
   const { isMobile, isTablet, isDesktop } = useDeviceDetect();
-  const textAnimationProps = { y: [-300, 0], opacity: [0, 1] };
-  const shelfAnimationProps = { y: [300, 0], opacity: [0, 1] };
+  const textAnimationDesktop = isDesktop
+    ? { y: [-300, 0], opacity: [0, 1] }
+    : {};
+  const shelfAnimationDesktop = isDesktop
+    ? { y: [300, 0], opacity: [0, 1] }
+    : {};
+  const textAnimationResponsive = !isDesktop
+    ? { y: [-300, 0], opacity: [0, 1] }
+    : {};
+  const shelfAnimationResponsive = !isDesktop
+    ? { y: [300, 0], opacity: [0, 1] }
+    : {};
   return (
     <section className="hero">
       <div
@@ -17,7 +27,8 @@ const Hero = () => {
           isDesktop ? "flex--around" : "flex--col"
         }`}>
         <motion.div
-          whileInView={textAnimationProps}
+          animate={textAnimationResponsive}
+          whileInView={textAnimationDesktop}
           transition={{ duration: 1 }}
           className="hero__left">
           <h1 className="hero__intro">
@@ -29,7 +40,8 @@ const Hero = () => {
         </motion.div>
 
         <motion.div
-          whileInView={shelfAnimationProps}
+          animate={shelfAnimationResponsive}
+          whileInView={shelfAnimationDesktop}
           transition={{ duration: 1 }}
           className="hero__right">
           <img

@@ -2,11 +2,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; /* Center items horizontally */
+  align-items: center;
   margin-top: 2rem;
   h1 {
     font-weight: 800;
   }
+  position: relative;
 }
 
 .project__container {
@@ -15,6 +16,9 @@
   align-items: flex-start;
   max-width: 80vw;
   margin-top: 4rem;
+  @media (max-width: 767px) {
+    margin-top: 2rem;
+  }
 }
 
 .project__header {
@@ -24,6 +28,16 @@
     width: 4.2vw;
     height: auto;
     margin-right: 1.5rem;
+  }
+  @media (max-width: 767px) {
+    margin-bottom: 0.75rem;
+    h1 {
+      font-size: 2rem;
+    }
+    img {
+      width: 1.8rem;
+      margin-right: 0.75rem;
+    }
   }
 }
 
@@ -38,23 +52,35 @@
     "one one one two two"
     "three three five five five"
     "four four five five five";
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
-.project__profile-title {
+.project__title {
   position: absolute;
   z-index: 2;
   max-width: 18vw;
+  @media (max-width: 767px) {
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+  }
 }
-.project__profile-item {
-  position: relative; // Add this line to make the child div positioned relative to this item
+.project__item {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  &:hover .project__profile-hover {
-    // Apply the hover effect to the child div when this item is hovered
+  &:hover .project__item--hover {
     background-color: rgba(0, 0, 0, 0.5);
   }
+  &:active .project__item--hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
   img {
     z-index: 1;
     border-radius: 2.75vw;
@@ -63,32 +89,35 @@
     object-fit: cover;
   }
 }
-.project__profile-item:nth-child(1) {
+.project__item:nth-child(1) {
   grid-area: one;
 }
-.project__profile-item:nth-child(2) {
+.project__item:nth-child(2) {
   grid-area: two;
 }
-.project__profile-item:nth-child(3) {
+.project__item:nth-child(3) {
   grid-area: three;
 }
-.project__profile-item:nth-child(4) {
+.project__item:nth-child(4) {
   grid-area: four;
 }
-.project__profile-item:nth-child(5) {
+.project__item:nth-child(5) {
   grid-area: five;
 }
 
-.project__profile-hover {
+.project__item--hover {
   position: absolute;
   bottom: 0;
   right: 0;
+
   width: 100%;
   height: 100%;
   z-index: 2;
+
   border-radius: 2.75vw;
   background-color: transparent;
   transition: all 0.3s ease;
+
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -96,18 +125,59 @@
   div {
     width: 50px;
     height: 50px;
+
     border-radius: 1rem;
-    background-color: rgba(0, 0, 0, 0.5);
     margin: 1rem;
+
     cursor: pointer;
+
     display: flex;
     justify-content: center;
     align-items: center;
     transition: all 0.3s ease;
     position: relative;
-    img {
-      width: 20px;
-      height: auto;
-    }
+    background: var(--navy-primary);
+  }
+  img {
+    width: 20px;
+    height: auto;
+  }
+}
+
+.project__item--hover-link:hover {
+  background: var(--yellow-gradient);
+}
+
+.project__item--hover-github:hover {
+  background: var(--blue-gradient);
+}
+.project__item--hover-link:active {
+  background: var(--yellow-gradient);
+}
+
+.project__item--hover-github:active {
+  background: var(--blue-gradient);
+}
+
+.project__bg {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.project__bg-text {
+  font-size: 14vw;
+  font-weight: 800;
+  user-select: none;
+  color: var(--navy-secondary);
+  @media (max-width: 767px) {
+    display: none;
   }
 }
