@@ -68,6 +68,23 @@
     text-align: center;
   }
 }
+@media (max-width: 767px) {
+  .hero__intro {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    font-size: 16vw;
+    text-align: center;
+    justify-items: start;
+  }
+  .hero__intro span:nth-child(-n+2) {
+    grid-column: span 1;
+    padding-right: 0;
+  }
+  .hero__intro span:nth-child(3) {
+    grid-column: span 3;
+  }
+}
 
 .hero__desc {
   width: 34vw;
@@ -78,6 +95,15 @@
     text-align: center;
     width: 55vw;
     font-size: 4.5vw;
+  }
+}
+@media (max-width: 767px) {
+  .hero__desc {
+    line-height: 1;
+    margin-top: 0.25rem;
+    width: 68vw;
+    font-size: 6vw;
+    text-align: left;
   }
 }
 
