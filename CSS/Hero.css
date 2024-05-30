@@ -3,6 +3,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+}
+@media (min-width: 1025px) {
+  .hero {
+    flex-direction: row;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -10,6 +16,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    order: 1;
   }
 }
 
@@ -23,6 +30,7 @@
 .hero__container {
   position: absolute;
   width: 100vw;
+  height: 100vh;
   display: flex;
   align-items: center;
 }
@@ -68,7 +76,7 @@
 @media (max-width: 1024px) {
   .hero__desc {
     text-align: center;
-    width: 52vw;
+    width: 55vw;
     font-size: 4.5vw;
   }
 }
@@ -77,6 +85,13 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+@media (max-width: 1024px) {
+  .hero__right {
+    order: 2;
+    position: absolute;
+    bottom: 10%;
+  }
 }
 
 .hero__logo {

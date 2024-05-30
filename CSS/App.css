@@ -5,7 +5,8 @@ img {
 h1,
 h2,
 h3,
-a {
+a,
+span {
   font-family: "Gilroy", Helvetica, Arial, sans-serif;
   text-decoration: none;
   font-synthesis: none;
