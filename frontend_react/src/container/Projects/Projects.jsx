@@ -54,7 +54,7 @@ const Projects = () => {
               key={project.title ? project.title + index : index}
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.9 }}
-              transition={{ duration: 0.5, type: "tween" }}
+              transition={{ duration: 0.5, ease: "easeInOut", type: "tween" }}
               className={getItemClass(project)}>
               <img src={urlFor(project.imgUrl)} alt={project.title} />
               <motion.div

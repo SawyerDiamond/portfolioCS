@@ -1,4 +1,5 @@
 import React from "react";
+import { Wrap } from "../../wrapper";
 
 import "./Skills.scss";
 import { images, icons, links } from "../../constants";
@@ -19,4 +20,4 @@ const Skills = () => {
   );
 };
 
-export default Skills;
+export default Wrap(Skills, "skills");
