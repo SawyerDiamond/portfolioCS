@@ -30,7 +30,7 @@
 .project__header img {
   width: 4.2vw;
   height: auto;
-  margin-right: 1.5rem;
+  margin-right: 1rem;
 }
 @media (max-width: 767px) {
   .project__header {

@@ -12,7 +12,10 @@ const Nav = () => {
   const { isMobile, isTablet, isDesktop } = useDeviceDetect();
   return (
     <nav>
-      <div className={`navbar flex--spaced ${isMobile ? "hidden" : ""}`}>
+      <motion.div
+        animate={{ y: [-150, 0], opacity: [0, 1] }}
+        transition={{ duration: 1 }}
+        className={`navbar flex--spaced ${isMobile ? "hidden" : ""}`}>
         <div className={`flex navbar__logo ${isMobile ? "hidden" : ""}`}>
           <img src={images.logo} alt="logo" />
           <h3>SAWYER</h3>
@@ -37,7 +40,7 @@ const Nav = () => {
           <img src={icons.Contact} alt="Contact" />
           <h3>Contact</h3>
         </a>
-      </div>
+      </motion.div>
     </nav>
   );
 };
