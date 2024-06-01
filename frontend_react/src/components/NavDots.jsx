@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import useDeviceDetect from "../hooks/useDeviceDetect";
 
 const NavDots = ({ active }) => {
@@ -9,7 +10,10 @@ const NavDots = ({ active }) => {
   }
 
   return (
-    <div className="dots">
+    <motion.div
+      animate={{ y: [-150, 0], opacity: [0, 1] }}
+      transition={{ duration: 1 }}
+      className="dots">
       {["hero", "skills", "project", "Contact"].map((item, index) => (
         <a
           href={`#${item}`}
@@ -18,7 +22,7 @@ const NavDots = ({ active }) => {
           style={active === item ? { background: "var(--pink-gradient)" } : {}}
         />
       ))}
-    </div>
+    </motion.div>
   );
 };
 
