@@ -39,6 +39,8 @@ const Projects = () => {
     });
   }, []);
 
+  //Creates background text for projects section
+  const textArray = Array(6).fill("P R O J E C T S");
   return (
     <section className="project">
       <div className="project__container">
@@ -93,14 +95,13 @@ const Projects = () => {
           ))}
         </div>
       </div>
-      <div className="project__bg">
-        <span className="project__bg-text">P R O J E C T S</span>
-        <span className="project__bg-text">P R O J E C T S</span>
-        <span className="project__bg-text">P R O J E C T S</span>
-        <span className="project__bg-text">P R O J E C T S</span>
-        <span className="project__bg-text">P R O J E C T S</span>
-        <span className="project__bg-text">P R O J E C T S</span>
-      </div>
+      <motion.div className="project__bg">
+        {textArray.map((text, index) => (
+          <span className="project__bg-text" key={index}>
+            {text}
+          </span>
+        ))}
+      </motion.div>
     </section>
   );
 };
