@@ -2,14 +2,10 @@ import React from "react";
 
 import "./Nav.scss";
 import { images, icons } from "../../constants";
-import { HiMenuAlt3 } from "react-icons/hi";
-import { IoClose } from "react-icons/io5";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 const Nav = () => {
-  const [toggle, setToggle] = useState(false);
-  const { isMobile, isTablet, isDesktop } = useDeviceDetect();
+  const { isMobile, isDesktop } = useDeviceDetect();
   return (
     <nav>
       <motion.div
