@@ -9,6 +9,7 @@ import Dribbble from "../assets/dribbble2.svg";
 import GitHub from "../assets/github-two.svg";
 import Resume from "../assets/resume.svg";
 import Link from "../assets/Link.svg";
+import Location from "../assets/location.svg";
 const icons = {
   Home,
   Skills,
@@ -21,6 +22,7 @@ const icons = {
   GitHub,
   Resume,
   Link,
+  Location,
 };
 
 export default icons;
