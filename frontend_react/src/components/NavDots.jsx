@@ -14,7 +14,7 @@ const NavDots = ({ active }) => {
       animate={{ y: [-150, 0], opacity: [0, 1] }}
       transition={{ duration: 1 }}
       className="dots">
-      {["hero", "skills", "project", "Contact"].map((item, index) => (
+      {["Home", "Skills", "Projects", "Contact"].map((item, index) => (
         <a
           href={`#${item}`}
           key={item + index}

@@ -106,4 +106,4 @@ const Projects = () => {
   );
 };
 
-export default Wrap(Projects, "project");
+export default Wrap(Projects, "Projects");

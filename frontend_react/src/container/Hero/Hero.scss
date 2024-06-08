@@ -4,11 +4,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column; // Add this line to stack the children vertically
-
+  flex-direction: column;
   @media (min-width: 1025px) {
-    // Add this media query for desktop configuration
-    flex-direction: row; // Change the direction to row for desktop
+    flex-direction: row;
   }
 }
 .hero__left {
@@ -16,7 +14,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    order: 1; // Add this line to make sure it's centered on the screen
+    order: 1;
   }
 }
 .bg {
@@ -63,19 +61,19 @@
   }
   @media (max-width: 767px) {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); // Change this line
+    grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: auto;
     font-size: 16vw;
     text-align: center;
     justify-items: start;
 
     & span:nth-child(-n + 2) {
-      grid-column: span 1; // Change this line
+      grid-column: span 1;
       padding-right: 0;
     }
 
     & span:nth-child(3) {
-      grid-column: span 3; // Change this line
+      grid-column: span 3;
     }
   }
 }
@@ -103,7 +101,7 @@
   align-items: center;
   @media (max-width: 1024px) {
     order: 2;
-    position: absolute; // Add this line to position the element
+    position: absolute;
     bottom: 10%;
   }
 }

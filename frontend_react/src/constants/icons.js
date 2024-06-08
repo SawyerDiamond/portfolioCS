@@ -1,5 +1,6 @@
 import Home from "../assets/home.svg";
 import Skills from "../assets/bolt.svg";
+import SkillsBG from "../assets/skillsBG.svg";
 import SkillsHeader from "../assets/lightning.svg";
 import Projects from "../assets/proj.svg";
 import ProjectsHeader from "../assets/projHeader.svg";
@@ -13,6 +14,7 @@ import Location from "../assets/location.svg";
 const icons = {
   Home,
   Skills,
+  SkillsBG,
   SkillsHeader,
   Projects,
   ProjectsHeader,
