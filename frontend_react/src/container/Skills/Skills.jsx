@@ -9,7 +9,7 @@ import useDeviceDetect from "../../hooks/useDeviceDetect";
 
 const Skills = () => {
   const [skills, setSkills] = useState([]);
-  const textArray = Array(10).fill("S K I L L S");
+  const iconArray = Array(5).fill(icons.SkillsBG);
   useEffect(() => {
     const skillsQuery = '*[_type == "skills"]';
     client.fetch(skillsQuery).then((data) => {
@@ -43,15 +43,8 @@ const Skills = () => {
           ))}
         </motion.div>
       </div>
-      <motion.div className="skills__bg">
-        {textArray.map((text, index) => (
-          <span className="skills__bg-text" key={index}>
-            {text}
-          </span>
-        ))}
-      </motion.div>
     </section>
   );
 };
 
-export default Wrap(Skills, "skills");
+export default Wrap(Skills, "Skills");

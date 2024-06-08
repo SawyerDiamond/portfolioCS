@@ -7,15 +7,12 @@
   --light-blue: #138ef0;
   --dark-gold: #f7991d;
   --light-gold: #fcc00a;
-  --white-primary: #f8fbff;
-  --white-secondary: #d9d9d9;
-
   /*--<SHADOWS>--*/
   --white-shadow: 0px 0px 15px #ffffff50;
   --blue-shadow: 0px 0px 15px #105fd660;
   --navy-shadow: 0px 0px 10px #0f234dbc;
   --gold-shadow: 0px 0px 15px #f7991d78;
-  --dark-shadow: 0px 0px 15px #00000024;
+  --dark-shadow: 0px 0px 15px #00000013;
 
   --blue-gradient: linear-gradient(67.93deg, #138ef0 23.56%, #0971f0 79.49%);
   --pink-gradient: linear-gradient(67.93deg, #e938c0 23.56%, #f15f79 79.49%);
@@ -98,6 +95,7 @@ body {
   background-color: --navy-primary;
   background-size: cover;
   color: --white-primary;
+  overflow-x: hidden;
 }
 
 h1,

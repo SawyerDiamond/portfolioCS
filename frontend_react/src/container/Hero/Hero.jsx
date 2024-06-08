@@ -79,4 +79,4 @@ const Hero = () => {
   );
 };
 
-export default Wrap(Hero, "hero");
+export default Wrap(Hero, "Home");
