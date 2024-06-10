@@ -11,7 +11,7 @@
   border-radius: 1.2rem;
   z-index: 1000;
   background: var(--navy-secondary);
-  filter: var(--navy-shadow);
+  box-shadow: var(--dark-shadow);
   overflow: hidden;
   @media screen and (min-width: 2400px) {
     height: 6rem;
@@ -20,21 +20,22 @@
 }
 
 .navbar__logo {
-  background-color: var(--navy-primary);
-  padding: 0.7rem;
-  padding-right: 2rem;
+  box-sizing: border-box;
+  padding: 0.9rem;
+  padding-right: 2.2rem;
   border-radius: 1.2rem;
   font-size: 1.35rem;
+  background-color: var(--navy-primary);
   @media screen and (min-width: 2400px) {
-    padding: 1rem;
-    padding-right: 2.5rem;
-    border-radius: 1.4rem;
+    padding: 1.25rem;
+    padding-right: 2.85rem;
+    border-radius: 1.75rem;
     h3 {
       font-size: 2.5rem;
     }
   }
   img {
-    width: 2.602rem;
+    width: 2.25rem;
     height: auto;
     border-radius: 0.8rem;
     margin-left: 1.2rem;
@@ -49,24 +50,27 @@
   }
 }
 
+.navbar__links {
+  li {
+    &:nth-child(odd) {
+      a:hover .navbar__button-icon {
+        background: var(--yellow-gradient);
+      }
+    }
+
+    &:nth-child(even) {
+      a:hover .navbar__button-icon {
+        background: var(--pink-gradient);
+      }
+    }
+  }
+}
 .navbar__button {
   padding: 0.5rem;
   font-weight: bold;
-  &:hover {
-    text-decoration: underline;
-    -moz-text-decoration-color: var(--light-blue);
-    text-decoration-color: var(--light-blue);
-    -moz-text-decoration-thickness: 2px;
-    text-decoration-thickness: 2px;
-    -moz-text-underline-offset: 4px;
-    text-underline-offset: 4px;
-    transition: all 1000ms ease;
-  }
-
-  &:hover img {
-    background: linear-gradient(0deg, var(--dark-blue), var(--light-blue));
-    filter: --navy-shadow;
-    transition: all 1000ms ease;
+  a {
+    display: flex;
+    align-items: center;
   }
 
   @media screen and (min-width: 2400px) {
@@ -80,7 +84,7 @@
   padding: 0.5rem;
   margin-right: 0.75rem;
   border-radius: 0.5rem;
-  background-color: var(--navy-primary);
+  background-color: var(--navy-nav);
 
   @media (max-width: 1024px) {
     margin-right: 4vw;
