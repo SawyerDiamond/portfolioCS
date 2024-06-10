@@ -19,15 +19,18 @@ const Nav = () => {
         <ul className="navbar__links flex--spaced">
           {["Home", "Skills", "Projects", "Experience"].map((item) => (
             <li className="navbar__button flex--v" key={`link-${item}`}>
-              <img
-                className="navbar__button-icon"
-                src={icons[item]}
-                alt="icon"
-              />
-              <a
-                className={`navbar__button-label ${isDesktop ? "" : "hidden"}`}
-                href={`#${item}`}>
-                {item}
+              <a href={`#${item}`}>
+                <img
+                  className="navbar__button-icon"
+                  src={icons[item]}
+                  alt="icon"
+                />
+                <span
+                  className={`navbar__button-label ${
+                    isDesktop ? "" : "hidden"
+                  }`}>
+                  {item}
+                </span>
               </a>
             </li>
           ))}

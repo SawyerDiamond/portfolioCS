@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useRef } from "react"; // Import useEffect
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+} from "react";
 
 import { Wrap } from "../../wrapper";
 import "./Projects.scss";
@@ -7,7 +13,7 @@ import { motion } from "framer-motion";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { urlFor, client } from "../../client";
 
-const Projects = () => {
+const Projects = React.memo(() => {
   const { isMobile } = useDeviceDetect();
 
   //Sets logic for clicking on project items
@@ -28,9 +34,12 @@ const Projects = () => {
 
   //Sets logic for inputs into the projects grid and removes filler from mobile site.
   const [projects, setProjects] = useState([]);
-  const getItemClass = (project) => {
-    return isMobile && !project.projectLink ? "hidden" : "project__item";
-  };
+  const getItemClass = useCallback(
+    (project) => {
+      return isMobile && !project.projectLink ? "hidden" : "project__item";
+    },
+    [isMobile]
+  );
   useEffect(() => {
     const query = '*[_type == "projects"]';
 
@@ -39,8 +48,6 @@ const Projects = () => {
     });
   }, []);
 
-  //Creates background text for projects section
-  const textArray = Array(6).fill("P R O J E C T S");
   return (
     <section className="project">
       <div className="project__container">
@@ -90,20 +97,13 @@ const Projects = () => {
                   </motion.div>
                 </a>
               </motion.div>
-              <h2 className=" project__title">{project.title}</h2>
+              <h2 className="project__title">{project.title}</h2>
             </motion.div>
           ))}
         </div>
       </div>
-      <motion.div className="project__bg">
-        {textArray.map((text, index) => (
-          <span className="project__bg-text" key={index}>
-            {text}
-          </span>
-        ))}
-      </motion.div>
     </section>
   );
-};
+});
 
 export default Wrap(Projects, "Projects");
