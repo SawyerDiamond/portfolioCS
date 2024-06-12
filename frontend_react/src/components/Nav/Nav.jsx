@@ -11,8 +11,13 @@ const Nav = () => {
       <motion.div
         animate={{ y: [-150, 0], opacity: [0, 1] }}
         transition={{ duration: 1 }}
-        className={`navbar flex--spaced ${isMobile ? "hidden" : ""}`}>
-        <div className={`flex navbar__logo ${isMobile ? "hidden" : ""}`}>
+        className={`navbar secondary-bg flex--spaced ${
+          isMobile ? "hidden" : ""
+        }`}>
+        <div
+          className={`flex primary-bg navbar__logo ${
+            isMobile ? "hidden" : ""
+          }`}>
           <img src={images.logo} alt="logo" />
           <h3>SAWYER</h3>
         </div>
@@ -21,7 +26,7 @@ const Nav = () => {
             <li className="navbar__button flex--v" key={`link-${item}`}>
               <a href={`#${item}`}>
                 <img
-                  className="navbar__button-icon"
+                  className="navbar__button-icon primary-bg"
                   src={icons[item]}
                   alt="icon"
                 />

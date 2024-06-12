@@ -8,8 +8,6 @@
   display: block;
   border-radius: 1.2rem;
   z-index: 1000;
-  background: var(--navy-secondary);
-  box-shadow: var(--dark-shadow);
   overflow: hidden;
 }
 @media screen and (min-width: 2400px) {
@@ -25,7 +23,6 @@
   padding-right: 2.2rem;
   border-radius: 1.2rem;
   font-size: 1.35rem;
-  background-color: var(--navy-primary);
 }
 @media screen and (min-width: 2400px) {
   .navbar__logo {
@@ -81,7 +78,6 @@
   padding: 0.5rem;
   margin-right: 0.75rem;
   border-radius: 0.5rem;
-  background-color: var(--navy-nav);
 }
 @media (max-width: 1024px) {
   .navbar__button-icon {
