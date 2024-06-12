@@ -1,8 +1,8 @@
 :root {
   /*--<COLORS>--*/
   --navy-primary: rgba(11, 22, 44, 0.6);
-  --navy-secondary: rgba(15, 35, 77, 0.6);
-  --navy-tertiary: background: rgba(14, 41, 75, 0.6);
+  --navy-secondary: rgba(15, 35, 77, 0.5);
+  --navy-tertiary: rgba(11, 31, 55, 0.5);
   --dark-blue: #0971f0;
   --light-blue: #138ef0;
   --dark-gold: #f7991d;
