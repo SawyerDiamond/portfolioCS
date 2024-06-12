@@ -25,11 +25,13 @@ const Skills = () => {
           <h1>Skills</h1>
         </div>
         <motion.div className="skills__list">
-          {skills.map((skill) => (
+          {skills.map((skill, index) => (
             <motion.div
               whileInView={{ opacity: [0, 1] }}
               transition={{ duration: 0.5 }}
-              className="skills__item"
+              className={`skills__item ${
+                skill.order % 2 === 0 ? "tertiary-bg" : "secondary-bg"
+              }`}
               key={skill.name}
               style={{ order: skill.order }}>
               <motion.img

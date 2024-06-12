@@ -49,7 +49,8 @@ const Hero = () => {
             className={`hero__logo ${isDesktop ? "" : "hidden"}`}
             alt="logo"
           />
-          <ul className={`hero__shelf ${isDesktop ? "" : "flex--h"}`}>
+          <ul
+            className={`hero__shelf tertiary-bg ${isDesktop ? "" : "flex--h"}`}>
             {Object.keys(links).map((item) => (
               <li className="hero__shelf--item" key={item}>
                 <a href={links[item]} target="_blank" rel="noopener noreferrer">
