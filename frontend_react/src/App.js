@@ -5,7 +5,7 @@ import { Nav } from "./components";
 import "./App.scss";
 const App = () => {
   return (
-    <div className="app">
+    <div className="app app-bg">
       <Nav />
       <Hero />
       <Skills />
