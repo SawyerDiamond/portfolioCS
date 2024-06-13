@@ -30,7 +30,7 @@ const Skills = () => {
               whileInView={{ opacity: [0, 1] }}
               transition={{ duration: 0.5 }}
               className={`skills__item ${
-                skill.order % 2 === 0 ? "tertiary-bg" : "secondary-bg"
+                skill.order % 2 === 0 ? "tertiary-bg" : "primary-bg"
               }`}
               key={skill.name}
               style={{ order: skill.order }}>

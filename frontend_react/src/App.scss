@@ -118,3 +118,39 @@ p {
 .hidden {
   display: none;
 }
+
+.primary-bg {
+  background: var(--navy-primary);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(11, 22, 44, 0.35);
+}
+
+.secondary-bg {
+  background: var(--navy-secondary);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(15, 35, 77, 0.35);
+}
+.tertiary-bg {
+  background: var(--navy-tertiary);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(14, 41, 75, 0.35);
+}
+
+.blue-glass {
+  background: var(--blue-glass);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(9, 113, 240, 0.5);
+}
+
+.app-bg {
+  margin: 1vw;
+  border-radius: 1vw;
+  background: var(--navy-secondary);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(15, 35, 77, 0.35);
+}

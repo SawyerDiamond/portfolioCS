@@ -40,7 +40,7 @@ const Nav = () => {
             </li>
           ))}
         </ul>
-        <a className="navbar__contact flex--v" href="#contact-point">
+        <a className="navbar__contact blue-glass flex--v" href="#contact-point">
           <img src={icons.Contact} alt="Contact" />
           <h3>Contact</h3>
         </a>
