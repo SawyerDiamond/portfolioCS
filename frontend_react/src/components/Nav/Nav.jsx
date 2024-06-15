@@ -18,7 +18,7 @@ const Nav = () => {
           className={`flex primary-bg navbar__logo ${
             isMobile ? "hidden" : ""
           }`}>
-          <img src={images.logo} alt="logo" />
+          <img src={images.logo2} alt="logo" />
           <h3>SAWYER</h3>
         </div>
         <ul className="navbar__links flex--spaced">
@@ -28,7 +28,7 @@ const Nav = () => {
                 <img
                   className="navbar__button-icon primary-bg"
                   src={icons[item]}
-                  alt="icon"
+                  alt="Navigation icon"
                 />
                 <span
                   className={`navbar__button-label ${
@@ -41,7 +41,7 @@ const Nav = () => {
           ))}
         </ul>
         <a className="navbar__contact blue-glass flex--v" href="#contact-point">
-          <img src={icons.Contact} alt="Contact" />
+          <img src={icons.Contact} alt="Contact link icon" />
           <h3>Contact</h3>
         </a>
       </motion.div>

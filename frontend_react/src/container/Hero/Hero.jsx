@@ -26,7 +26,7 @@ const Hero = () => {
         className={`hero__container ${
           isDesktop ? "flex--around" : "flex--col"
         }`}>
-        <motion.div
+        <motion.header
           animate={textAnimationResponsive}
           whileInView={textAnimationDesktop}
           transition={{ duration: 1 }}
@@ -37,7 +37,7 @@ const Hero = () => {
             <span>Sawyer,</span>
           </h1>
           <h2 className="hero__desc">a Frontend Developer & UI Designer. </h2>
-        </motion.div>
+        </motion.header>
 
         <motion.div
           animate={shelfAnimationResponsive}
@@ -45,7 +45,7 @@ const Hero = () => {
           transition={{ duration: 1 }}
           className="hero__right">
           <img
-            src={images.logo}
+            src={images.logo2}
             className={`hero__logo ${isDesktop ? "" : "hidden"}`}
             alt="logo"
           />

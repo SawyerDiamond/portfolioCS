@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  useMemo,
-} from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 
 import { Wrap } from "../../wrapper";
 import "./Projects.scss";
@@ -19,6 +13,7 @@ const Projects = React.memo(() => {
   //Sets logic for clicking on project items
   const itemRef = useRef();
   const [isActive, setIsActive] = useState(false);
+  const textArray = Array(6).fill("P R O J E C T S");
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (itemRef.current && !itemRef.current.contains(event.target)) {
@@ -57,15 +52,18 @@ const Projects = React.memo(() => {
         </div>
         <div className="project__grid">
           {projects.map((project, index) => (
-            <motion.div
+            <div
               ref={itemRef}
               whileInView={{ opacity: 1 }}
               key={project.title ? project.title + index : index}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ duration: 0.5, ease: "easeInOut", type: "tween" }}
-              className={getItemClass(project)}>
-              <img src={urlFor(project.imgUrl)} alt={project.title} />
+              className={`${getItemClass(project)} project__item
+              }`}>
+              <img
+                src={urlFor(project.imgUrl)}
+                alt={
+                  project.title ? project.title : "Placeholder Project Image"
+                }
+              />
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: isActive ? 1 : 0 }}
@@ -79,28 +77,34 @@ const Projects = React.memo(() => {
                 onClick={() => setIsActive(!isActive)}
                 className={project.codeLink ? "project__item--hover" : ""}>
                 <a href={project.projectLink} target="_blank" rel="noreferrer">
-                  <motion.div
-                    whileInView={{ scale: [0, 1] }}
-                    whileHover={{ scale: [1, 0.9] }}
-                    transition={{ duration: 0.25 }}
-                    className="project__item--hover-link">
+                  <div className="project__item--hover-link secondary-bg">
                     <img src={icons.Link} alt="View Code" />
-                  </motion.div>
+                  </div>
                 </a>
                 <a href={project.codeLink} target="_blank" rel="noreferrer">
-                  <motion.div
-                    whileInView={{ scale: [0, 1] }}
-                    whileHover={{ scale: [1, 0.9] }}
-                    transition={{ duration: 0.25 }}
-                    className="project__item--hover-github">
+                  <div className="project__item--hover-github secondary-bg">
                     <img src={icons.GitHub} alt="View Code" />
-                  </motion.div>
+                  </div>
                 </a>
               </motion.div>
               <h2 className="project__title">{project.title}</h2>
-            </motion.div>
+            </div>
           ))}
+          {Array(5 - projects.length)
+            .fill()
+            .map((_, index) => (
+              <div
+                key={`placeholder-${index}`}
+                className="project__item primary-bg"></div>
+            ))}
         </div>
+      </div>
+      <div className="project__bg">
+        {textArray.map((text, index) => (
+          <span className="project__bg-text" key={index}>
+            {text}
+          </span>
+        ))}
       </div>
     </section>
   );
