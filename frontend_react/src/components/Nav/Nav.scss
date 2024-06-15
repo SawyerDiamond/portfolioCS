@@ -11,7 +11,6 @@
   border-radius: 1.2rem;
   z-index: 1000;
 
-  overflow: hidden;
   @media screen and (min-width: 2400px) {
     height: 6rem;
     border-radius: 2rem;
@@ -34,7 +33,7 @@
   }
   img {
     width: 2.25rem;
-    height: auto;
+    height: 2.25rem;
     border-radius: 0.8rem;
     margin-left: 1.2rem;
     margin-right: 0.8rem;
@@ -103,7 +102,7 @@
 }
 
 .navbar__contact {
-  margin-right: 0.8rem;
+  margin-right: 0.75rem;
   padding-right: 1rem;
   border-radius: 0.75rem;
 

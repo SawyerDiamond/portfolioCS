@@ -9,7 +9,7 @@ import useDeviceDetect from "../../hooks/useDeviceDetect";
 
 const Skills = () => {
   const [skills, setSkills] = useState([]);
-  const iconArray = Array(5).fill(icons.SkillsBG);
+  const iconArray = Array(skills.length).fill(icons.SkillsBG);
   useEffect(() => {
     const skillsQuery = '*[_type == "skills"]';
     client.fetch(skillsQuery).then((data) => {
@@ -20,10 +20,10 @@ const Skills = () => {
   return (
     <section className="skills">
       <div className="skills__container">
-        <div className="skills__header">
+        <header className="skills__header">
           <img src={icons.SkillsHeader} alt="Header Icon" />
           <h1>Skills</h1>
-        </div>
+        </header>
         <motion.div className="skills__list">
           {skills.map((skill, index) => (
             <motion.div
@@ -45,6 +45,16 @@ const Skills = () => {
           ))}
         </motion.div>
       </div>
+      <motion.div className="skills__bg">
+        {iconArray.map((icon, index) => (
+          <motion.img
+            src={icon}
+            className="skills__bg-icon"
+            key={index}
+            alt="Background images"
+          />
+        ))}
+      </motion.div>
     </section>
   );
 };

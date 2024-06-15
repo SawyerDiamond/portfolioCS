@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+
+import { images } from "../../constants";
+import { Wrap } from "../../wrapper";
+import { client } from "../../client";
 
 import "./Contact.scss";
 
 const Contact = () => {
-  return null;
+  return (
+    <>
+      <div className="contact" id="contact"></div>
+    </>
+  );
 };
 
-export default Contact;
+export default Wrap(Contact, "contact");

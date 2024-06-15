@@ -3,10 +3,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   h1 {
     font-weight: 800;
   }
   position: relative;
+  overflow-x: hidden;
+  padding: 75px 0;
 }
 
 .skills__container {
@@ -25,7 +28,7 @@
   margin-bottom: 1rem;
   img {
     width: 4.2vw;
-    height: auto;
+    height: 5.6vw;
     margin-right: 0.25rem;
   }
   @media (max-width: 767px) {
@@ -75,18 +78,14 @@
 }
 
 .skills__bg {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   position: absolute;
+  display: flex;
   z-index: -1;
-  overflow-x: hidden;
 }
 
 .skills__bg-icon {
-  width: 40rem;
-
-  overflow: hidden;
+  width: 30rem;
+  margin-right: 3rem;
   @media (max-width: 767px) {
     display: none;
   }

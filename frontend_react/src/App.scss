@@ -89,7 +89,7 @@ p {
 .dots {
   display: flex;
   justify-content: center;
-  align-items: center; /* This will center the dots vertically */
+  align-items: center;
   flex-direction: column;
   position: absolute;
   z-index: 100;
@@ -117,26 +117,28 @@ p {
 }
 .hidden {
   display: none;
+  width: 0px;
+  height: 0px;
 }
 
 .primary-bg {
   background: var(--navy-primary);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(11, 22, 44, 0.35);
+  border: 1px solid rgba(14, 41, 75, 0.35);
 }
 
 .secondary-bg {
   background: var(--navy-secondary);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(15, 35, 77, 0.35);
+  border: 1px solid rgba(15, 35, 77, 0.5);
 }
 .tertiary-bg {
   background: var(--navy-tertiary);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(14, 41, 75, 0.35);
+  border: 1px solid rgba(14, 41, 75, 0.5);
 }
 
 .blue-glass {
@@ -146,11 +148,11 @@ p {
   border: 1px solid rgba(9, 113, 240, 0.5);
 }
 
-.app-bg {
+.app {
   margin: 1vw;
   border-radius: 1vw;
-  background: var(--navy-secondary);
+  background: var(--navy-tertiary);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(15, 35, 77, 0.35);
+  border: 1px solid rgba(15, 35, 77, 0.45);
 }
