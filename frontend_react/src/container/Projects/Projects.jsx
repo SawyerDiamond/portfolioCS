@@ -39,9 +39,10 @@ const Projects = React.memo(() => {
         </div>
         <div className="project__grid">
           {projects.map((project, index) => (
-            <div
+            <motion.div
               ref={itemRef}
-              whileInView={{ opacity: 1 }}
+              whileInView={{ opacity: [0, 1] }}
+              transition={{ duration: 0.5 }}
               key={project.title ? project.title + index : index}
               className={`${getItemClass(project)} project__item`}>
               <img
@@ -51,24 +52,24 @@ const Projects = React.memo(() => {
                 }
               />
               <div className="project__shelf">
-                <motion.div className={project.codeLink ? "project__link" : ""}>
+                <motion.div className={project.codeLink ? `project__link` : ""}>
                   <a
                     href={project.projectLink}
                     target="_blank"
                     rel="noreferrer">
-                    <div className="project__link-site secondary-bg">
+                    <div className="project__link-site tertiary-bg">
                       <img src={icons.Link} alt="View Code" />
                     </div>
                   </a>
                   <a href={project.codeLink} target="_blank" rel="noreferrer">
-                    <div className="project__link-github secondary-bg">
+                    <div className="project__link-github tertiary-bg">
                       <img src={icons.GitHub} alt="View Code" />
                     </div>
                   </a>
                 </motion.div>
                 <h2 className="project__title">{project.title}</h2>
               </div>
-            </div>
+            </motion.div>
           ))}
           {Array(5 - projects.length)
             .fill()

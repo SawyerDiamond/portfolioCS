@@ -145,7 +145,7 @@
   height: 100%;
   z-index: 2;
   border-radius: inherit;
-  background-color: transparent;
+
   transition: all 0.3s ease;
 
   display: flex;
@@ -166,7 +166,6 @@
     align-items: center;
     transition: all 0.3s ease;
     position: relative;
-    background: var(--navy-primary);
   }
   img {
     width: 20px;
