@@ -12,20 +12,7 @@ const Projects = React.memo(() => {
 
   //Sets logic for clicking on project items
   const itemRef = useRef();
-  const [isActive, setIsActive] = useState(false);
   const textArray = Array(6).fill("P R O J E C T S");
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (itemRef.current && !itemRef.current.contains(event.target)) {
-        setIsActive(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   //Sets logic for inputs into the projects grid and removes filler from mobile site.
   const [projects, setProjects] = useState([]);
@@ -56,38 +43,31 @@ const Projects = React.memo(() => {
               ref={itemRef}
               whileInView={{ opacity: 1 }}
               key={project.title ? project.title + index : index}
-              className={`${getItemClass(project)} project__item
-              }`}>
+              className={`${getItemClass(project)} project__item`}>
               <img
                 src={urlFor(project.imgUrl)}
                 alt={
                   project.title ? project.title : "Placeholder Project Image"
                 }
               />
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: isActive ? 1 : 0 }}
-                whileHover={{ opacity: 1 }}
-                whileTap={{ opacity: 1 }}
-                transition={{
-                  ease: "easeInOut",
-                  duration: 0.5,
-                  staggerChildren: 0.5,
-                }}
-                onClick={() => setIsActive(!isActive)}
-                className={project.codeLink ? "project__item--hover" : ""}>
-                <a href={project.projectLink} target="_blank" rel="noreferrer">
-                  <div className="project__item--hover-link secondary-bg">
-                    <img src={icons.Link} alt="View Code" />
-                  </div>
-                </a>
-                <a href={project.codeLink} target="_blank" rel="noreferrer">
-                  <div className="project__item--hover-github secondary-bg">
-                    <img src={icons.GitHub} alt="View Code" />
-                  </div>
-                </a>
-              </motion.div>
-              <h2 className="project__title">{project.title}</h2>
+              <div className="project__shelf">
+                <motion.div className={project.codeLink ? "project__link" : ""}>
+                  <a
+                    href={project.projectLink}
+                    target="_blank"
+                    rel="noreferrer">
+                    <div className="project__link-site secondary-bg">
+                      <img src={icons.Link} alt="View Code" />
+                    </div>
+                  </a>
+                  <a href={project.codeLink} target="_blank" rel="noreferrer">
+                    <div className="project__link-github secondary-bg">
+                      <img src={icons.GitHub} alt="View Code" />
+                    </div>
+                  </a>
+                </motion.div>
+                <h2 className="project__title">{project.title}</h2>
+              </div>
             </div>
           ))}
           {Array(5 - projects.length)
@@ -95,7 +75,9 @@ const Projects = React.memo(() => {
             .map((_, index) => (
               <div
                 key={`placeholder-${index}`}
-                className="project__item primary-bg"></div>
+                className={`project__item ${
+                  index % 2 === 0 ? "secondary-bg" : "primary-bg"
+                }`}></div>
             ))}
         </div>
       </div>
