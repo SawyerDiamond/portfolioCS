@@ -5,7 +5,7 @@
   align-items: center;
   position: relative;
   overflow-x: hidden;
-  padding: 75px 0;
+  padding: 6.5vw 0;
 }
 .skills h1 {
   font-weight: 800;
@@ -93,8 +93,8 @@
 }
 
 .skills__bg-icon {
-  width: 30rem;
-  margin-right: 3rem;
+  width: 33vw;
+  margin-right: 2vw;
 }
 @media (max-width: 767px) {
   .skills__bg-icon {

@@ -56,7 +56,7 @@ p {
 }
 
 .app > *:not(:first-child) {
-  margin-bottom: 10vw;
+  margin-bottom: 6vw;
 }
 
 .flex {
