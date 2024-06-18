@@ -174,17 +174,17 @@
   background: linear-gradient(67.93deg, rgba(233, 56, 192, 0.5) 23.56%, rgba(241, 95, 121, 0.5) 79.49%);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(233, 56, 192, 0.35);
+  border: 1px solid rgba(233, 56, 192, 0.5);
 }
 .hero__shelf--item:nth-child(2):hover {
   background: var(--pink-gradient);
-  box-shadow: var(--navy-shadow);
+  box-shadow: var(--pink-shadow);
 }
 .hero__shelf--item:nth-child(3) {
   background: rgba(252, 192, 10, 0.5);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(252, 192, 10, 0.35);
+  border: 1px solid rgba(252, 192, 10, 0.5);
 }
 .hero__shelf--item:nth-child(3):hover {
   background: var(--yellow-gradient);

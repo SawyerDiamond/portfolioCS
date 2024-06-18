@@ -161,6 +161,20 @@ p {
   border: 1px solid rgba(9, 113, 240, 0.5);
 }
 
+.gold-glass {
+  background: rgba(252, 192, 10, 0.5);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(252, 192, 10, 0.5);
+}
+
+.pink-glass {
+  background: linear-gradient(67.93deg, rgba(233, 56, 192, 0.5) 23.56%, rgba(241, 95, 121, 0.5) 79.49%);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(233, 56, 192, 0.35);
+}
+
 .app {
   margin: 1vw;
   border-radius: 1vw;
