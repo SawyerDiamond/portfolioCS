@@ -72,6 +72,9 @@
   margin: 0 4rem 2rem 4rem;
   z-index: 3;
   border-radius: 2vw;
+  @media (max-width: 1024px) {
+    height: 4rem;
+  }
 }
 .project__title {
   position: absolute;
@@ -80,8 +83,8 @@
   font-size: 2.5rem;
   margin-left: 2rem;
 
-  @media (max-width: 767px) {
-    font-size: 2rem;
+  @media (max-width: 1024px) {
+    font-size: 1.8rem;
   }
 }
 .project__item {
@@ -138,8 +141,6 @@
 
 .project__link {
   position: absolute;
-  bottom: 0;
-  right: 0;
 
   width: 100%;
   height: 100%;
@@ -152,10 +153,16 @@
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-end;
+  @media (max-width: 1024px) {
+    align-items: flex-start;
+  }
   div {
     width: 50px;
     height: 50px;
-
+    @media (max-width: 1024px) {
+      width: 40px;
+      height: 40px;
+    }
     border-radius: 1rem;
     margin: 0.5rem 1rem 1rem 0.5rem;
 
@@ -170,6 +177,9 @@
   img {
     width: 20px;
     height: auto;
+    @media (max-width: 1024px) {
+      width: 14px;
+    }
   }
 }
 

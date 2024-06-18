@@ -52,7 +52,7 @@ const Projects = React.memo(() => {
                 }
               />
               <div className="project__shelf">
-                <motion.div className={project.codeLink ? `project__link` : ""}>
+                <div className={project.codeLink ? `project__link` : ""}>
                   <a
                     href={project.projectLink}
                     target="_blank"
@@ -66,7 +66,7 @@ const Projects = React.memo(() => {
                       <img src={icons.GitHub} alt="View Code" />
                     </div>
                   </a>
-                </motion.div>
+                </div>
                 <h2 className="project__title">{project.title}</h2>
               </div>
             </motion.div>
@@ -76,9 +76,19 @@ const Projects = React.memo(() => {
             .map((_, index) => (
               <div
                 key={`placeholder-${index}`}
-                className={`project__item ${
-                  index % 2 === 0 ? "secondary-bg" : "primary-bg"
-                }`}></div>
+                className={
+                  isMobile
+                    ? "hidden"
+                    : `project__item ${
+                        index % 4 === 0
+                          ? "blue-glass"
+                          : index % 4 === 1
+                          ? "primary-bg"
+                          : index % 4 === 2
+                          ? "gold-glass"
+                          : "pink-glass"
+                      }`
+                }></div>
             ))}
         </div>
       </div>

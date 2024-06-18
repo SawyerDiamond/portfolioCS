@@ -24,37 +24,35 @@ const Skills = () => {
           <img src={icons.SkillsHeader} alt="Header Icon" />
           <h1>Skills</h1>
         </header>
-        <motion.div className="skills__list">
-          {skills.map((skill, index) => (
-            <motion.div
-              whileInView={{ opacity: [0, 1] }}
-              transition={{ duration: 0.5 }}
+        <div className="skills__list">
+          {skills.map(({ name, icon, order }) => (
+            <div
               className={`skills__item ${
-                skill.order % 2 === 0 ? "tertiary-bg" : "primary-bg"
+                order % 2 === 0 ? "tertiary-bg" : "primary-bg"
               }`}
-              key={skill.name}
-              style={{ order: skill.order }}>
+              key={name}
+              style={{ order }}>
               <motion.img
-                src={urlFor(skill.icon)}
+                src={urlFor(icon)}
                 className="skills__item-img"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.5 }}
-                alt={skill.name}
+                alt={name}
               />
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
-      <motion.div className="skills__bg">
+      <div className="skills__bg">
         {iconArray.map((icon, index) => (
-          <motion.img
+          <img
             src={icon}
             className="skills__bg-icon"
             key={index}
             alt="Background images"
           />
         ))}
-      </motion.div>
+      </div>
     </section>
   );
 };

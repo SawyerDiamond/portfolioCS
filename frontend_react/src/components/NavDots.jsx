@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import useDeviceDetect from "../hooks/useDeviceDetect";
 
 const NavDots = ({ active }) => {
-  const { isMobile } = useDeviceDetect();
+  const { isDesktop } = useDeviceDetect();
 
-  if (isMobile) {
+  if (!isDesktop) {
     return null;
   }
 
