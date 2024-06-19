@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Wrap } from "../../wrapper";
+import { Wrap, MotionWrap } from "../../wrapper";
 
 import "./Skills.scss";
-import { images, icons } from "../../constants";
+import { icons } from "../../constants";
 import { motion } from "framer-motion";
 import { urlFor, client } from "../../client";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
@@ -57,4 +57,4 @@ const Skills = () => {
   );
 };
 
-export default Wrap(Skills, "Skills");
+export default Wrap(MotionWrap(Skills, "Skills"));

@@ -62,16 +62,17 @@
 .project__shelf {
   position: absolute;
   display: flex;
+  justify-content: center;
   align-items: center;
   width: 90%;
-  height: 5rem;
+  height: 3.25vw;
   background: rgba(11, 22, 44, 0.9);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(14, 41, 75, 0.5);
   margin: 0 4rem 2rem 4rem;
   z-index: 3;
-  border-radius: 2vw;
+  border-radius: 1vw;
   @media (max-width: 1024px) {
     height: 4rem;
   }
@@ -80,12 +81,8 @@
   position: absolute;
   z-index: 2;
   max-width: 18vw;
-  font-size: 2.5rem;
+  font-size: 2vw;
   margin-left: 2rem;
-
-  @media (max-width: 1024px) {
-    font-size: 1.8rem;
-  }
 }
 .project__item {
   position: relative;
@@ -151,31 +148,26 @@
 
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
   justify-content: flex-end;
-  @media (max-width: 1024px) {
-    align-items: flex-start;
-  }
-  div {
-    width: 50px;
-    height: 50px;
-    @media (max-width: 1024px) {
-      width: 40px;
-      height: 40px;
-    }
-    border-radius: 1rem;
-    margin: 0.5rem 1rem 1rem 0.5rem;
+
+  a {
+    width: 2.4vw;
+    height: 2.4vw;
+
+    border-radius: 0.725vw;
+    margin: 1rem 0.5rem 1rem 0.5rem;
 
     cursor: pointer;
 
+    transition: all 0.3s ease;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s ease;
-    position: relative;
   }
   img {
-    width: 20px;
+    width: 17px;
     height: auto;
     @media (max-width: 1024px) {
       width: 14px;
