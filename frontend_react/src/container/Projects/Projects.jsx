@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 
-import { Wrap } from "../../wrapper";
+import { Wrap, MotionWrap } from "../../wrapper";
 import "./Projects.scss";
 import { icons } from "../../constants";
 import { motion } from "framer-motion";
@@ -56,15 +56,16 @@ const Projects = React.memo(() => {
                   <a
                     href={project.projectLink}
                     target="_blank"
-                    rel="noreferrer">
-                    <div className="project__link-site tertiary-bg">
-                      <img src={icons.Link} alt="View Code" />
-                    </div>
+                    rel="noreferrer"
+                    className="project__link-site tertiary-bg">
+                    <img src={icons.Link} alt="View Code" />
                   </a>
-                  <a href={project.codeLink} target="_blank" rel="noreferrer">
-                    <div className="project__link-github tertiary-bg">
-                      <img src={icons.GitHub} alt="View Code" />
-                    </div>
+                  <a
+                    href={project.codeLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="project__link-github tertiary-bg">
+                    <img src={icons.GitHub} alt="View Code" />
                   </a>
                 </div>
                 <h2 className="project__title">{project.title}</h2>
@@ -103,4 +104,4 @@ const Projects = React.memo(() => {
   );
 });
 
-export default Wrap(Projects, "Projects");
+export default Wrap(MotionWrap(Projects, "Projects"));
