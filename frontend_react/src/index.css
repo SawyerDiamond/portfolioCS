@@ -93,9 +93,7 @@ html {
 }
 
 body {
-  background-color: --navy-primary;
   background-size: cover;
-  color: --white-primary;
   overflow-x: hidden;
 }
 

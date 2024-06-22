@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import { images, icons } from "../../constants";
-import { Wrap } from "../../wrapper";
+import { icons } from "../../constants";
+import { Wrap, MotionWrap } from "../../wrapper";
 import { client } from "../../client";
 
 import "./Contact.scss";
@@ -9,16 +9,27 @@ import "./Contact.scss";
 const Contact = () => {
   return (
     <>
-      <section className="contact" id="contact">
-        <div className="contact__container">
-          <header className="contact__header">
-            <img src={icons.Contact} alt="Contact Icon" />
-            <h1>Contact Me</h1>
+      <section className="about" id="Contact">
+        <div className="about__container">
+          <header className="about__header">
+            <img src={icons.Contact} alt="About Icon" />
+            <h1 className="about__text">Contact</h1>
           </header>
+          <div className="content">
+            <div className="contact primary-bg">
+              <div className="secondary-bg"></div>
+            </div>
+            <div className="info primary-bg">
+              <div className="about__container">
+                <div className="about__header primary-bg"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
+      <div className="about__bg"></div>
     </>
   );
 };
 
-export default Wrap(Contact, "contact");
+export default MotionWrap(Wrap(Contact, "Contact"), "Contact");

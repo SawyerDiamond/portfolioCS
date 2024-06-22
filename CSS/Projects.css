@@ -64,10 +64,10 @@
 .project__shelf {
   position: absolute;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 90%;
-  height: 3.25vw;
+  height: 3.75vw;
   background: rgba(11, 22, 44, 0.9);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
@@ -87,7 +87,7 @@
   z-index: 2;
   max-width: 18vw;
   font-size: 2vw;
-  margin-left: 2rem;
+  margin-left: 1.5rem;
 }
 
 .project__item {
@@ -159,7 +159,7 @@
   width: 2.4vw;
   height: 2.4vw;
   border-radius: 0.725vw;
-  margin: 1rem 0.5rem 1rem 0.5rem;
+  margin: 1rem 0.75rem 1rem 0rem;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
