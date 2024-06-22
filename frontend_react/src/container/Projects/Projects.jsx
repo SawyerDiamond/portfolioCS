@@ -33,7 +33,7 @@ const Projects = React.memo(() => {
   return (
     <section className="project">
       <div className="project__container">
-        <div className="project__header">
+        <div className="project__header" id="Projects">
           <img src={icons.ProjectsHeader} alt="Header Icon" />
           <h1>Projects</h1>
         </div>
@@ -104,4 +104,4 @@ const Projects = React.memo(() => {
   );
 });
 
-export default Wrap(MotionWrap(Projects, "Projects"));
+export default Wrap(MotionWrap(Projects, "Projects"), "Projects");

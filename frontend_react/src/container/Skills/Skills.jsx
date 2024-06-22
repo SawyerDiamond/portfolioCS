@@ -18,7 +18,7 @@ const Skills = () => {
   }, []);
 
   return (
-    <section className="skills">
+    <section className="skills" id="Skills">
       <div className="skills__container">
         <header className="skills__header">
           <img src={icons.SkillsHeader} alt="Header Icon" />
@@ -57,4 +57,4 @@ const Skills = () => {
   );
 };
 
-export default Wrap(MotionWrap(Skills, "Skills"));
+export default Wrap(MotionWrap(Skills, "Skills"), "Skills");
