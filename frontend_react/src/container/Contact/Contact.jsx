@@ -6,9 +6,7 @@ import { Wrap, MotionWrap } from "../../wrapper";
 import "./Contact.scss";
 
 const Contact = () => {
-  const iconArray = Array(Object.keys(icons.ContactBG).length).fill(
-    icons.ContactBG
-  );
+  const iconArray = new Array(3).fill(icons.ContactBG);
 
   return (
     <>
