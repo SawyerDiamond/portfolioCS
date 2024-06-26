@@ -49,10 +49,11 @@ const Hero = () => {
             className={`hero__logo ${isDesktop ? "" : "hidden"}`}
             alt="logo"
           />
-          <ul
-            className={`hero__shelf tertiary-bg ${isDesktop ? "" : "flex--h"}`}>
-            {Object.keys(links).map((item) => (
-              <li className="hero__shelf--item" key={item}>
+          <ul className={`shelf tertiary-bg ${isDesktop ? "" : "flex--h"}`}>
+            {Object.keys(links).map((item, index) => (
+              <li
+                className={`shelf--item ${index === 3 ? "hidden" : ""}`}
+                key={item}>
                 <a href={links[item]} target="_blank" rel="noopener noreferrer">
                   <img src={icons[item]} alt={item} />
                 </a>
