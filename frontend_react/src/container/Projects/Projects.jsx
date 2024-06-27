@@ -8,7 +8,7 @@ import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { urlFor, client } from "../../client";
 
 const Projects = React.memo(() => {
-  const { isMobile } = useDeviceDetect();
+  const { isMobile, isTablet } = useDeviceDetect();
 
   //Sets logic for clicking on project items
   const itemRef = useRef();
@@ -78,7 +78,7 @@ const Projects = React.memo(() => {
               <div
                 key={`placeholder-${index}`}
                 className={
-                  isMobile
+                  isMobile || isTablet
                     ? "hidden"
                     : `project__item ${
                         index % 4 === 0
