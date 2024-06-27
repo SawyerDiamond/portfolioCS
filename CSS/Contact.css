@@ -40,6 +40,7 @@
   flex-direction: column;
   justify-content: center;
   margin-top: 2rem;
+  height: 100%;
 }
 
 .contact__content {
@@ -49,14 +50,11 @@
 }
 
 .contact__card {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   width: 84vw;
   height: 42vw;
-  margin: 0 2vw 0 0;
   border-radius: 3vw;
+  padding-bottom: 1rem; /* Add padding to ensure space for the shelf at the bottom */
+  position: relative; /* Ensure .contact__card can correctly position its children */
 }
 @media (max-width: 767px) {
   .contact__card {
@@ -68,7 +66,8 @@
   display: flex;
   flex-direction: column;
   font-size: 3.75vw;
-  margin-left: 0.5vw;
+  align-self: center;
+  margin: auto;
 }
 
 .contact__bg {

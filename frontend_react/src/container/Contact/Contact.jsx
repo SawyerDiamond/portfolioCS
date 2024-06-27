@@ -5,6 +5,12 @@ import { Wrap, MotionWrap } from "../../wrapper";
 
 import "./Contact.scss";
 
+/**
+ * Renders the Contact component which displays contact information and icons.
+ * The component includes a header, a list of contact links, and a background image.
+ *
+ * @return {JSX.Element} The Contact component.
+ */
 const Contact = () => {
   const iconArray = new Array(3).fill(icons.ContactBG);
 
@@ -18,13 +24,8 @@ const Contact = () => {
           </header>
           <div className="contact__content primary-bg">
             <div className="contact__card flex--col">
-              <h3 className="contact__text" style={{ marginTop: "14rem" }}>
-                {" "}
-                Reach Out to Me 👋
-              </h3>
-              <ul
-                className={`shelf tertiary-bg flex--h`}
-                style={{ marginLeft: "0", marginTop: "10rem" }}>
+              <h3 className="contact__text">Reach Out to Me 👋</h3>
+              <ul className={`shelf tertiary-bg flex--h`}>
                 {Object.keys(links).map((item, index) => (
                   <li
                     className={`shelf--item ${index === 2 ? "hidden" : ""}`}
@@ -57,4 +58,4 @@ const Contact = () => {
   );
 };
 
-export default MotionWrap(Wrap(Contact, "Contact"), "Contact");
+export default Wrap(MotionWrap(Contact, "Contact"), "Contact");

@@ -4,7 +4,6 @@ import SkillsBG from "../assets/skillsBG.svg";
 import SkillsHeader from "../assets/lightning.svg";
 import Projects from "../assets/proj.svg";
 import ProjectsHeader from "../assets/projects.svg";
-import Experience from "../assets/edu.svg";
 import Contact from "../assets/mail.svg";
 import ContactBG from "../assets/Contact_BG.svg";
 import ContactHeader from "../assets/Contact_Header.svg";
@@ -20,7 +19,6 @@ const icons = {
   SkillsHeader,
   Projects,
   ProjectsHeader,
-  Experience,
   Contact,
   ContactBG,
   ContactHeader,
