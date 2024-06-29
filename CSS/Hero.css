@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  top: 0;
 }
 @media (min-width: 1025px) {
   .hero {
@@ -37,7 +38,8 @@
 }
 
 .hero__intro {
-  line-height: 0.9;
+  line-height: 0.95;
+  font-size: 5.25vw;
 }
 .hero__intro span:nth-child(1) {
   background: var(--blue-gradient);
@@ -90,6 +92,7 @@
 .hero__desc {
   width: 34vw;
   line-height: 0.925;
+  font-size: 2.75vw;
 }
 @media (max-width: 1024px) {
   .hero__desc {
