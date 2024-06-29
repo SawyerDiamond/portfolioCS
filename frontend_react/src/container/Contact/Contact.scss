@@ -45,14 +45,14 @@
   display: flex;
   flex-direction: row;
   border-radius: 3vw;
-}
-
-.contact__card {
   width: 84vw;
   height: 42vw;
   border-radius: 3vw;
-  padding-bottom: 1rem; /* Add padding to ensure space for the shelf at the bottom */
-  position: relative; /* Ensure .contact__card can correctly position its children */
+  padding-bottom: 1rem;
+  position: relative;
+
+  align-items: center;
+  justify-content: center;
 
   @media (max-width: 767px) {
     margin-top: 2rem;

@@ -20,6 +20,7 @@ const Hero = () => {
   const shelfAnimationResponsive = !isDesktop
     ? { y: [300, 0], opacity: [0, 1] }
     : {};
+
   return (
     <section className="hero">
       <div
