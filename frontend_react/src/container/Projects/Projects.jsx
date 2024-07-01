@@ -52,7 +52,10 @@ const Projects = React.memo(() => {
                 }
               />
               <div className="project__shelf">
-                <div className={project.codeLink ? `project__link` : ""}>
+                <div
+                  className={`${isMobile ? "hidden" : ""} ${
+                    project.codeLink ? "project__link" : ""
+                  }`}>
                   <a
                     href={project.projectLink}
                     target="_blank"

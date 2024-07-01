@@ -8,6 +8,7 @@ import { urlFor, client } from "../../client";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 
 const Skills = () => {
+  const { isMobile } = useDeviceDetect();
   const [skills, setSkills] = useState([]);
   const iconArray = Array(skills.length).fill(icons.SkillsBG);
   useEffect(() => {
@@ -24,11 +25,15 @@ const Skills = () => {
           <img src={icons.SkillsHeader} alt="Header Icon" />
           <h1>Skills</h1>
         </header>
-        <div className="skills__list">
+        <div className={`skills__list ${isMobile ? "tertiary-bg" : ""}`}>
           {skills.map(({ name, icon, order }) => (
             <div
               className={`skills__item ${
-                order % 2 === 0 ? "tertiary-bg" : "primary-bg"
+                isMobile
+                  ? "" // No additional class for mobile, thus no background
+                  : order % 2 === 0
+                  ? "tertiary-bg"
+                  : "primary-bg"
               }`}
               key={name}
               style={{ order }}>

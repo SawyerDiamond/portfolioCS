@@ -51,6 +51,11 @@ p {
   &:not(:first-child) {
     margin-bottom: 6vw;
   }
+  @media (max-width: 767px) {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 .flex {
   display: flex;
@@ -171,6 +176,11 @@ p {
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(15, 35, 77, 0.45);
+  @media (max-width: 767px) {
+    margin: 0px;
+    border-radius: 0px;
+    border: none;
+  }
 }
 
 //Shelf
