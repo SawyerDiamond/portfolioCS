@@ -8,7 +8,7 @@
     font-weight: 800;
   }
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
   padding: 6.5vw 0;
 }
 
@@ -20,6 +20,7 @@
 
   @media (max-width: 767px) {
     margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 }
 
@@ -33,13 +34,15 @@
     margin-right: 0.25rem;
   }
   @media (max-width: 767px) {
+    width: 80vw;
+    border-radius: 2vw;
     margin-bottom: 0.75rem;
     h1 {
-      font-size: 2.75rem;
+      font-size: 3.5rem;
     }
     img {
-      width: 2.75rem;
-      margin-right: 0.5rem;
+      width: 2.8rem;
+      height: 2.8rem;
     }
   }
 }
@@ -50,6 +53,12 @@
   gap: 3.8vw;
   @media screen and (max-width: 767px) {
     grid-template-columns: repeat(4, 1fr);
+    gap: 2vw;
+    width: 80vw;
+    justify-items: center;
+    align-items: center;
+    aspect-ratio: 1/1;
+    border-radius: 3vw;
   }
 }
 .skills__item {
@@ -61,11 +70,15 @@
   height: 15vw;
   margin-right: 1rem;
   border-radius: 1.5vw;
-  background-color: var(--navy-secondary);
-  box-shadow: var(--dark-shadow);
   @media screen and (max-width: 767px) {
-    width: 15vw;
-    height: 22vw;
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0;
+    padding: 1rem;
+    img {
+      width: 2rem;
+      height: 2rem;
+    }
   }
 }
 
@@ -73,8 +86,8 @@
   width: 4rem;
   height: 4rem;
   @media screen and (max-width: 767px) {
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
   }
 }
 
@@ -82,12 +95,19 @@
   position: absolute;
   display: flex;
   z-index: -1;
+  @media (max-width: 767px) {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    height: 40rem;
+  }
 }
 
 .skills__bg-icon {
   width: 33vw;
   margin-right: 2vw;
   @media (max-width: 767px) {
-    display: none;
+    width: 50vw;
+    margin-right: 0px;
   }
 }

@@ -2,6 +2,7 @@ import React from "react";
 
 import { icons, links } from "../../constants";
 import { Wrap, MotionWrap } from "../../wrapper";
+import useDeviceDetect from "../../hooks/useDeviceDetect";
 
 import "./Contact.scss";
 
@@ -12,7 +13,9 @@ import "./Contact.scss";
  * @return {JSX.Element} The Contact component.
  */
 const Contact = () => {
-  const iconArray = new Array(3).fill(icons.ContactBG);
+  const { isMobile } = useDeviceDetect();
+  const arrayNum = isMobile ? 9 : 3;
+  const iconArray = new Array(arrayNum).fill(icons.ContactBG);
 
   return (
     <>
@@ -25,8 +28,8 @@ const Contact = () => {
           <div className="contact__content primary-bg flex--col">
             <h3 className="contact__text">Reach Out to Me 👋</h3>
             <ul
-              className={`shelf tertiary-bg flex--h`}
-              style={{ marginLeft: "0" }}>
+              className={`shelf contact__shelf tertiary-bg flex--h`}
+              style={{ marginLeft: "0", position: "absolute" }}>
               {Object.keys(links).map((item, index) => (
                 <li
                   className={`shelf--item ${index === 2 ? "hidden" : ""}`}
