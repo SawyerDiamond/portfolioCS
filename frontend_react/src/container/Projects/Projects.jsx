@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 
 import { Wrap, MotionWrap } from "../../wrapper";
 import "./Projects.scss";
-import { icons, links } from "../../constants";
+import { icons } from "../../constants";
 import { motion } from "framer-motion";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { urlFor, client } from "../../client";
@@ -16,7 +16,6 @@ const Projects = React.memo(() => {
 
   //Sets logic for inputs into the projects grid and removes filler from mobile site.
   const [projects, setProjects] = useState([]);
-  const projectMobileHref = isMobile ? "{project.codeLink}" : undefined;
   const getItemClass = useCallback(
     (project) => {
       return isMobile && !project.projectLink ? "hidden" : "project__item";
@@ -41,8 +40,7 @@ const Projects = React.memo(() => {
         <div className="project__grid">
           {projects.map((project, index) => (
             <motion.a
-              href={projectMobileHref}
-              onClick={(e) => !isMobile && e.preventDefault()}
+              href={isMobile ? project.codeLink : undefined}
               ref={itemRef}
               whileInView={{ opacity: [0, 1] }}
               transition={{ duration: 0.5 }}
