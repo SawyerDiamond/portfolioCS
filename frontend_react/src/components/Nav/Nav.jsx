@@ -8,7 +8,7 @@ const Nav = () => {
   const { isMobile, isDesktop } = useDeviceDetect();
 
   return (
-    <nav
+    <motion.nav
       animate={{ y: [-150, 0], opacity: [0, 1] }}
       transition={{ duration: 1 }}
       className={`navbar secondary-bg flex--spaced ${
@@ -40,7 +40,7 @@ const Nav = () => {
         <img src={icons.Contact} alt="Contact link icon" />
         <h3>Contact</h3>
       </a>
-    </nav>
+    </motion.nav>
   );
 };
 
