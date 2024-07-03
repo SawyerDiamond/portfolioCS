@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 
 import { Wrap, MotionWrap } from "../../wrapper";
 import "./Projects.scss";
-import { icons } from "../../constants";
+import { icons, links } from "../../constants";
 import { motion } from "framer-motion";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { urlFor, client } from "../../client";
@@ -16,6 +16,7 @@ const Projects = React.memo(() => {
 
   //Sets logic for inputs into the projects grid and removes filler from mobile site.
   const [projects, setProjects] = useState([]);
+  const projectMobileHref = isMobile ? "{project.projectLink}" : undefined;
   const getItemClass = useCallback(
     (project) => {
       return isMobile && !project.projectLink ? "hidden" : "project__item";
@@ -39,7 +40,9 @@ const Projects = React.memo(() => {
         </div>
         <div className="project__grid">
           {projects.map((project, index) => (
-            <motion.div
+            <motion.a
+              href={projectMobileHref}
+              onClick={(e) => !isMobile && e.preventDefault()}
               ref={itemRef}
               whileInView={{ opacity: [0, 1] }}
               transition={{ duration: 0.5 }}
@@ -52,10 +55,7 @@ const Projects = React.memo(() => {
                 }
               />
               <div className="project__shelf">
-                <div
-                  className={`${isMobile ? "hidden" : ""} ${
-                    project.codeLink ? "project__link" : ""
-                  }`}>
+                <div className={` ${project.codeLink ? "project__link" : ""}`}>
                   <a
                     href={project.projectLink}
                     target="_blank"
@@ -73,7 +73,7 @@ const Projects = React.memo(() => {
                 </div>
                 <h2 className="project__title">{project.title}</h2>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
           {Array(5 - projects.length)
             .fill()

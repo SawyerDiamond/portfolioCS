@@ -34,6 +34,12 @@
   height: 5.6vw;
   margin-right: 0.25rem;
 }
+@media (max-width: 1024px) {
+  .skills__header img {
+    width: 4.2rem;
+    height: 4.2rem;
+  }
+}
 @media (max-width: 767px) {
   .skills__header {
     width: 80vw;

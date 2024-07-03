@@ -3,7 +3,7 @@ import Skills from "../assets/bolt.svg";
 import SkillsBG from "../assets/skillsBG.svg";
 import SkillsHeader from "../assets/lightning.svg";
 import Projects from "../assets/proj.svg";
-import ProjectsHeader from "../assets/projects.svg";
+import ProjectsHeader from "../assets/projHeader.svg";
 import Contact from "../assets/mail.svg";
 import ContactBG from "../assets/Contact_BG.svg";
 import ContactHeader from "../assets/Contact_Header.svg";

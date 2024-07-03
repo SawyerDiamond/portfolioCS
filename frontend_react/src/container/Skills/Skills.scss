@@ -33,6 +33,12 @@
     height: 5.6vw;
     margin-right: 0.25rem;
   }
+  @media (max-width: 1024px) {
+    img {
+      width: 4.2rem;
+      height: 4.2rem;
+    }
+  }
   @media (max-width: 767px) {
     width: 80vw;
     border-radius: 2vw;
