@@ -16,7 +16,7 @@ const Projects = React.memo(() => {
 
   //Sets logic for inputs into the projects grid and removes filler from mobile site.
   const [projects, setProjects] = useState([]);
-  const projectMobileHref = isMobile ? "{project.projectLink}" : undefined;
+  const projectMobileHref = isMobile ? "{project.codeLink}" : undefined;
   const getItemClass = useCallback(
     (project) => {
       return isMobile && !project.projectLink ? "hidden" : "project__item";
