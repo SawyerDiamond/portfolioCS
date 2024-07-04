@@ -88,6 +88,7 @@
   display: flex;
   flex-direction: column;
   font-size: 3.75vw;
+  font-weight: 600;
   align-self: center;
   margin: auto;
 }
