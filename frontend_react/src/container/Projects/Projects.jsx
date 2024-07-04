@@ -39,8 +39,12 @@ const Projects = React.memo(() => {
         </div>
         <div className="project__grid">
           {projects.map((project, index) => (
-            <motion.a
-              href={isMobile ? project.codeLink : undefined}
+            <motion.div
+              onClick={() => {
+                if (isMobile && project.codeLink) {
+                  window.location.href = project.codeLink;
+                }
+              }}
               ref={itemRef}
               whileInView={{ opacity: [0, 1] }}
               transition={{ duration: 0.5 }}
@@ -71,7 +75,7 @@ const Projects = React.memo(() => {
                 </div>
                 <h2 className="project__title">{project.title}</h2>
               </div>
-            </motion.a>
+            </motion.div>
           ))}
           {Array(5 - projects.length)
             .fill()

@@ -26,7 +26,7 @@ const Contact = () => {
             <h1 className="about__text">Contact</h1>
           </header>
           <div className="contact__content primary-bg flex--col">
-            <h3 className="contact__text">Reach Out to Me 👋</h3>
+            <p className="contact__text">Reach Out to Me 👋</p>
             <ul
               className={`shelf contact__shelf tertiary-bg flex--h`}
               style={{ marginLeft: "0", position: "absolute" }}>
