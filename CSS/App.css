@@ -142,14 +142,14 @@ p {
   background: var(--navy-primary);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(14, 41, 75, 0.35);
+  border: 1px solid rgba(20, 62, 112, 0.35);
 }
 
 .secondary-bg {
   background: var(--navy-secondary);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(15, 35, 77, 0.5);
+  border: 1px solid rgba(15, 35, 77, 0.848);
 }
 
 .tertiary-bg {

@@ -22,7 +22,7 @@ const Hero = () => {
     : {};
 
   return (
-    <section className="hero">
+    <section className="hero flex--col">
       <div
         className={`hero__container ${
           isDesktop ? "flex--around" : "flex--col"
@@ -63,6 +63,12 @@ const Hero = () => {
           </ul>
         </motion.div>
       </div>
+      <motion.div
+        animate={{ y: [150, 0], opacity: [0, 1] }}
+        transition={{ duration: 1 }}
+        className="hero__location tertiary-bg">
+        <p>📍 Long Island / Washington, DC</p>
+      </motion.div>
       <img
         src={images.hero_bg}
         className={`bg ${isDesktop ? "" : "hidden"}`}
