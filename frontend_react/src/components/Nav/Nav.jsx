@@ -9,7 +9,7 @@ const Nav = () => {
 
   return (
     <motion.nav
-      animate={{ y: [-150, 0], opacity: [0, 1] }}
+      animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 1 }}
       className={`navbar secondary-bg flex--spaced ${
         isMobile ? "hidden" : ""

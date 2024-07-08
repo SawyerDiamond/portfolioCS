@@ -52,6 +52,7 @@ const Projects = React.memo(() => {
               className={`${getItemClass(project)} project__item`}>
               <img
                 src={urlFor(project.imgUrl)}
+                loading="lazy"
                 alt={
                   project.title ? project.title : "Placeholder Project Image"
                 }
