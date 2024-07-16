@@ -91,6 +91,10 @@
 .skills__item-img {
   width: 4rem;
   height: 4rem;
+  @media (max-width: 1024px) {
+    width: 3rem;
+    height: 3rem;
+  }
   @media screen and (max-width: 767px) {
     width: 2rem;
     height: 2rem;

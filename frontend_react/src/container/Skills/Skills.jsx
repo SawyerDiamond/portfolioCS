@@ -29,11 +29,7 @@ const Skills = () => {
           {skills.map(({ name, icon, order }) => (
             <div
               className={`skills__item ${
-                isMobile
-                  ? "" // No additional class for mobile, thus no background
-                  : order % 2 === 0
-                  ? "tertiary-bg"
-                  : "primary-bg"
+                isMobile ? "" : order % 2 === 0 ? "tertiary-bg" : "primary-bg"
               }`}
               key={name}
               style={{ order }}>

@@ -26,5 +26,16 @@ export default {
         hotspot: true,
       },
     },
+    {
+      name: 'images',
+      title: 'Images',
+      type: 'array',
+      of: [{type: 'image', options: {hotspot: true}}],
+    },
+    {
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+    },
   ],
 }

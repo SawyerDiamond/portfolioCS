@@ -25,14 +25,14 @@
   margin-bottom: 1rem;
   align-items: center;
   img {
-    width: 4.7vw;
-    height: 4.7vw;
+    width: 4.6vw;
+    height: 4.6vw;
     margin-right: 1vw;
   }
   @media (max-width: 1024px) {
     img {
-      width: 4.2rem;
-      height: 4.2rem;
+      width: 7.5vw;
+      height: 7.5vw;
       margin-right: 1.2vw;
     }
   }
@@ -55,170 +55,170 @@
   display: grid;
   width: 80vw;
   height: 80vw;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
-  gap: 1.5vw;
+  gap: 3vw;
   grid-template-areas:
-    "one one one two two"
-    "one one one two two"
-    "three three five five five"
-    "four four five five five";
+    "one one two two"
+    "one one two two"
+    "three three four four"
+    "three three  four four";
   @media (max-width: 1024px) {
     display: flex;
     flex-direction: column;
   }
 }
 
+.project__grid > * {
+  @media (max-width: 1024px) {
+    width: 80vw;
+    height: 80vw;
+  }
+}
+
 .project__shelf {
-  position: absolute;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 90%;
-  height: 3.75vw;
-  background: rgba(11, 22, 44, 0.9);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(14, 41, 75, 0.5);
-  margin: 0 4rem 2rem 4rem;
+  width: 100%;
   z-index: 3;
-  border-radius: 1vw;
+  border-radius: 1.5vw;
+  padding-top: 2vw;
+  padding-bottom: 0.5vw;
   @media (max-width: 1024px) {
-    height: 4rem;
-    justify-content: center;
-    background: none;
-    backdrop-filter: none;
-    border: none;
+    padding-top: 4.5vw;
+    padding-bottom: 1.5vw;
   }
 }
+.project__shelf-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .project__title {
-  position: absolute;
   z-index: 2;
   display: flex;
   font-weight: 600;
-  max-width: 18vw;
+  margin-left: 2vw;
   font-size: 2vw;
-  margin-left: 1.5rem;
+
   @media (max-width: 1024px) {
-    font-size: 2.4vw;
+    font-size: 4.5vw;
+    margin-left: 3.5vw;
   }
-  @media (max-width: 767px) {
-    justify-content: center;
-    margin-left: 0;
-    font-size: 8vw;
+}
+.project__tools {
+  display: flex;
+  margin-left: 1vw;
+  @media (max-width: 1024px) {
+    margin-left: 2vw;
+  }
+}
+.project__tools-img {
+  width: 0.9vw;
+  height: 0.9vw;
+  padding: 0.5vw;
+  margin-right: 0.5vw;
+  border-radius: 0.5vw;
+  @media (max-width: 1024px) {
+    width: 2.25vw;
+    height: 2.25vw;
+    padding: 1.25vw;
+    margin-right: 1vw;
+    border-radius: 1.25vw;
+  }
+}
+.project__description {
+  margin: 0 0 2.5vw 2vw;
+  font-size: 2ch;
+  @media (max-width: 1024px) {
+    font-size: 2.3vw;
+    margin-left: 3.5vw;
+    margin-right: 3.5vw;
   }
 }
 .project__item {
-  position: relative;
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  aspect-ratio: 1/1;
+  flex-direction: column;
+  justify-content: space-between;
   border-radius: 3.5vw;
   cursor: pointer;
-
-  img {
+  &-img {
     z-index: 1;
-    border-radius: 3.5vw;
+    border-radius: inherit;
     width: 100%;
-    height: 100%;
+    height: 72.5%;
     object-fit: cover;
   }
-
-  &::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    border-radius: inherit;
-    z-index: 2;
-  }
-
-  &:hover::after,
-  &:active::after {
-    opacity: 1;
+  @media (max-width: 1024px) {
+    justify-content: initial;
   }
   @media (max-width: 767px) {
-    justify-content: center;
     align-items: center;
-    img {
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 5vw;
-      &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-      }
-    }
   }
 }
+
 .project__item:nth-child(1) {
   grid-area: one;
 }
 .project__item:nth-child(2) {
   grid-area: two;
-  width: 100%;
-  height: 100%;
 }
 .project__item:nth-child(3) {
   grid-area: three;
-  width: 100%;
-  height: 100%;
 }
 .project__item:nth-child(4) {
   grid-area: four;
 }
-.project__item:nth-child(5) {
-  grid-area: five;
-}
 
 .project__link {
-  position: absolute;
-
   width: 100%;
   height: 100%;
   z-index: 2;
   border-radius: inherit;
-
+  position: absolute;
   transition: all 0.3s ease;
-
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-end;
-
   a {
-    width: 2.4vw;
-    height: 2.4vw;
-
-    border-radius: 0.725vw;
-    margin: 1rem 0.75rem 1rem 0rem;
-
+    padding: 0.7vw;
+    height: 1.3vw;
+    border-radius: 0.7vw;
+    margin-top: 2rem;
     cursor: pointer;
-
     transition: all 0.3s ease;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    @media (max-width: 1024px) {
-      width: 3.3vw;
-      height: 3.3vw;
-
+    &:not(:first-child) {
       margin-right: 2vw;
+      margin-left: 1vw;
+      @media (max-width: 1024px) {
+        margin-right: 4vw;
+      }
+    }
+    @media (max-width: 1024px) {
+      padding: 3vw;
+      height: 3vw;
+      margin-top: 28rem;
+      margin-right: 2vw;
+      border-radius: 2vw;
     }
   }
+  span {
+    margin-right: 0.5rem;
+  }
   img {
-    width: 17px;
-    height: auto;
+    width: 1.1vw;
+    height: 1.1vw;
+    @media (max-width: 1024px) {
+      width: 3vw;
+      height: 3vw;
+    }
   }
   @media (max-width: 767px) {
     display: none;
@@ -247,11 +247,10 @@
   align-items: center;
   position: absolute;
   z-index: -1;
+  overflow: hidden;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  overflow-x: hidden;
   @media (max-width: 767px) {
     height: 120vw;
   }
@@ -263,8 +262,14 @@
   user-select: none;
   color: var(--navy-secondary);
   white-space: nowrap;
+  overflow-y: visible;
   overflow-x: hidden;
+  line-height: 1.175;
 
+  @media (max-width: 1024px) {
+    line-height: 1.1;
+    font-size: 16vw;
+  }
   @media (max-width: 767px) {
     font-size: 16vw;
   }

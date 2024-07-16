@@ -28,14 +28,14 @@
   align-items: center;
 }
 .project__header img {
-  width: 4.7vw;
-  height: 4.7vw;
+  width: 4.6vw;
+  height: 4.6vw;
   margin-right: 1vw;
 }
 @media (max-width: 1024px) {
   .project__header img {
-    width: 4.2rem;
-    height: 4.2rem;
+    width: 7.5vw;
+    height: 7.5vw;
     margin-right: 1.2vw;
   }
 }
@@ -59,10 +59,10 @@
   display: grid;
   width: 80vw;
   height: 80vw;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
-  gap: 1.5vw;
-  grid-template-areas: "one one one two two" "one one one two two" "three three five five five" "four four five five five";
+  gap: 3vw;
+  grid-template-areas: "one one two two" "one one two two" "three three four four" "three three  four four";
 }
 @media (max-width: 1024px) {
   .project__grid {
@@ -71,101 +71,112 @@
   }
 }
 
-.project__shelf {
-  position: absolute;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 90%;
-  height: 3.75vw;
-  background: rgba(11, 22, 44, 0.9);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(14, 41, 75, 0.5);
-  margin: 0 4rem 2rem 4rem;
-  z-index: 3;
-  border-radius: 1vw;
-}
 @media (max-width: 1024px) {
-  .project__shelf {
-    height: 4rem;
-    justify-content: center;
-    background: none;
-    backdrop-filter: none;
-    border: none;
+  .project__grid > * {
+    width: 80vw;
+    height: 80vw;
   }
 }
 
+.project__shelf {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  z-index: 3;
+  border-radius: 1.5vw;
+  padding-top: 2vw;
+  padding-bottom: 0.5vw;
+}
+@media (max-width: 1024px) {
+  .project__shelf {
+    padding-top: 4.5vw;
+    padding-bottom: 1.5vw;
+  }
+}
+
+.project__shelf-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .project__title {
-  position: absolute;
   z-index: 2;
   display: flex;
   font-weight: 600;
-  max-width: 18vw;
+  margin-left: 2vw;
   font-size: 2vw;
-  margin-left: 1.5rem;
 }
 @media (max-width: 1024px) {
   .project__title {
-    font-size: 2.4vw;
+    font-size: 4.5vw;
+    margin-left: 3.5vw;
   }
 }
-@media (max-width: 767px) {
-  .project__title {
-    justify-content: center;
-    margin-left: 0;
-    font-size: 8vw;
+
+.project__tools {
+  display: flex;
+  margin-left: 1vw;
+}
+@media (max-width: 1024px) {
+  .project__tools {
+    margin-left: 2vw;
+  }
+}
+
+.project__tools-img {
+  width: 0.9vw;
+  height: 0.9vw;
+  padding: 0.5vw;
+  margin-right: 0.5vw;
+  border-radius: 0.5vw;
+}
+@media (max-width: 1024px) {
+  .project__tools-img {
+    width: 2.25vw;
+    height: 2.25vw;
+    padding: 1.25vw;
+    margin-right: 1vw;
+    border-radius: 1.25vw;
+  }
+}
+
+.project__description {
+  margin: 0 0 2.5vw 2vw;
+  font-size: 2ch;
+}
+@media (max-width: 1024px) {
+  .project__description {
+    font-size: 2.3vw;
+    margin-left: 3.5vw;
+    margin-right: 3.5vw;
   }
 }
 
 .project__item {
-  position: relative;
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  aspect-ratio: 1/1;
+  flex-direction: column;
+  justify-content: space-between;
   border-radius: 3.5vw;
   cursor: pointer;
 }
-.project__item img {
+.project__item-img {
   z-index: 1;
-  border-radius: 3.5vw;
+  border-radius: inherit;
   width: 100%;
-  height: 100%;
+  height: 72.5%;
   object-fit: cover;
 }
-.project__item::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-  border-radius: inherit;
-  z-index: 2;
-}
-.project__item:hover::after, .project__item:active::after {
-  opacity: 1;
+@media (max-width: 1024px) {
+  .project__item {
+    justify-content: initial;
+  }
 }
 @media (max-width: 767px) {
   .project__item {
-    justify-content: center;
     align-items: center;
-  }
-  .project__item img {
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 5vw;
-  }
-  .project__item img::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -175,41 +186,33 @@
 
 .project__item:nth-child(2) {
   grid-area: two;
-  width: 100%;
-  height: 100%;
 }
 
 .project__item:nth-child(3) {
   grid-area: three;
-  width: 100%;
-  height: 100%;
 }
 
 .project__item:nth-child(4) {
   grid-area: four;
 }
 
-.project__item:nth-child(5) {
-  grid-area: five;
-}
-
 .project__link {
-  position: absolute;
   width: 100%;
   height: 100%;
   z-index: 2;
   border-radius: inherit;
+  position: absolute;
   transition: all 0.3s ease;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-end;
 }
 .project__link a {
-  width: 2.4vw;
-  height: 2.4vw;
-  border-radius: 0.725vw;
-  margin: 1rem 0.75rem 1rem 0rem;
+  padding: 0.7vw;
+  height: 1.3vw;
+  border-radius: 0.7vw;
+  margin-top: 2rem;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
@@ -217,16 +220,36 @@
   justify-content: center;
   align-items: center;
 }
+.project__link a:not(:first-child) {
+  margin-right: 2vw;
+  margin-left: 1vw;
+}
 @media (max-width: 1024px) {
-  .project__link a {
-    width: 3.3vw;
-    height: 3.3vw;
-    margin-right: 2vw;
+  .project__link a:not(:first-child) {
+    margin-right: 4vw;
   }
 }
+@media (max-width: 1024px) {
+  .project__link a {
+    padding: 3vw;
+    height: 3vw;
+    margin-top: 28rem;
+    margin-right: 2vw;
+    border-radius: 2vw;
+  }
+}
+.project__link span {
+  margin-right: 0.5rem;
+}
 .project__link img {
-  width: 17px;
-  height: auto;
+  width: 1.1vw;
+  height: 1.1vw;
+}
+@media (max-width: 1024px) {
+  .project__link img {
+    width: 3vw;
+    height: 3vw;
+  }
 }
 @media (max-width: 767px) {
   .project__link {
@@ -257,11 +280,10 @@
   align-items: center;
   position: absolute;
   z-index: -1;
+  overflow: hidden;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  overflow-x: hidden;
 }
 @media (max-width: 767px) {
   .project__bg {
@@ -275,7 +297,15 @@
   user-select: none;
   color: var(--navy-secondary);
   white-space: nowrap;
+  overflow-y: visible;
   overflow-x: hidden;
+  line-height: 1.175;
+}
+@media (max-width: 1024px) {
+  .project__bg-text {
+    line-height: 1.1;
+    font-size: 16vw;
+  }
 }
 @media (max-width: 767px) {
   .project__bg-text {

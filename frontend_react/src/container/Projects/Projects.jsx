@@ -49,36 +49,56 @@ const Projects = React.memo(() => {
               whileInView={{ opacity: [0, 1] }}
               transition={{ duration: 0.5 }}
               key={project.title ? project.title + index : index}
-              className={`${getItemClass(project)} project__item`}>
+              className={`${getItemClass(project)} project__item primary-bg`}>
+              {" "}
+              <div className={` ${project.codeLink ? "project__link" : ""}`}>
+                <a
+                  href={project.codeLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="project__link-github secondary-bg">
+                  <img src={icons.GitHub} alt="View Github" />
+                </a>
+                <a
+                  href={project.projectLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="project__link-site secondary-bg">
+                  <img src={icons.Link} alt="View Live Site" />
+                </a>
+              </div>
               <img
                 src={urlFor(project.imgUrl)}
                 loading="lazy"
+                className="project__item-img"
                 alt={
                   project.title ? project.title : "Placeholder Project Image"
                 }
               />
-              <div className="project__shelf">
-                <div className={` ${project.codeLink ? "project__link" : ""}`}>
-                  <a
-                    href={project.projectLink}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="project__link-site tertiary-bg">
-                    <img src={icons.Link} alt="View Code" />
-                  </a>
-                  <a
-                    href={project.codeLink}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="project__link-github tertiary-bg">
-                    <img src={icons.GitHub} alt="View Code" />
-                  </a>
+              <>
+                <div className="project__shelf">
+                  <div className="project__shelf-block">
+                    <h2 className="project__title">{project.title}</h2>
+                    {project.images && project.images.length > 0 && (
+                      <div className="project__tools ">
+                        {project.images.map((image, index) => (
+                          <img
+                            className="project__tools-img primary-bg"
+                            key={index}
+                            src={urlFor(image)}
+                            alt={`${project.title} - Image ${index + 1}`}
+                            loading="lazy"
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <h2 className="project__title">{project.title}</h2>
-              </div>
+                <p className="project__description">{project.description}</p>
+              </>
             </motion.div>
           ))}
-          {Array(5 - projects.length)
+          {Array(4 - projects.length)
             .fill()
             .map((_, index) => (
               <div
@@ -87,13 +107,7 @@ const Projects = React.memo(() => {
                   isMobile || isTablet
                     ? "hidden"
                     : `project__item ${
-                        index % 4 === 0
-                          ? "blue-glass"
-                          : index % 4 === 1
-                          ? "primary-bg"
-                          : index % 4 === 2
-                          ? "gold-glass"
-                          : "pink-glass"
+                        (index + 1) % 3 === 0 ? "primary-bg" : "tertiary-bg"
                       }`
                 }></div>
             ))}
