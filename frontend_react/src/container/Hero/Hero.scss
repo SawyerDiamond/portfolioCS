@@ -1,3 +1,33 @@
+// <PETALS> //
+.petals {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  gap: 2rem;
+  overflow: hidden;
+  & > * {
+    width: 100px;
+    height: 100px;
+  }
+  &-blue {
+    position: absolute;
+    padding-left: 60rem;
+    padding-bottom: 20rem;
+  }
+  &-gold {
+    position: absolute;
+    padding-left: 25rem;
+  }
+  &-pink {
+    position: absolute;
+    padding-left: 42rem;
+    padding-top: 28rem;
+  }
+}
+
 // <HERO> //
 .hero {
   position: relative;
