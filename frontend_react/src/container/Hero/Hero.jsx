@@ -32,33 +32,33 @@ const Hero = () => {
 
   return (
     <>
-      <motion.div
-        className={`petals ${!isDesktop ? "hidden" : ""}`}
-        whileInView={shelfAnimationDesktop}
-        transition={{ duration: 1 }}>
-        <motion.img
-          className="petals-blue"
-          src={images.bluepetal}
-          animate={bobAnimation}
-        />
-        <motion.img
-          className="petals-gold"
-          src={images.goldpetal}
-          animate={{
-            ...bobAnimation,
-            transition: { ...bobAnimation.transition, delay: 3 },
-          }}
-        />
-        <motion.img
-          className="petals-pink"
-          src={images.pinkpetal}
-          animate={{
-            ...bobAnimation,
-            transition: { ...bobAnimation.transition, delay: 1.5 },
-          }}
-        />
-      </motion.div>
       <section className="hero flex--col">
+        <motion.div
+          className={`petals ${!isDesktop ? "hidden" : ""}`}
+          whileInView={shelfAnimationDesktop}
+          transition={{ duration: 1 }}>
+          <motion.img
+            className="petals-blue"
+            src={images.bluepetal}
+            animate={bobAnimation}
+          />
+          <motion.img
+            className="petals-gold"
+            src={images.goldpetal}
+            animate={{
+              ...bobAnimation,
+              transition: { ...bobAnimation.transition, delay: 3 },
+            }}
+          />
+          <motion.img
+            className="petals-pink"
+            src={images.pinkpetal}
+            animate={{
+              ...bobAnimation,
+              transition: { ...bobAnimation.transition, delay: 1.5 },
+            }}
+          />
+        </motion.div>
         <div
           className={`hero__container ${
             isDesktop ? "flex--around" : "flex--col"
