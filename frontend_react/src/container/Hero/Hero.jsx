@@ -109,7 +109,7 @@ const Hero = () => {
           animate={{ y: [150, 0], opacity: [0, 1] }}
           transition={{ duration: 1 }}
           className="hero__location tertiary-bg">
-          <p>📍 Long Island / Washington, DC</p>
+          <p>📍 Long Island / Washington, D.C.</p>
         </motion.div>
         <img
           src={images.hero_bg}
