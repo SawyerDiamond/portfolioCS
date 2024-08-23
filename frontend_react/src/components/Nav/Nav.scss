@@ -22,6 +22,9 @@
   padding: 0.9rem;
   padding-right: 2.2rem;
   border-radius: 1.2rem;
+  background: var(--navy-primary);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   font-size: 1.35rem;
   @media screen and (min-width: 2400px) {
     padding: 1.25rem;

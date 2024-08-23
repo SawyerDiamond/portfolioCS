@@ -41,6 +41,7 @@ const Hero = () => {
             className="petals-blue"
             src={images.bluepetal}
             animate={bobAnimation}
+            alt="Blue petal"
           />
           <motion.img
             className="petals-gold"
@@ -49,6 +50,7 @@ const Hero = () => {
               ...bobAnimation,
               transition: { ...bobAnimation.transition, delay: 3 },
             }}
+            alt="Gold petal"
           />
           <motion.img
             className="petals-pink"
@@ -57,6 +59,7 @@ const Hero = () => {
               ...bobAnimation,
               transition: { ...bobAnimation.transition, delay: 1.5 },
             }}
+            alt="Pink petal"
           />
         </motion.div>
         <div

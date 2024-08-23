@@ -14,8 +14,7 @@ const Nav = () => {
       className={`navbar secondary-bg flex--spaced ${
         isMobile ? "hidden" : ""
       }`}>
-      <div
-        className={`flex primary-bg navbar__logo ${isMobile ? "hidden" : ""}`}>
+      <div className={`flex navbar__logo ${isMobile ? "hidden" : ""}`}>
         <img src={images.logo2} alt="logo" />
         <h3>SAWYER</h3>
       </div>
