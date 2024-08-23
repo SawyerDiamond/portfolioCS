@@ -179,9 +179,8 @@ p {
 .app {
   margin: 1vw;
   border-radius: 1vw;
-  background: var(--navy-tertiary);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  position: absolute;
+  overflow: hidden;
   border: 1px solid rgba(15, 35, 77, 0.45);
 }
 @media (max-width: 767px) {
@@ -190,6 +189,16 @@ p {
     border-radius: 0px;
     border: none;
   }
+}
+
+.app__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0e1a30;
+  z-index: -1;
 }
 
 .shelf {
