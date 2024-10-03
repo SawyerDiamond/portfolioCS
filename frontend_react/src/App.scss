@@ -142,6 +142,13 @@ p {
   border: 1px solid rgba(14, 41, 75, 0.5);
 }
 
+.nav-bg {
+  background: var(--navy-nav);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(15, 35, 77, 0.848);
+}
+
 .blue-glass {
   background: var(--blue-glass);
   -webkit-backdrop-filter: blur(10px);

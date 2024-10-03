@@ -11,9 +11,7 @@ const Nav = () => {
     <motion.nav
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 1 }}
-      className={`navbar secondary-bg flex--spaced ${
-        isMobile ? "hidden" : ""
-      }`}>
+      className={`navbar nav-bg flex--spaced ${isMobile ? "hidden" : ""}`}>
       <div className={`flex navbar__logo ${isMobile ? "hidden" : ""}`}>
         <img src={images.logo2} alt="logo" />
         <h3>SAWYER</h3>
