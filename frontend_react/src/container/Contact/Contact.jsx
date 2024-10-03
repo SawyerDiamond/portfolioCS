@@ -1,22 +1,18 @@
 import React from "react";
 
 import { icons, links } from "../../constants";
-import { Wrap, MotionWrap } from "../../wrapper";
+import { Wrap } from "../../wrapper";
+import { motion } from "framer-motion";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
-
+import useMotionAnimation from "../../hooks/useMotionAnimation";
 import "./Contact.scss";
 
-/**
- * Renders the Contact component which displays contact information and icons.
- * The component includes a header, a list of contact links, and a background image.
- *
- * @return {JSX.Element} The Contact component.
- */
 const Contact = () => {
   const { isMobile } = useDeviceDetect();
   const arrayNum = isMobile ? 9 : 3;
   const iconArray = new Array(arrayNum).fill(icons.ContactBG);
 
+  const { getAnimationProps } = useMotionAnimation();
   return (
     <>
       <section className="contact" id="Contact">
@@ -25,8 +21,11 @@ const Contact = () => {
             <img src={icons.ContactHeader} alt="About Icon" />
             <h1 className="about__text">Contact</h1>
           </header>
-          <div className="contact__content primary-bg flex--col">
+          <motion.div
+            className="contact__content primary-bg flex--col"
+            {...getAnimationProps("slideUp")}>
             <p className="contact__text">Reach Out to Me 👋</p>
+
             <ul
               className={`shelf contact__shelf tertiary-bg flex--h`}
               style={{ marginLeft: "0", position: "absolute" }}>
@@ -44,7 +43,7 @@ const Contact = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         </div>
         <div className="contact__bg">
           {iconArray.map((icon, index) => (
@@ -61,4 +60,4 @@ const Contact = () => {
   );
 };
 
-export default Wrap(MotionWrap(Contact, "Contact"), "Contact");
+export default Wrap(Contact, "Contact");

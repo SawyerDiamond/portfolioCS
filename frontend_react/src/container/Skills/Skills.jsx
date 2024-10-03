@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Wrap, MotionWrap } from "../../wrapper";
+import { Wrap } from "../../wrapper";
 
 import "./Skills.scss";
 import { icons } from "../../constants";
 import { motion } from "framer-motion";
 import { urlFor, client } from "../../client";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
+import useMotionAnimation from "../../hooks/useMotionAnimation";
 
 const Skills = () => {
   const { isMobile } = useDeviceDetect();
   const [skills, setSkills] = useState([]);
   const iconArray = Array(skills.length).fill(icons.SkillsBG);
+  const { getAnimationProps } = useMotionAnimation();
   useEffect(() => {
     const skillsQuery = '*[_type == "skills"]';
     client.fetch(skillsQuery).then((data) => {
@@ -21,10 +23,12 @@ const Skills = () => {
   return (
     <section className="skills" id="Skills">
       <div className="skills__container">
-        <header className="skills__header">
+        <motion.header
+          className="skills__header"
+          {...getAnimationProps("slideRight")}>
           <img src={icons.SkillsHeader} alt="Header Icon" />
           <h1>Skills</h1>
-        </header>
+        </motion.header>
         <div className={`skills__list ${isMobile ? "tertiary-bg" : ""}`}>
           {skills.map(({ name, icon, order }) => (
             <div
@@ -40,6 +44,7 @@ const Skills = () => {
                 transition={{ duration: 0.5 }}
                 loading="lazy"
                 alt={name}
+                {...getAnimationProps("slideUp")}
               />
             </div>
           ))}
@@ -59,4 +64,4 @@ const Skills = () => {
   );
 };
 
-export default Wrap(MotionWrap(Skills, "Skills"), "Skills");
+export default Wrap(Skills, "Skills");

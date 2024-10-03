@@ -76,7 +76,7 @@ const Hero = () => {
               <span>I'm</span>
               <span>Sawyer,</span>
             </h1>
-            <h2 className="hero__desc">a Frontend Developer & UI Designer. </h2>
+            <h2 className="hero__desc">a Software Developer & UI Engineer. </h2>
           </motion.header>
 
           <motion.div
@@ -108,7 +108,7 @@ const Hero = () => {
         <motion.div
           animate={{ y: [150, 0], opacity: [0, 1] }}
           transition={{ duration: 1 }}
-          className="hero__location tertiary-bg">
+          className="hero__location nav-bg">
           <p>📍 Long Island / Washington, D.C.</p>
         </motion.div>
         <img

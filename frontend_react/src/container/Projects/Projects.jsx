@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 
-import { Wrap, MotionWrap } from "../../wrapper";
+import { Wrap } from "../../wrapper";
 import "./Projects.scss";
 import { icons } from "../../constants";
 import { motion } from "framer-motion";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
+import useMotionAnimation from "../../hooks/useMotionAnimation";
 import { urlFor, client } from "../../client";
 
 const Projects = React.memo(() => {
+  const { getAnimationProps } = useMotionAnimation();
   const { isMobile, isTablet } = useDeviceDetect();
 
   //Sets logic for clicking on project items
@@ -33,10 +35,13 @@ const Projects = React.memo(() => {
   return (
     <section className="project">
       <div className="project__container">
-        <div className="project__header" id="Projects">
+        <motion.div
+          className="project__header"
+          id="Projects"
+          {...getAnimationProps("slideRight")}>
           <img src={icons.ProjectsHeader} alt="Header Icon" />
           <h1>Projects</h1>
-        </div>
+        </motion.div>
         <div className="project__grid">
           {projects.map((project, index) => (
             <motion.div
@@ -51,7 +56,9 @@ const Projects = React.memo(() => {
               key={project.title ? project.title + index : index}
               className={`${getItemClass(project)} project__item primary-bg`}>
               {" "}
-              <div className={` ${project.codeLink ? "project__link" : ""}`}>
+              <motion.div
+                className={` ${project.codeLink ? "project__link" : ""}`}
+                {...getAnimationProps("slideUp")}>
                 <a
                   href={project.codeLink}
                   target="_blank"
@@ -66,7 +73,7 @@ const Projects = React.memo(() => {
                   className="project__link-site secondary-bg">
                   <img src={icons.Link} alt="View Live Site" />
                 </a>
-              </div>
+              </motion.div>
               <img
                 src={urlFor(project.imgUrl)}
                 loading="lazy"
@@ -75,7 +82,7 @@ const Projects = React.memo(() => {
                   project.title ? project.title : "Placeholder Project Image"
                 }
               />
-              <>
+              <motion.div {...getAnimationProps("slideRight")}>
                 <div className="project__shelf">
                   <div className="project__shelf-block">
                     <h2 className="project__title">{project.title}</h2>
@@ -95,7 +102,7 @@ const Projects = React.memo(() => {
                   </div>
                 </div>
                 <p className="project__description">{project.description}</p>
-              </>
+              </motion.div>
             </motion.div>
           ))}
           {Array(4 - projects.length)
@@ -124,4 +131,4 @@ const Projects = React.memo(() => {
   );
 });
 
-export default Wrap(MotionWrap(Projects, "Projects"), "Projects");
+export default Wrap(Projects, "Projects");
