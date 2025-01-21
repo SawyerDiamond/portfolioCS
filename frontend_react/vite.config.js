@@ -11,11 +11,9 @@ export default defineConfig({
     loader: "jsx",
   },
   define: {
-    "process.env.REACT_APP_SANITY_PROJECT_ID": JSON.stringify(
-      process.env.REACT_APP_SANITY_PROJECT_ID
-    ),
-    "process.env.REACT_APP_SANITY_TOKEN": JSON.stringify(
-      process.env.REACT_APP_SANITY_TOKEN
+    "import.meta.env.VITE_SANITY_PROJECT_ID": JSON.stringify("295d7tee"),
+    "import.meta.env.VITE_SANITY_TOKEN": JSON.stringify(
+      process.env.VITE_SANITY_TOKEN
     ),
   },
 });
