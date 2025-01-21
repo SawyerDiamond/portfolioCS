@@ -11,6 +11,16 @@
 .contact h1 {
   font-weight: 800;
 }
+@media (max-width: 1024px) {
+  .contact {
+    margin-top: 70vw;
+  }
+}
+@media (max-width: 767px) {
+  .contact {
+    margin-top: 8rem;
+  }
+}
 
 .contact__header {
   display: flex;
@@ -54,7 +64,7 @@
 }
 @media (max-width: 767px) {
   .contact__container {
-    padding-bottom: 2rem;
+    padding-bottom: 8rem;
   }
 }
 
