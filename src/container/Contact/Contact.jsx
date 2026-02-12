@@ -29,19 +29,21 @@ const Contact = () => {
             <ul
               className={`shelf contact__shelf tertiary-bg flex--h`}
               style={{ marginLeft: "0", position: "absolute" }}>
-              {Object.keys(links).map((item, index) => (
-                <li
-                  className={`shelf--item ${index === 2 ? "hidden" : ""}`}
-                  style={{ margin: ".75rem" }}
-                  key={item}>
-                  <a
-                    href={links[item]}
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    <img src={icons[item]} alt={item} />
-                  </a>
-                </li>
-              ))}
+              {Object.keys(links)
+                .filter((item) => item !== "Resume")
+                .map((item) => (
+                  <li
+                    className="shelf--item"
+                    style={{ margin: ".75rem" }}
+                    key={item}>
+                    <a
+                      href={links[item]}
+                      target="_blank"
+                      rel="noopener noreferrer">
+                      <img src={icons[item]} alt={item} />
+                    </a>
+                  </li>
+                ))}
             </ul>
           </motion.div>
         </div>

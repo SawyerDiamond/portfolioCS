@@ -10,17 +10,35 @@
   --dark-gold: #f7991d;
   --light-gold: #fcc00a;
   --gold-glass: rgba(247, 153, 29, 0.5);
-  /*--<SHADOWS>--*/
-  --white-shadow: 0px 0px 15px #ffffff50;
-  --blue-shadow: 0px 0px 15px #105fd660;
-  --navy-shadow: 0px 0px 10px #0f234dbc;
-  --gold-shadow: 0px 0px 15px #f7991d78;
-  --pink-shadow: 0px 0px 15px #e938c072;
-  --dark-shadow: 0px 0px 15px #00000013;
 
-  --blue-gradient: linear-gradient(67.93deg, #138ef0 23.56%, #0971f0 79.49%);
-  --pink-gradient: linear-gradient(67.93deg, #e938c0 23.56%, #f15f79 79.49%);
-  --yellow-gradient: linear-gradient(67.93deg, #fcc00a 23.56%, #f7991d 79.49%);
+  /*--<RADII>--*/
+  --radius-xs: 0.65rem;
+  --radius-sm: 1rem;
+  --radius-md: 1.25rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+  --radius-2xl: 2.5rem;
+
+  /*--<SHADOWS>--*/
+  --white-shadow: 0px 0px 20px rgba(255, 255, 255, 0.25);
+  --blue-shadow: 0px 0px 20px rgba(16, 95, 214, 0.45);
+  --navy-shadow: 0px 0px 14px rgba(15, 35, 77, 0.7);
+  --gold-shadow: 0px 0px 20px rgba(247, 153, 29, 0.4);
+  --pink-shadow: 0px 0px 20px rgba(233, 56, 192, 0.4);
+  --dark-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+
+  /*--<GRADIENTS>--*/
+  --blue-gradient: linear-gradient(135deg, #138ef0 0%, #0971f0 100%);
+  --pink-gradient: linear-gradient(135deg, #e938c0 0%, #f15f79 100%);
+  --yellow-gradient: linear-gradient(135deg, #fcc00a 0%, #f7991d 100%);
+
+  /*--<TRANSITIONS>--*/
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-spring: cubic-bezier(0.34, 1.2, 0.64, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --transition-fast: 250ms var(--ease-smooth);
+  --transition-base: 400ms var(--ease-smooth);
+  --transition-slow: 600ms var(--ease-smooth);
 }
 
 html {
@@ -35,7 +53,8 @@ html {
 @font-face {
   font-family: "Gilroy";
   src: url("fonts/Gilroy-Regular.eot");
-  src: url("fonts/Gilroy-Regular.eot?#iefix") format("embedded-opentype"),
+  src:
+    url("fonts/Gilroy-Regular.eot?#iefix") format("embedded-opentype"),
     url("fonts/Gilroy-Regular.woff2") format("woff2"),
     url("fonts/Gilroy-Regular.woff") format("woff"),
     url("fonts/Gilroy-Regular.ttf") format("truetype");
@@ -48,7 +67,8 @@ html {
 @font-face {
   font-family: "Gilroy";
   src: url("fonts/Gilroy-Medium.eot");
-  src: url("fonts/Gilroy-Medium.eot?#iefix") format("embedded-opentype"),
+  src:
+    url("fonts/Gilroy-Medium.eot?#iefix") format("embedded-opentype"),
     url("fonts/Gilroy-Medium.woff2") format("woff2"),
     url("fonts/Gilroy-Medium.woff") format("woff"),
     url("fonts/Gilroy-Medium.ttf") format("truetype");
@@ -62,7 +82,8 @@ html {
 @font-face {
   font-family: "Gilroy";
   src: url("fonts/Gilroy-SemiBold.eot");
-  src: url("fonts/Gilroy-SemiBold.eot?#iefix") format("embedded-opentype"),
+  src:
+    url("fonts/Gilroy-SemiBold.eot?#iefix") format("embedded-opentype"),
     url("fonts/Gilroy-SemiBold.woff2") format("woff2"),
     url("fonts/Gilroy-SemiBold.woff") format("woff"),
     url("fonts/Gilroy-SemiBold.ttf") format("truetype");
@@ -75,7 +96,8 @@ html {
 @font-face {
   font-family: "Gilroy";
   src: url("fonts/Gilroy-Bold.eot");
-  src: url("fonts/Gilroy-Bold.eot?#iefix") format("embedded-opentype"),
+  src:
+    url("fonts/Gilroy-Bold.eot?#iefix") format("embedded-opentype"),
     url("fonts/Gilroy-Bold.woff2") format("woff2"),
     url("fonts/Gilroy-Bold.woff") format("woff"),
     url("fonts/Gilroy-Bold.ttf") format("truetype");

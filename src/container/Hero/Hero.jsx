@@ -90,18 +90,18 @@ const Hero = () => {
               alt="logo"
             />
             <ul className={`shelf tertiary-bg ${isDesktop ? "" : "flex--h"}`}>
-              {Object.keys(links).map((item, index) => (
-                <li
-                  className={`shelf--item ${index === 3 ? "hidden" : ""}`}
-                  key={item}>
-                  <a
-                    href={links[item]}
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    <img src={icons[item]} alt={item} />
-                  </a>
-                </li>
-              ))}
+              {Object.keys(links)
+                .filter((item) => item !== "Mail")
+                .map((item) => (
+                  <li className="shelf--item" key={item}>
+                    <a
+                      href={links[item]}
+                      target="_blank"
+                      rel="noopener noreferrer">
+                      <img src={icons[item]} alt={item} />
+                    </a>
+                  </li>
+                ))}
             </ul>
           </motion.div>
         </div>

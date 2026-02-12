@@ -49,8 +49,7 @@ export const projects = [
     title: "Portfolio",
     projectLink: "https://sawyerdiamond.xyz/",
     codeLink: "https://github.com/SawyerDiamond/portfolioCS",
-    description:
-      "Built from scratch to display my accomplishments in a simple yet elegant manner. ",
+    description: "Elegant portfolio built from scratch.",
     imgUrl: portfolioThumb,
     images: [portfolioTool1, portfolioTool2],
   },

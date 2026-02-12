@@ -11,6 +11,7 @@
   & > * {
     width: 100px;
     height: 100px;
+    filter: blur(0.5px);
   }
   &-blue {
     position: absolute;
@@ -50,13 +51,13 @@
 }
 .bg {
   width: 98vw;
-  border-radius: 1vw;
+  border-radius: var(--radius-xl);
   height: auto;
   top: 0;
   z-index: -1;
   @media (max-width: 767px) {
     width: 100vw;
-    border-radius: 0 0 1vw 1vw;
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
   }
 }
 .hero__container {
@@ -142,9 +143,24 @@
   height: 2.5rem;
   align-items: center;
   justify-content: center;
-  border-radius: 1rem;
+  border-radius: var(--radius-md);
   bottom: 3rem;
   width: 17rem;
+  transition:
+    box-shadow 400ms var(--ease-smooth),
+    transform 400ms var(--ease-spring);
+
+  p {
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    opacity: 0.9;
+  }
+
+  &:hover {
+    box-shadow: var(--navy-shadow);
+    transform: scale(1.03);
+  }
+
   @media (max-width: 768px) {
     display: none;
   }
@@ -161,15 +177,19 @@
   }
 }
 .hero__logo {
-  width: 11vw;
-  height: 11vw;
+  width: 12.5vw;
+  height: 12.5vw;
 
-  border-radius: 30%;
-  border-style: solid;
-  border-color: white;
-  border-width: 0.25vw;
+  border-radius: 26%;
 
-  box-shadow: var(--white-shadow);
+  box-shadow: var(--blue-shadow);
+  transition:
+    box-shadow 500ms var(--ease-smooth),
+    transform 500ms var(--ease-spring);
+
+  &:hover {
+    transform: scale(1.02);
+  }
 
   z-index: 1;
 }
