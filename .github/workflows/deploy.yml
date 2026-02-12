@@ -31,8 +31,6 @@ jobs:
         run: npm ci
 
       - name: Build
-        env:
-          VITE_SANITY_TOKEN: ${{ secrets.VITE_SANITY_TOKEN }}
         run: npm run build
 
       - name: Setup Pages
