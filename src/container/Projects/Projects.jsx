@@ -1,36 +1,25 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useRef, useCallback } from "react";
 
 import { Wrap } from "../../wrapper";
 import "./Projects.scss";
-import { icons } from "../../constants";
+import { icons, projects } from "../../constants";
 import { motion } from "framer-motion";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import useMotionAnimation from "../../hooks/useMotionAnimation";
-import { urlFor, client } from "../../client";
 
 const Projects = React.memo(() => {
   const { getAnimationProps } = useMotionAnimation();
   const { isMobile, isTablet } = useDeviceDetect();
 
-  //Sets logic for clicking on project items
   const itemRef = useRef();
   const textArray = Array(6).fill("P R O J E C T S");
 
-  //Sets logic for inputs into the projects grid and removes filler from mobile site.
-  const [projects, setProjects] = useState([]);
   const getItemClass = useCallback(
     (project) => {
       return isMobile && !project.projectLink ? "hidden" : "project__item";
     },
-    [isMobile]
+    [isMobile],
   );
-  useEffect(() => {
-    const query = '*[_type == "projects"]';
-
-    client.fetch(query).then((data) => {
-      setProjects(data);
-    });
-  }, []);
 
   return (
     <section className="project">
@@ -75,7 +64,7 @@ const Projects = React.memo(() => {
                 </a>
               </motion.div>
               <img
-                src={urlFor(project.imgUrl)}
+                src={project.imgUrl}
                 loading="lazy"
                 className="project__item-img"
                 alt={
@@ -92,7 +81,7 @@ const Projects = React.memo(() => {
                           <img
                             className="project__tools-img primary-bg"
                             key={index}
-                            src={urlFor(image)}
+                            src={image}
                             alt={`${project.title} - Image ${index + 1}`}
                             loading="lazy"
                           />

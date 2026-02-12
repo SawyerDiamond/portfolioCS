@@ -1,24 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Wrap } from "../../wrapper";
 
 import "./Skills.scss";
-import { icons } from "../../constants";
+import { icons, skills } from "../../constants";
 import { motion } from "framer-motion";
-import { urlFor, client } from "../../client";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import useMotionAnimation from "../../hooks/useMotionAnimation";
 
 const Skills = () => {
   const { isMobile } = useDeviceDetect();
-  const [skills, setSkills] = useState([]);
   const iconArray = Array(skills.length).fill(icons.SkillsBG);
   const { getAnimationProps } = useMotionAnimation();
-  useEffect(() => {
-    const skillsQuery = '*[_type == "skills"]';
-    client.fetch(skillsQuery).then((data) => {
-      setSkills(data);
-    });
-  }, []);
 
   return (
     <section className="skills" id="Skills">
@@ -38,7 +30,7 @@ const Skills = () => {
               key={name}
               style={{ order }}>
               <motion.img
-                src={urlFor(icon)}
+                src={icon}
                 className="skills__item-img"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.5 }}
