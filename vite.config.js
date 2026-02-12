@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default defineConfig({
-  base: "./",
+  base: "/portfolioCS/",
   plugins: [react()],
   esbuild: {
     loader: "jsx",
@@ -13,7 +13,7 @@ export default defineConfig({
   define: {
     "import.meta.env.VITE_SANITY_PROJECT_ID": JSON.stringify("295d7tee"),
     "import.meta.env.VITE_SANITY_TOKEN": JSON.stringify(
-      process.env.VITE_SANITY_TOKEN
+      process.env.VITE_SANITY_TOKEN,
     ),
   },
 });
