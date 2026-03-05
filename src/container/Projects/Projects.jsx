@@ -78,6 +78,13 @@ const ProjectModal = ({ project, onClose }) => {
           </div>
 
           <p className="modal__description">{project.description}</p>
+
+          {project.showDescription && project.detailedDescription && (
+            <div
+              className="modal__detailed-desc"
+              dangerouslySetInnerHTML={{ __html: project.detailedDescription }}
+            />
+          )}
         </div>
       </motion.div>
     </motion.div>

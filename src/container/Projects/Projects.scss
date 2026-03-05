@@ -222,15 +222,98 @@
   max-width: 680px;
   width: 100%;
   border-radius: var(--radius-2xl);
-  overflow: hidden;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  max-height: 90vh;
-  overflow-y: auto;
+  max-height: 95vh;
 
   @media (max-width: 767px) {
     max-width: 95vw;
     border-radius: var(--radius-xl);
+  }
+}
+
+.modal__detailed-desc {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+
+  h2,
+  h3,
+  h4 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.3rem;
+    color: white;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    opacity: 0.5;
+  }
+
+  h2 {
+    font-size: 0.75rem;
+  }
+  h3 {
+    font-size: 0.7rem;
+  }
+
+  p {
+    margin-bottom: 0.9rem;
+  }
+
+  /* For the inline desc images */
+  img.inline-img {
+    display: block;
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    margin: 1.25rem 0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Inline tech icon chips */
+  .tech-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem 0.2rem 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    vertical-align: middle;
+    margin: 0 0.15rem;
+    color: rgba(255, 255, 255, 0.9);
+
+    img {
+      width: 14px;
+      height: 14px;
+      object-fit: contain;
+    }
+  }
+
+  ul,
+  ol {
+    margin-left: 1.4rem;
+    margin-bottom: 0.9rem;
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+  }
+
+  a {
+    color: #138ef0;
+    text-decoration: underline;
+
+    &:hover {
+      color: white;
+    }
   }
 }
 
@@ -269,12 +352,15 @@
   width: 100%;
   aspect-ratio: 16 / 10;
   overflow: hidden;
+  flex-shrink: 0; /* Prevents the cover image from collapsing */
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
 }
 
 .modal__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .modal__body {

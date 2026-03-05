@@ -52,6 +52,46 @@ export const projects = [
     description: "Elegant portfolio built from scratch.",
     imgUrl: portfolioThumb,
     images: [portfolioTool1, portfolioTool2],
+    showDescription: true,
+    detailedDescription: `
+      <h2>How it came together</h2>
+      <p>
+        I started this from a blank <span class="tech-chip"><img src="${reactIcon}" alt="React" />React</span> project
+        and basically figured out the design as I went. No mockup, no Figma file, just vibes
+        and a lot of tweaking in the browser.
+      </p>
+
+      <img src="${portfolioThumb}" alt="Portfolio preview" class="inline-img" />
+
+      <h3>Styling</h3>
+      <p>
+        All the styles are in <span class="tech-chip"><img src="${scssIcon}" alt="SCSS" />SCSS</span>
+        with a custom variable system for colors, which made swapping between theme iterations a lot
+        less painful. Each background layer (primary, secondary, tertiary) is a separate class tied to
+        a CSS variable, so I could experiment with the palette without hunting through component files.
+      </p>
+
+      <h3>Animations</h3>
+      <p>
+        Framer Motion handles most of the animations. I pulled the scroll-triggered entry config into
+        a shared <code>useMotionAnimation</code> hook pretty early on once I realized I was copying the
+        same props into every section. Saved a lot of repeat code.
+      </p>
+
+      <h3>Layout</h3>
+      <p>
+        The project grid is pure <span class="tech-chip"><img src="${cssIcon}" alt="CSS" />CSS</span>
+        named-area grid. I wanted to avoid any JS-driven layout logic for something that
+        <code>grid-template-areas</code> handles perfectly well on its own.
+      </p>
+
+      <h3>Deployment</h3>
+      <p>
+        Pushed automatically to GitHub Pages on every merge to <code>main</code> via a
+        <span class="tech-chip"><img src="${gitIcon}" alt="Git" />GitHub Actions</span>
+        workflow. Pretty simple setup, zero servers to worry about.
+      </p>
+    `,
   },
   {
     title: "Jobsite",
@@ -59,6 +99,7 @@ export const projects = [
     description:
       "A modern internship application hub to get your career kickstarted. ",
     imgUrl: jobsiteThumb,
+    showDescription: false,
     images: [
       jobsiteTool1,
       jobsiteTool2,
@@ -66,5 +107,21 @@ export const projects = [
       jobsiteTool4,
       jobsiteTool5,
     ],
+    detailedDescription: `
+      <h2>The Problem Space</h2>
+      <p>Finding an internship can be a daunting, fragmented experience. Jobsite is a unified platform created to centralize and simplify the search for modern tech internships.</p>
+      
+      <h3>User Experience First</h3>
+      <img src="${jobsiteThumb}" alt="Jobsite Dashboard" />
+      <p>We prioritized an intuitive dashboard that lets students sort, track, and apply to roles with minimal friction. The entire flow features soft UI queues, micro-interactions, and instant feedback.</p>
+
+      <h3>Key Features</h3>
+      <ul>
+        <li>Real-time application tracking</li>
+        <li>Streamlined search mechanics</li>
+        <li>Responsive, mobile-friendly interface</li>
+      </ul>
+      <img src="${jobsiteThumb}" alt="Jobsite Search" />
+    `,
   },
 ];
