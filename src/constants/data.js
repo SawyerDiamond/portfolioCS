@@ -25,6 +25,12 @@ import jobsiteTool2 from "../assets/sanity-content/projects/jobsite-tool-2.png";
 import jobsiteTool3 from "../assets/sanity-content/projects/jobsite-tool-3.svg";
 import jobsiteTool4 from "../assets/sanity-content/projects/jobsite-tool-4.svg";
 import jobsiteTool5 from "../assets/sanity-content/projects/jobsite-tool-5.png";
+const queryEngineThumb = "/QueryEngine_Thumb.png";
+const queryEngineArticle1 = "/699e489ed786af9bc27a0dea--statuesque-swan-265767.netlify.app_.png";
+const queryEngineArticle2 = "/699e489ed786af9bc27a0dea--statuesque-swan-265767.netlify.app_ (2).png";
+import pythonIcon from "../assets/sanity-content/skills/python.svg";
+import plotlyIcon from "../assets/sanity-content/skills/plotly.svg";
+import geminiIcon from "../assets/sanity-content/skills/gemini.svg";
 
 export const skills = [
   { name: "HTML", icon: htmlIcon, order: 1 },
@@ -122,6 +128,39 @@ export const projects = [
         <li>Responsive, mobile-friendly interface</li>
       </ul>
       <img src="${jobsiteThumb}" alt="Jobsite Search" />
+    `,
+  },
+  {
+    title: "Query Engine",
+    projectLink:
+      "https://699e489ed786af9bc27a0dea--statuesque-swan-265767.netlify.app",
+    description:
+      "An AI-powered SQL interface translating natural language to optimized queries.",
+    imgUrl: queryEngineThumb,
+    images: [geminiIcon, pythonIcon, typescriptIcon, reactIcon, plotlyIcon],
+    showDescription: true,
+    detailedDescription: `
+      <h2>The Vision</h2>
+      <p>
+        Building a bridge between business intent and database execution. <strong>Query Engine</strong> allows users to extract complex insights without needing to write or understand SQL.
+      </p>
+      
+      <h3>Natural Language to SQL</h3>
+      <p>
+        Powered by an advanced AI backend using the <span class="tech-chip"><img src="${geminiIcon}" alt="Gemini" />Gemini API</span>, user prompts are parsed and translated into optimized, context-aware SQL queries in real-time. 
+      </p>
+      <img src="${queryEngineArticle1}" alt="Natural Language Interface" class="inline-img" />
+
+      <h3>Full-Featured Editor</h3>
+      <p>
+        A robust editor provides syntax highlighting, auto-optimization, and intelligent schema-aware autocomplete, making it perfect for both technical and non-technical users. Built with <span class="tech-chip"><img src="${typescriptIcon}" alt="TypeScript" />TypeScript</span>, <span class="tech-chip"><img src="${reactIcon}" alt="React" />React</span>, and <span class="tech-chip"><img src="${pythonIcon}" alt="Python" />Python</span>.
+      </p>
+      <img src="${queryEngineArticle2}" alt="SQL Code Editor" class="inline-img" />
+
+      <h3>Dynamic Visualizations</h3>
+      <p>
+        Raw data is instantly transformed into interactive charts and graphs using <span class="tech-chip"><img src="${plotlyIcon}" alt="Plotly" />Plotly</span>, allowing for seamless exploration and export.
+      </p>
     `,
   },
 ];
