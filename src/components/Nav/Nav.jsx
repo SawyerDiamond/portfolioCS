@@ -17,7 +17,7 @@ const Nav = () => {
         <h3>SAWYER</h3>
       </div>
       <ul className="navbar__links flex--spaced">
-        {["Home", "Skills", "Projects"].map((item) => (
+        {["Home", "Experience", "Projects"].map((item) => (
           <li className="navbar__button flex--v" key={`link-${item}`}>
             <a href={`#${item}`}>
               <img

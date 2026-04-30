@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import useDeviceDetect from "../hooks/useDeviceDetect";
 
-const sections = ["Home", "Skills", "Projects", "Contact"];
+const sections = ["Home", "Experience", "Projects", "Contact"];
 
 const NavDots = () => {
   const { isDesktop } = useDeviceDetect();
