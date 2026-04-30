@@ -18,9 +18,11 @@ import jobsiteTool2 from "../assets/sanity-content/projects/jobsite-tool-2.png";
 import jobsiteTool3 from "../assets/sanity-content/projects/jobsite-tool-3.svg";
 import jobsiteTool4 from "../assets/sanity-content/projects/jobsite-tool-4.svg";
 import jobsiteTool5 from "../assets/sanity-content/projects/jobsite-tool-5.png";
-const queryEngineThumb = "/QueryEngine_Thumb.png";
-const queryEngineArticle1 = "/699e489ed786af9bc27a0dea--statuesque-swan-265767.netlify.app_.png";
-const queryEngineArticle2 = "/699e489ed786af9bc27a0dea--statuesque-swan-265767.netlify.app_ (2).png";
+import queryEngineThumb from "../assets/queryEngine/query-engine-square.png";
+import editorView from "../assets/queryEngine/editor-view.png";
+import schemaBrowser from "../assets/queryEngine/schema-browser.png";
+import dataViz from "../assets/queryEngine/data-viz.png";
+import queryHistory from "../assets/queryEngine/query-history.png";
 
 import {
   Python,
@@ -137,7 +139,7 @@ export const projects = [
     title: "Portfolio",
     projectLink: "https://sawyerdiamond.xyz/",
     codeLink: "https://github.com/SawyerDiamond/portfolioCS",
-    description: "Elegant portfolio built from scratch.",
+    description: "Elegant portfolio built from scratch. I designed this to showcase my work and skills.",
     imgUrl: portfolioThumb,
     images: [portfolioTool1, portfolioTool2],
     showDescription: true,
@@ -182,6 +184,48 @@ export const projects = [
     `,
   },
   {
+    title: "Query Engine",
+    projectLink:
+      "https://699e489ed786af9bc27a0dea--statuesque-swan-265767.netlify.app",
+    description:
+      "An AI-powered SQL interface translating natural language to optimized queries.",
+    imgUrl: queryEngineThumb,
+    images: [geminiIcon, pythonIcon, typescriptIcon, reactIcon, plotlyIcon],
+    showDescription: true,
+    detailedDescription: `
+      <h2>The Vision</h2>
+      <p>
+        Building a bridge between business intent and database execution. <strong>Query Engine</strong> allows users to extract complex insights without needing to write or understand SQL.
+      </p>
+
+      <h3>Natural Language to SQL</h3>
+      <p>
+        The core experience centers on a "Human-in-the-loop" design. Powered by the <span class="tech-chip"><img src="${geminiIcon}" alt="Gemini" />Gemini API</span>, user prompts are translated into optimized SQL in real-time. I designed the interface to provide immediate visual feedback, allowing users to see their natural language evolve into technical logic instantly.
+      </p>
+      <img src="${editorView}" alt="Natural Language Interface" class="inline-img" />
+
+      <h3>High-Performance Editor & Auth</h3>
+      <p>
+        For the technical user, I built a robust editor with syntax highlighting and schema-aware autocomplete. The design philosophy here was "Terminal-plus"—the speed and precision of a CLI with the affordances of a modern GUI. I intentionally integrated the authentication and user profile as a sidebar element to maintain a unified workspace, ensuring that personalization and query history are always just a glance away.
+      </p>
+      
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; margin: 1.25rem 0; width: 100%;">
+        <div style="min-width: 0;">
+          <img src="${queryHistory}" alt="Authentication and Query History" class="inline-img" style="width: 100%; height: 100%; object-fit: cover; object-position: left; margin: 0;" />
+        </div>
+        <div style="min-width: 0;">
+          <img src="${schemaBrowser}" alt="User Profile and Personalization" class="inline-img" style="width: 100%; height: auto; margin: 0; object-fit: contain;" />
+        </div>
+      </div>
+
+      <h3>Data Storytelling & UX</h3>
+      <p>
+        Design isn't just how it looks, but how it works. I prioritized a clean visual hierarchy where raw data is instantly transformed into interactive <span class="tech-chip"><img src="${plotlyIcon}" alt="Plotly" />Plotly</span> charts. Every design choice—from the micro-interactions in the editor to the precise spacing of the results table—was made to minimize cognitive load. The "Dark-Glass" aesthetic isn't just for style; it creates a focused, high-contrast environment that highlights the data without distractions.
+      </p>
+      <img src="${dataViz}" alt="Data Visualizations" class="inline-img" />
+    `,
+  },
+  {
     title: "Jobsite",
     codeLink: "https://github.com/SawyerDiamond/jobsite",
     description:
@@ -210,39 +254,6 @@ export const projects = [
         <li>Responsive, mobile-friendly interface</li>
       </ul>
       <img src="${jobsiteThumb}" alt="Jobsite Search" />
-    `,
-  },
-  {
-    title: "Query Engine",
-    projectLink:
-      "https://699e489ed786af9bc27a0dea--statuesque-swan-265767.netlify.app",
-    description:
-      "An AI-powered SQL interface translating natural language to optimized queries.",
-    imgUrl: queryEngineThumb,
-    images: [geminiIcon, pythonIcon, typescriptIcon, reactIcon, plotlyIcon],
-    showDescription: true,
-    detailedDescription: `
-      <h2>The Vision</h2>
-      <p>
-        Building a bridge between business intent and database execution. <strong>Query Engine</strong> allows users to extract complex insights without needing to write or understand SQL.
-      </p>
-
-      <h3>Natural Language to SQL</h3>
-      <p>
-        Powered by an advanced AI backend using the <span class="tech-chip"><img src="${geminiIcon}" alt="Gemini" />Gemini API</span>, user prompts are parsed and translated into optimized, context-aware SQL queries in real-time.
-      </p>
-      <img src="${queryEngineArticle1}" alt="Natural Language Interface" class="inline-img" />
-
-      <h3>Full-Featured Editor</h3>
-      <p>
-        A robust editor provides syntax highlighting, auto-optimization, and intelligent schema-aware autocomplete, making it perfect for both technical and non-technical users. Built with <span class="tech-chip"><img src="${typescriptIcon}" alt="TypeScript" />TypeScript</span>, <span class="tech-chip"><img src="${reactIcon}" alt="React" />React</span>, and <span class="tech-chip"><img src="${pythonIcon}" alt="Python" />Python</span>.
-      </p>
-      <img src="${queryEngineArticle2}" alt="SQL Code Editor" class="inline-img" />
-
-      <h3>Dynamic Visualizations</h3>
-      <p>
-        Raw data is instantly transformed into interactive charts and graphs using <span class="tech-chip"><img src="${plotlyIcon}" alt="Plotly" />Plotly</span>, allowing for seamless exploration and export.
-      </p>
     `,
   },
 ];
