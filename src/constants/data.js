@@ -1,19 +1,12 @@
-// Skills icons
-import htmlIcon from "../assets/sanity-content/skills/html.svg";
+// Icons used in project descriptions only
 import cssIcon from "../assets/sanity-content/skills/css.svg";
 import scssIcon from "../assets/sanity-content/skills/scss.svg";
-import javascriptIcon from "../assets/sanity-content/skills/javascript.svg";
 import typescriptIcon from "../assets/sanity-content/skills/typescript.png";
 import reactIcon from "../assets/sanity-content/skills/react.svg";
-import nodejsIcon from "../assets/sanity-content/skills/nodejs.png";
-import nextjsIcon from "../assets/sanity-content/skills/nextjs.png";
-import tailwindIcon from "../assets/sanity-content/skills/tailwind.svg";
-import postgresqlIcon from "../assets/sanity-content/skills/postgresql.png";
-import figmaIcon from "../assets/sanity-content/skills/figma.svg";
-import javaIcon from "../assets/sanity-content/skills/java.svg";
 import gitIcon from "../assets/sanity-content/skills/git.svg";
-import supabaseIcon from "../assets/sanity-content/skills/supabase.svg";
-import firebaseIcon from "../assets/sanity-content/skills/firebase.svg";
+import pythonIcon from "../assets/sanity-content/skills/python.svg";
+import plotlyIcon from "../assets/sanity-content/skills/plotly.svg";
+import geminiIcon from "../assets/sanity-content/skills/gemini.svg";
 
 // Project images
 import portfolioThumb from "../assets/sanity-content/projects/portfolio-thumb.webp";
@@ -28,26 +21,115 @@ import jobsiteTool5 from "../assets/sanity-content/projects/jobsite-tool-5.png";
 const queryEngineThumb = "/QueryEngine_Thumb.png";
 const queryEngineArticle1 = "/699e489ed786af9bc27a0dea--statuesque-swan-265767.netlify.app_.png";
 const queryEngineArticle2 = "/699e489ed786af9bc27a0dea--statuesque-swan-265767.netlify.app_ (2).png";
-import pythonIcon from "../assets/sanity-content/skills/python.svg";
-import plotlyIcon from "../assets/sanity-content/skills/plotly.svg";
-import geminiIcon from "../assets/sanity-content/skills/gemini.svg";
 
-export const skills = [
-  { name: "HTML", icon: htmlIcon, order: 1 },
-  { name: "CSS", icon: cssIcon, order: 2 },
-  { name: "SCSS", icon: scssIcon, order: 3 },
-  { name: "Javascript", icon: javascriptIcon, order: 4 },
-  { name: "TypeScript", icon: typescriptIcon, order: 5 },
-  { name: "React", icon: reactIcon, order: 6 },
-  { name: "NodeJS", icon: nodejsIcon, order: 7 },
-  { name: "NextJS", icon: nextjsIcon, order: 8 },
-  { name: "Tailwind", icon: tailwindIcon, order: 9 },
-  { name: "PostgreSQL", icon: postgresqlIcon, order: 10 },
-  { name: "Figma", icon: figmaIcon, order: 11 },
-  { name: "Java", icon: javaIcon, order: 12 },
-  { name: "Git", icon: gitIcon, order: 13 },
-  { name: "Supabase", icon: supabaseIcon, order: 14 },
-  { name: "Firebase", icon: firebaseIcon, order: 15 },
+import {
+  Python,
+  Java,
+  Go,
+  Postgresql,
+  _React as ReactDI,
+  _Vue as VueDI,
+  NextjsIcon,
+  NuxtIcon,
+  TailwindIcon,
+  GitIcon,
+  DockerIcon,
+  Figma,
+  Vitest,
+  CursorIcon,
+  GoogleCloud,
+  FirebaseIcon,
+} from "@dev.icons/react";
+
+import ilsLogo from "../assets/logos/ils_logo.png";
+import gmuLogo from "../assets/logos/gmu_logo.png";
+import gwuLogo from "../assets/logos/gwu_logo.png";
+
+const DV = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/";
+const D = "https://cdn.jsdelivr.net/gh/xandemon/developer-icons/icons/";
+
+export const skillGroups = [
+  {
+    label: "Web",
+    items: [
+      { name: "HTML", src: `${DV}html5/html5-original.svg` },
+      { name: "CSS", src: `${DV}css3/css3-original.svg` },
+      { name: "Tailwind", Icon: TailwindIcon },
+      { name: "JavaScript", src: `${DV}javascript/javascript-original.svg`, rounded: true },
+      { name: "TypeScript", src: `${DV}typescript/typescript-original.svg`, rounded: true },
+    ],
+  },
+  {
+    label: "Languages",
+    items: [
+      { name: "Python", Icon: Python },
+      { name: "Java", Icon: Java },
+      { name: "Kotlin", src: `${DV}kotlin/kotlin-original.svg`, small: true },
+      { name: "Go", Icon: Go },
+      { name: "SQL", Icon: Postgresql },
+    ],
+  },
+  {
+    label: "Frameworks",
+    items: [
+      { name: "React", Icon: ReactDI },
+      { name: "Vue", Icon: VueDI },
+      { name: "Next.js", Icon: NextjsIcon },
+      { name: "Nuxt.js", Icon: NuxtIcon },
+      { name: "Node.js", src: `${DV}nodejs/nodejs-original.svg` },
+    ],
+  },
+  {
+    label: "Tooling",
+    items: [
+      { name: "Three.js", src: `${D}threejs-light.svg` },
+      { name: "Git", Icon: GitIcon },
+      { name: "Figma", Icon: Figma },
+      { name: "Vitest", Icon: Vitest },
+      { name: "Cursor", Icon: CursorIcon },
+    ],
+  },
+  {
+    label: "Cloud",
+    items: [
+      { name: "AWS", src: `${DV}amazonwebservices/amazonwebservices-plain-wordmark.svg` },
+      { name: "Google Cloud", Icon: GoogleCloud },
+      { name: "Firebase", Icon: FirebaseIcon },
+      { name: "Docker", Icon: DockerIcon },
+      { name: "Elastic", src: `${DV}elasticsearch/elasticsearch-original.svg`, small: true },
+    ],
+  },
+];
+
+export const workHistory = [
+  {
+    period: "Feb 2025 — Present",
+    title: "Software Developer",
+    company: "Integrated Lifecycle Solutions",
+    location: "Reston, VA",
+    description:
+      "Built SaaS dashboards in Vue/Nuxt.js with Elasticsearch APIs, shipped Go REST APIs, and an AI-powered semantic vector search service. Built a reusable Storybook component library and used Elastic APM telemetry to improve dashboard usability.",
+    logo: ilsLogo,
+  },
+  {
+    period: "Aug — Dec 2024",
+    title: "Frontend Developer Intern",
+    company: "GMU Legal Systems Policy Lab",
+    location: "Fairfax, VA",
+    description:
+      "Shipped features in TypeScript/React/Next.js, built Node.js data pipelines, and integrated Firebase and Vertex AI across 2000+ bills. Ran user research with stakeholders and iterated on Figma prototypes to refine interface workflows.",
+    logo: gmuLogo,
+  },
+  {
+    period: "Expected December 2026",
+    title: "Bachelor's in Computer Science & Interaction Design",
+    company: "George Washington University",
+    location: "Washington, DC",
+    description:
+      "Coursework in Algorithms, Software Engineering, Database Systems, Human-Centered Design, and Computer Systems. Focus on the intersection of technical depth and user-centered product thinking.",
+    logo: gwuLogo,
+    isEducation: true,
+  },
 ];
 
 export const projects = [
@@ -116,7 +198,7 @@ export const projects = [
     detailedDescription: `
       <h2>The Problem Space</h2>
       <p>Finding an internship can be a daunting, fragmented experience. Jobsite is a unified platform created to centralize and simplify the search for modern tech internships.</p>
-      
+
       <h3>User Experience First</h3>
       <img src="${jobsiteThumb}" alt="Jobsite Dashboard" />
       <p>We prioritized an intuitive dashboard that lets students sort, track, and apply to roles with minimal friction. The entire flow features soft UI queues, micro-interactions, and instant feedback.</p>
@@ -144,10 +226,10 @@ export const projects = [
       <p>
         Building a bridge between business intent and database execution. <strong>Query Engine</strong> allows users to extract complex insights without needing to write or understand SQL.
       </p>
-      
+
       <h3>Natural Language to SQL</h3>
       <p>
-        Powered by an advanced AI backend using the <span class="tech-chip"><img src="${geminiIcon}" alt="Gemini" />Gemini API</span>, user prompts are parsed and translated into optimized, context-aware SQL queries in real-time. 
+        Powered by an advanced AI backend using the <span class="tech-chip"><img src="${geminiIcon}" alt="Gemini" />Gemini API</span>, user prompts are parsed and translated into optimized, context-aware SQL queries in real-time.
       </p>
       <img src="${queryEngineArticle1}" alt="Natural Language Interface" class="inline-img" />
 

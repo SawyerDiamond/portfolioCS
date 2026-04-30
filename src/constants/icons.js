@@ -15,6 +15,7 @@ import Mail from "../assets/mail2.svg";
 const icons = {
   Home,
   Skills,
+  Experience: Skills,
   SkillsBG,
   SkillsHeader,
   Projects,
