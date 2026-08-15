@@ -530,3 +530,47 @@
         font-size: 16vw;
     }
 }
+
+/* ============================================================
+   HORIZONTAL TRACK (desktop)
+   The 80vw square grid is taller than a viewport, and the track
+   scrolls sideways with no vertical overflow to fall back on, so
+   the four projects lay out in one row instead. The panel then
+   runs wider than the screen — scrolling reveals the rest.
+   ============================================================ */
+@media (min-width: 1025px) {
+    .app > #Projects {
+        width: max-content;
+        padding: 0 8vw;
+    }
+    .project__container {
+        max-width: none;
+        margin-top: 0;
+    }
+    .project__grid {
+        width: auto;
+        height: 62svh;
+        grid-template-columns: repeat(4, auto);
+        grid-template-rows: minmax(0, 1fr);
+        grid-template-areas: "one two three four";
+        gap: 2.5vw;
+    }
+    // Cards keep their 1:1 ratio, so height drives width.
+    .project__grid > .project__item {
+        height: 100%;
+        width: auto;
+    }
+    // Six lines of 14vw watermark text run far past one screen; cap it to the
+    // panel so nothing spills below the fold that can no longer be scrolled to.
+    .project__bg {
+        height: 100svh;
+    }
+    // The cards are shorter in one row than they were in the 2×2 square, so
+    // the blurb gets clamped rather than overflowing its info strip.
+    .project__description {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}

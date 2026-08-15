@@ -1,13 +1,19 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 
 import { Wrap } from "../../wrapper";
+import { WordReveal } from "../../components";
 import "./Hero.scss";
 import { images, icons, links } from "../../constants";
 import { motion } from "framer-motion";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 
+// The shader engine is WebGPU-only and pulls in a large runtime, so it stays
+// off the initial bundle. Browsers without WebGPU render a transparent canvas,
+// which is why .hero__shader carries a navy CSS fallback underneath.
+const ShaderEffect = lazy(() => import("../../components/shaders/metallic-rings-1"));
+
 const Hero = () => {
-  const { isMobile, isTablet, isDesktop } = useDeviceDetect();
+  const { isDesktop } = useDeviceDetect();
   const textAnimationDesktop = isDesktop
     ? { y: [-300, 0], opacity: [0, 1] }
     : {};
@@ -71,12 +77,19 @@ const Hero = () => {
             whileInView={textAnimationDesktop}
             transition={{ duration: 1 }}
             className="hero__left">
-            <h1 className="hero__intro">
-              <span>Hi.</span>
-              <span>I'm</span>
-              <span>Sawyer,</span>
-            </h1>
-            <h2 className="hero__desc">a Software Developer & UI Engineer. </h2>
+            {/* WordReveal splits on whitespace into three .wr__unit spans, so
+                Hero.scss's nth-child gradient rules still land on the right
+                words — blue, pink, gold. */}
+            <WordReveal as="h1" className="hero__intro" stagger={0.09}>
+              {"Hi. I'm Sawyer,"}
+            </WordReveal>
+            <WordReveal
+              as="h2"
+              className="hero__desc"
+              stagger={0.035}
+              delay={0.35}>
+              {"a Software Developer & UI Engineer."}
+            </WordReveal>
           </motion.header>
 
           <motion.div
@@ -105,27 +118,11 @@ const Hero = () => {
             </ul>
           </motion.div>
         </div>
-        <motion.div
-          animate={{ y: [150, 0], opacity: [0, 1] }}
-          transition={{ duration: 1 }}
-          className="hero__location nav-bg">
-          <p>📍 Long Island / Washington, D.C.</p>
-        </motion.div>
-        <img
-          src={images.hero_bg}
-          className={`bg ${isDesktop ? "" : "hidden"}`}
-          alt="hero background"
-        />
-        <img
-          src={images.hero_bg_t}
-          className={`bg ${isTablet ? "" : "hidden"}`}
-          alt="hero background"
-        />
-        <img
-          src={images.hero_bg_m}
-          className={`bg ${isMobile ? "" : "hidden"}`}
-          alt="hero background"
-        />
+        <div className="hero__shader" aria-hidden="true">
+          <Suspense fallback={null}>
+            <ShaderEffect />
+          </Suspense>
+        </div>
       </section>
     </>
   );

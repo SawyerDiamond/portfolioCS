@@ -217,6 +217,70 @@ p {
   z-index: -1;
 }
 
+/* ============================================================
+   HORIZONTAL TRACK (desktop)
+   The document itself is the scroller — Lenis animates real
+   scrollLeft, so `position: fixed` (the bottom nav) and
+   window.scrollX both keep working. Each Wrap'd section becomes
+   one viewport-sized panel in a single flex row.
+   ============================================================ */
+@media (min-width: 1025px) {
+  // html only — overflow on body would make body its own scroll container
+  // and the viewport (window.scrollX) would never move.
+  html {
+    overflow-y: hidden;
+    overscroll-behavior-x: none;
+  }
+
+  .app {
+    position: relative;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    // Never clip here: the track is wider than the viewport by design.
+    overflow: visible;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: max-content;
+    height: 100svh;
+  }
+
+  // The vertical rhythm between sections is meaningless on this axis.
+  .app > * {
+    &:not(:first-child) {
+      margin-bottom: 0;
+    }
+  }
+
+  // Every Wrap'd panel: one screen wide, full height, contents centred.
+  // Panels clip their own overflow — with the page scrolling sideways there
+  // is no vertical scroll left to reach anything that spills below the fold
+  // (the decorative watermark layers are all taller than a screen).
+  .app > [id] {
+    flex: none;
+    width: 100vw;
+    height: 100svh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .app > [id] > .wrapper {
+    max-height: 100svh;
+  }
+}
+
+// Hide scrollbars in every mode — Lenis (or native scroll) still works.
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+
 // Shelf
 .shelf {
   border-radius: var(--radius-lg);

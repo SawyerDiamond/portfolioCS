@@ -5,6 +5,7 @@ import { Wrap } from "../../wrapper";
 import { motion } from "framer-motion";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import useMotionAnimation from "../../hooks/useMotionAnimation";
+import { WordReveal } from "../../components";
 import "./Contact.scss";
 
 const Contact = () => {
@@ -19,7 +20,9 @@ const Contact = () => {
         <div className="contact__container">
           <header className="contact__header">
             <img src={icons.ContactHeader} alt="About Icon" />
-            <h1 className="about__text">Contact</h1>
+            <WordReveal as="h1" className="about__text" inView stagger={0.06}>
+              Contact
+            </WordReveal>
           </header>
           <motion.div
             className="contact__content primary-bg flex--col"

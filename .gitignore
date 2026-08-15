@@ -1,2 +1,7 @@
 node_modules
 .DS_Store
+
+# Local secrets (SHADERS_API_KEY, etc.)
+.env
+.env.local
+.env.*.local

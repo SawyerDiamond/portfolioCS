@@ -1,0 +1,116 @@
+/* ============================================================
+   GLASS BUTTONS — standalone
+   ------------------------------------------------------------
+   The glassmorphic treatment from the token dropdown in
+   lab01.dev/experiments/03: a low-alpha white fill, a backdrop blur,
+   and a 1px inset ring — plus a top-lit edge and a vertical wash,
+   which are what make it read as glass over a flat (unblurrable)
+   surface rather than as a plain translucent chip.
+
+   Usage:   import "…/styles/glass-buttons.css";
+            <button class="gbtn glass">Label</button>
+            <button class="gbtn gbtn--icon gbtn--sm glass">…</button>
+            <a class="gbtn gbtn--blue glass" href="…">Primary</a>
+            <span class="glass">…</span>            ← any glass surface
+
+   `.glass` is the material; `.gbtn` is the button geometry. Hover and
+   active states only apply to <a> and <button>, so decorative glass
+   tiles stay inert.
+   ============================================================ */
+
+:root {
+  --glass-fill: rgba(242, 245, 250, 0.07);
+  --glass-fill-hover: rgba(242, 245, 250, 0.13);
+  --glass-ring: rgba(242, 245, 250, 0.14);
+  --glass-ring-hover: rgba(242, 245, 250, 0.26);
+  --glass-edge: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  --glass-blur: blur(10px);
+  --glass-radius: 9999px;
+
+  --glass-accent: 19, 142, 240; /* rgb triplet driving .gbtn--blue */
+
+  --glass-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --glass-dur: 300ms;
+  --glass-dur-fast: 150ms;
+}
+
+.glass {
+  background-color: var(--glass-fill);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0) 55%
+  );
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow:
+    inset 0 0 0 1px var(--glass-ring),
+    var(--glass-edge);
+  border-radius: var(--glass-radius);
+  color: #f4f4f5;
+  transition:
+    background-color var(--glass-dur) var(--glass-ease),
+    box-shadow var(--glass-dur) var(--glass-ease),
+    transform var(--glass-dur-fast) var(--glass-ease);
+}
+
+a.glass:hover,
+button.glass:hover {
+  background-color: var(--glass-fill-hover);
+  box-shadow:
+    inset 0 0 0 1px var(--glass-ring-hover),
+    var(--glass-edge);
+}
+a.glass:active,
+button.glass:active {
+  transform: translateY(1px);
+}
+
+/* ---- Geometry ---- */
+.gbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 18px;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.gbtn--icon {
+  width: 40px;
+  padding: 0;
+}
+
+.gbtn--sm {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 0.8125rem;
+}
+.gbtn--sm.gbtn--icon {
+  width: 32px;
+  padding: 0;
+}
+
+/* ---- Accent-tinted glass — for the one primary action on a screen ---- */
+.gbtn--blue {
+  background-color: rgba(var(--glass-accent), 0.24);
+  box-shadow:
+    inset 0 0 0 1px rgba(var(--glass-accent), 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  color: #dbecff;
+}
+a.gbtn--blue:hover,
+button.gbtn--blue:hover {
+  background-color: rgba(var(--glass-accent), 0.36);
+  box-shadow:
+    inset 0 0 0 1px rgba(var(--glass-accent), 0.72),
+    inset 0 1px 0 rgba(255, 255, 255, 0.34);
+}

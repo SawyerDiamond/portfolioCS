@@ -47,7 +47,8 @@ html {
 * {
   padding: 0;
   margin: 0;
-  scroll-behavior: smooth;
+  /* Deliberately no `scroll-behavior: smooth` — Lenis owns scrolling, and the
+     native smooth behaviour fights its animation loop. */
 }
 
 @font-face {

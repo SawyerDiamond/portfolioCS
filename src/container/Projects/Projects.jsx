@@ -5,6 +5,7 @@ import { icons, projects } from "../../constants";
 import { motion, AnimatePresence } from "framer-motion";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import useMotionAnimation from "../../hooks/useMotionAnimation";
+import { WordReveal } from "../../components";
 
 const ProjectModal = ({ project, onClose }) => {
   if (!project) return null;
@@ -114,7 +115,9 @@ const Projects = React.memo(() => {
           id="Projects"
           {...getAnimationProps("slideRight")}>
           <img src={icons.ProjectsHeader} alt="Header Icon" />
-          <h1>Projects</h1>
+          <WordReveal as="h1" inView stagger={0.06}>
+            Projects
+          </WordReveal>
         </motion.div>
         <div className="project__grid">
           {projects.map((project, index) => (

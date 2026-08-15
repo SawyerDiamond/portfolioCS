@@ -37,6 +37,10 @@
   justify-content: center;
   flex-direction: column;
   top: 0;
+  // The full-bleed shader is absolutely positioned, so the section needs its
+  // own size — the background image used to supply it.
+  width: 100%;
+  min-height: 100svh;
   @media (min-width: 1025px) {
     flex-direction: row;
   }
@@ -49,15 +53,37 @@
     order: 1;
   }
 }
-.bg {
-  width: 98vw;
-  border-radius: var(--radius-xl);
-  height: auto;
-  top: 0;
+// Replaces the old <img class="bg"> wave artwork. Full-bleed: the canvas fills
+// the whole hero panel edge to edge. The old image was in flow and was what
+// gave .hero its height, so .hero now carries an explicit size (above) and
+// this sits behind it.
+.hero__shader {
+  position: absolute;
+  inset: 0;
   z-index: -1;
-  @media (max-width: 767px) {
-    width: 100vw;
-    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  overflow: hidden;
+  // Navy floor: the shader canvas is transparent until WebGPU is up, and stays
+  // transparent on browsers without it, so this is what shows through.
+  background:
+    radial-gradient(
+      120% 90% at 100% 100%,
+      rgba(38, 62, 110, 0.5) 0%,
+      rgba(11, 22, 44, 0) 60%
+    ),
+    #0b162c;
+
+  // <Shader> renders its canvas inside a plain <div class="shader"> that has
+  // no height of its own, so the canvas's height:100% resolves against a
+  // collapsed box. Stretch the wrapper too or the render stops short.
+  .shader {
+    position: absolute;
+    inset: 0;
+  }
+
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 }
 .hero__container {
@@ -134,35 +160,6 @@
     width: 70vw;
     font-size: 6vw;
     text-align: center;
-  }
-}
-.hero__location {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  height: 2.5rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-md);
-  bottom: 3rem;
-  width: 17rem;
-  transition:
-    box-shadow 400ms var(--ease-smooth),
-    transform 400ms var(--ease-spring);
-
-  p {
-    font-size: 0.9rem;
-    letter-spacing: 0.02em;
-    opacity: 0.9;
-  }
-
-  &:hover {
-    box-shadow: var(--navy-shadow);
-    transform: scale(1.03);
-  }
-
-  @media (max-width: 768px) {
-    display: none;
   }
 }
 

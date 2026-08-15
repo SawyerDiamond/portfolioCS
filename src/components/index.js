@@ -1,2 +1,2 @@
-export { default as Nav } from "./Nav/Nav";
-export { default as NavDots } from "./NavDots";
+export { default as BottomNav } from "./BottomNav/BottomNav";
+export { default as WordReveal } from "./WordReveal/WordReveal";

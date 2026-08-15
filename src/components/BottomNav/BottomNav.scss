@@ -1,0 +1,124 @@
+$mobile: 767px;
+
+// Floating pill nav, centred at the bottom of the viewport. Replaces the old
+// top navbar + right-hand dot rail: in horizontal mode a fixed top bar and a
+// vertical dot column both read as the wrong axis.
+//
+// The surface is the saved `.mat` material and the controls are the saved
+// `.glass` / `.gbtn` buttons — this file only retints their tokens to the
+// site's navy and adjusts geometry.
+.bottomnav {
+  position: fixed;
+  bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: fit-content;
+  z-index: 120;
+
+  // Navy retint of both materials, scoped to the nav.
+  --mat-fill: rgba(13, 27, 52, 0.72);
+  --mat-ring: rgba(38, 74, 130, 0.55);
+  --mat-radius: 9999px;
+  --glass-accent: 9, 113, 240;
+
+  &__pill {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 5px;
+    // The material is translucent here, so it needs a blur of its own to sit
+    // over the moving track behind it.
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    backdrop-filter: blur(16px) saturate(180%);
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.35))
+      drop-shadow(0 20px 48px rgba(0, 0, 0, 0.45));
+  }
+
+  &__logo {
+    width: 34px;
+    height: 34px;
+    img {
+      width: 20px;
+      height: 20px;
+      border-radius: 9999px;
+    }
+  }
+
+  &__rule {
+    width: 1px;
+    height: 18px;
+    margin: 0 5px;
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item {
+    position: relative;
+    list-style: none;
+  }
+
+  // The sliding pill behind the active item — glass, but never interactive.
+  &__indicator {
+    position: absolute;
+    inset: 0;
+  }
+
+  &__link {
+    position: relative;
+    z-index: 1;
+    height: 34px;
+    padding: 0 14px;
+    gap: 7px;
+    background: none;
+    font-family: "Gilroy", Helvetica, Arial, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.65);
+    transition: color var(--transition-base);
+
+    &:hover,
+    &.is-active {
+      color: #fff;
+    }
+  }
+
+  // The nav icons are white SVG files, so opacity carries the state change.
+  &__glyph {
+    display: inline-flex;
+    opacity: 0.5;
+    transition: opacity var(--transition-base);
+    img {
+      width: 15px;
+      height: 15px;
+    }
+  }
+  &__link:hover &__glyph,
+  &__link.is-active &__glyph {
+    opacity: 1;
+  }
+
+  &__cta {
+    height: 34px;
+    margin-left: 4px;
+    padding: 0 16px;
+    font-family: "Gilroy", Helvetica, Arial, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  @media (max-width: $mobile) {
+    &__label {
+      display: none;
+    }
+    &__link {
+      padding: 0 11px;
+    }
+  }
+}

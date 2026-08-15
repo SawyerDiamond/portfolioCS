@@ -1,19 +1,25 @@
 import React from "react";
+import { MotionConfig } from "framer-motion";
 
 import { Contact, Hero, Skills, Projects } from "./container";
-import { Nav, NavDots } from "./components";
+import { BottomNav } from "./components";
+import { ScrollProvider } from "./context/ScrollContext";
 import "./App.scss";
+
 const App = () => {
   return (
-    <div className="app">
-      <div className="app__bg"></div>
-      <Nav />
-      <NavDots />
-      <Hero />
-      <Skills />
-      <Projects />
-      <Contact />
-    </div>
+    <MotionConfig reducedMotion="user">
+      <ScrollProvider>
+        <div className="app">
+          <div className="app__bg"></div>
+          <Hero />
+          <Skills />
+          <Projects />
+          <Contact />
+        </div>
+        <BottomNav />
+      </ScrollProvider>
+    </MotionConfig>
   );
 };
 

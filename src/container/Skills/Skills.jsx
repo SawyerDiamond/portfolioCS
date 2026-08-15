@@ -4,6 +4,7 @@ import "./Skills.scss";
 import { icons, skillGroups, workHistory } from "../../constants";
 import { motion } from "framer-motion";
 import useMotionAnimation from "../../hooks/useMotionAnimation";
+import { WordReveal } from "../../components";
 
 const Skills = () => {
   const { getAnimationProps } = useMotionAnimation();
@@ -16,7 +17,9 @@ const Skills = () => {
           className="skills__header"
           {...getAnimationProps("slideRight")}>
           <img src={icons.SkillsHeader} alt="Header Icon" />
-          <h1>Experience</h1>
+          <WordReveal as="h1" inView stagger={0.06}>
+            Experience
+          </WordReveal>
         </motion.header>
 
         <div className="skills__body">

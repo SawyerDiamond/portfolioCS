@@ -1,0 +1,61 @@
+/* ============================================================
+   CARD MATERIAL — standalone
+   ------------------------------------------------------------
+   The surface treatment from lab01.dev/experiments/09, retuned for a
+   dark ground: a flat fill, a top-lit vertical wash, a hairline ring,
+   a short stack of contact shadows, and inset top/bottom edges.
+
+   Deliberately static — there is no hover state.
+
+   Usage:   import "…/styles/card-material.css";
+            <div class="mat">…</div>
+   Tokens:  override --mat-* on :root (or any ancestor) to retint it.
+   ============================================================ */
+
+:root {
+  --mat-fill: #0e0e10;
+  --mat-ring: #212126;
+  --mat-radius: 30px;
+
+  /* The lit edge. Raise the white alpha for smaller surfaces (buttons want
+     ~0.3, large cards ~0.16 — a big panel with a bright edge looks plastic). */
+  --mat-edge-light: rgba(255, 255, 255, 0.16);
+  --mat-edge-dark: rgba(0, 0, 0, 0.45);
+
+  --mat-wash: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+
+  --mat-shadow:
+    0 0 0 1px var(--mat-ring), 0 9px 4px rgba(0, 0, 0, 0.02),
+    0 5px 3px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.14),
+    0 1px 1px rgba(0, 0, 0, 0.18), inset 0 -1px 0 var(--mat-edge-dark),
+    inset 0 1px 0 var(--mat-edge-light);
+}
+
+.mat {
+  position: relative;
+  background-color: var(--mat-fill);
+  background-image: var(--mat-wash);
+  border-radius: var(--mat-radius);
+  box-shadow: var(--mat-shadow);
+}
+
+/* Full-bleed image tiles read better with a heavier curve — no text inside
+   means nothing fights the corner. */
+.mat--tile {
+  border-radius: 44px;
+  overflow: hidden;
+}
+
+/* Light-ground variant, closer to the original reference. */
+.mat--light {
+  --mat-fill: #fafafa;
+  --mat-ring: rgba(0, 0, 0, 0.07);
+  --mat-edge-light: #ffffff;
+  --mat-edge-dark: rgba(0, 0, 0, 0.05);
+  --mat-wash: none;
+  color: #111;
+}

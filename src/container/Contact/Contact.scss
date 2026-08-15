@@ -124,3 +124,22 @@
     margin: 0;
   }
 }
+
+/* ============================================================
+   HORIZONTAL TRACK (desktop)
+   The card is sized in vw, which is taller than a viewport once
+   the panel is height-constrained — and its social shelf sits
+   exactly where the floating nav does. Both get corrected here.
+   ============================================================ */
+@media (min-width: 1025px) {
+  .contact__content {
+    width: 72vw;
+    height: auto;
+    aspect-ratio: 2 / 1;
+    max-height: 62svh;
+  }
+  // Clear the bottom nav.
+  .contact__shelf {
+    bottom: 4.5rem;
+  }
+}
