@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 
 import { icons } from "../../constants";
@@ -13,7 +14,9 @@ const ProjectModal = ({ project, onClose }) => {
 
   if (!project) return null;
 
-  return (
+  // Portalled out of the shell: the tab panel is transformed and clipped, which
+  // would otherwise trap the fixed overlay.
+  return createPortal(
     <motion.div
       className="modal__overlay"
       initial={{ opacity: 0 }}
@@ -22,7 +25,7 @@ const ProjectModal = ({ project, onClose }) => {
       transition={{ duration: 0.3 }}
       onClick={onClose}>
       <motion.div
-        className="modal__content secondary-bg"
+        className="modal__content"
         initial={{ opacity: 0, scale: 0.92, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.92, y: 20 }}
@@ -48,7 +51,7 @@ const ProjectModal = ({ project, onClose }) => {
                 <div className="modal__tools">
                   {project.images.map((image, index) => (
                     <img
-                      className="modal__tools-img primary-bg"
+                      className="modal__tools-img"
                       key={index}
                       src={image}
                       alt={`${project.title} tool ${index + 1}`}
@@ -91,7 +94,8 @@ const ProjectModal = ({ project, onClose }) => {
           )}
         </div>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body
   );
 };
 
