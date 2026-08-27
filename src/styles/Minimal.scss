@@ -1,0 +1,441 @@
+// Minimal single-column layout. Reuses the palette, radii and Gilroy stack
+// declared in index.css; everything structural lives here.
+
+:root {
+  --ink: #ffffff;
+  --ink-muted: rgba(255, 255, 255, 0.62);
+  --ink-faint: rgba(255, 255, 255, 0.38);
+  --hairline: rgba(255, 255, 255, 0.09);
+  --page: #0b162c;
+  --surface: #0e1a30;
+  --measure: 44rem;
+}
+
+body {
+  background-color: var(--page);
+}
+
+.site {
+  position: relative;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: "Gilroy", Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+
+  h1,
+  h2,
+  h3,
+  p,
+  a,
+  span,
+  li {
+    font-family: "Gilroy", Helvetica, Arial, sans-serif;
+    color: inherit;
+    font-synthesis: none;
+    letter-spacing: normal;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.site__main {
+  position: relative;
+  z-index: 1;
+  width: min(100%, var(--measure));
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 2rem) clamp(3rem, 8vw, 5rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3.5rem, 8vw, 6rem);
+}
+
+/* ---------------------------------------------------------------- glass */
+
+.primary-bg {
+  background: var(--navy-primary);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(20, 62, 112, 0.3);
+}
+
+.secondary-bg {
+  background: var(--navy-secondary);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(15, 35, 77, 0.7);
+}
+
+/* ---------------------------------------------------------------- intro */
+
+.intro {
+  position: relative;
+  padding-top: clamp(15rem, 32vh, 20rem);
+  padding-bottom: clamp(3.5rem, 8vw, 6rem);
+}
+
+.intro__inner {
+  position: relative;
+  z-index: 1;
+  width: min(100%, var(--measure));
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 2rem);
+}
+
+.intro__name {
+  font-size: clamp(2rem, 5.5vw, 2.9rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+.intro__role {
+  margin-top: 0.5rem;
+  font-size: clamp(1rem, 2.4vw, 1.15rem);
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+
+.intro__bio {
+  margin-top: 1.5rem;
+  max-width: 36rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--ink-muted);
+}
+
+.intro__actions {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.intro__location {
+  margin-top: 1.75rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink-faint);
+}
+
+/* --------------------------------------------------------------- button */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 2.5rem;
+  padding: 0 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--hairline);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    transform 250ms var(--ease-spring);
+
+  img {
+    width: 0.95rem;
+    height: 0.95rem;
+    opacity: 0.85;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  &--primary {
+    background: rgba(9, 113, 240, 0.18);
+    border-color: rgba(19, 142, 240, 0.35);
+
+    &:hover {
+      background: var(--blue-gradient);
+      border-color: rgba(19, 142, 240, 0.7);
+      box-shadow: var(--blue-shadow);
+    }
+  }
+
+  &--icon {
+    width: 2.5rem;
+    padding: 0;
+    justify-content: center;
+  }
+}
+
+/* -------------------------------------------------------------- section */
+
+.section__label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding-bottom: 1rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* ----------------------------------------------------------------- work */
+
+.work {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+.work__row {
+  display: grid;
+  grid-template-columns: 2.75rem 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.work__logo {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--hairline);
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0.3rem;
+  }
+}
+
+.work__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.work__title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.work__period {
+  flex-shrink: 0;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ink-faint);
+}
+
+.work__company {
+  margin-top: 0.15rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+
+  span {
+    color: var(--ink-faint);
+  }
+}
+
+.work__desc {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--ink-muted);
+}
+
+/* ---------------------------------------------------------------- stack */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.stack__group {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+.stack__label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ink-faint);
+}
+
+.stack__icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.stack__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  opacity: 0.75;
+  transition: opacity var(--transition-fast);
+
+  &:hover {
+    opacity: 1;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  &--rounded img {
+    border-radius: 0.25rem;
+  }
+}
+
+/* ---------------------------------------------------------------- bento */
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: clamp(6.5rem, 11vw, 9rem);
+  gap: 0.75rem;
+}
+
+.bento__tile {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--hairline);
+  background: var(--surface);
+  cursor: pointer;
+  transition:
+    border-color var(--transition-base),
+    transform 350ms var(--ease-spring);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 600ms var(--ease-smooth);
+  }
+
+  &:hover {
+    border-color: rgba(19, 142, 240, 0.45);
+
+    img {
+      transform: scale(1.04);
+    }
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+
+  &--lg {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  &--wide {
+    grid-column: span 2;
+  }
+
+  &--sm {
+    grid-column: span 1;
+  }
+}
+
+/* --------------------------------------------------------------- footer */
+
+.footer {
+  border-top: 1px solid var(--hairline);
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.footer__note {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+
+.footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.footer__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  transition: color var(--transition-fast);
+
+  img {
+    width: 0.9rem;
+    height: 0.9rem;
+    opacity: 0.7;
+  }
+
+  &:hover {
+    color: var(--ink);
+  }
+}
+
+.footer__copy {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--ink-faint);
+}
+
+/* ----------------------------------------------------------- responsive */
+
+@media (max-width: 640px) {
+  .bento {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: clamp(6rem, 26vw, 8rem);
+  }
+
+  .work__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+  }
+
+  .stack__group {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    align-items: start;
+  }
+}
