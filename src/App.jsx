@@ -1,9 +1,9 @@
 import React from "react";
 
 import Intro from "./container/minimal/Intro";
+import Bento from "./container/minimal/Bento";
 import Work from "./container/minimal/Work";
 import Stack from "./container/minimal/Stack";
-import Bento from "./container/minimal/Bento";
 import Footer from "./container/minimal/Footer";
 import "./styles/Minimal.scss";
 
@@ -12,9 +12,9 @@ const App = () => {
     <div className="site">
       <Intro />
       <main className="site__main">
+        <Bento />
         <Work />
         <Stack />
-        <Bento />
         <Footer />
       </main>
     </div>

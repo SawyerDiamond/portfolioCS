@@ -1,26 +1,58 @@
 import React from "react";
 
-import { icons, links } from "../../constants";
+import { icons, images, links } from "../../constants";
 
 const Footer = () => (
-  <footer className="footer" id="Contact">
-    <p className="footer__note">Always up for a good problem. Say hello.</p>
+  <footer className="depth footer" id="Contact">
+    <div className="footer__glow" />
 
-    <div className="footer__links">
-      {Object.keys(links).map((item) => (
-        <a
-          className="footer__link"
-          key={item}
-          href={links[item]}
-          target={item === "Mail" ? undefined : "_blank"}
-          rel="noopener noreferrer">
-          <img src={icons[item]} alt="" aria-hidden="true" />
-          {item === "Mail" ? "Email" : item}
-        </a>
-      ))}
+    <img className="footer__logo" src={images.logo2} alt="Sawyer Diamond" />
+
+    <h2 className="footer__title">Let's build something.</h2>
+    <p className="footer__note">
+      Always up for a good problem — whether that's a role, a side project, or
+      an interface that deserves better.
+    </p>
+
+    <div className="footer__actions">
+      <a className="btn btn--primary" href={links.Mail}>
+        <img src={icons.Mail} alt="" aria-hidden="true" />
+        sawyerrdiamond@gmail.com
+      </a>
+      <a
+        className="btn btn--icon"
+        href={links.GitHub}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub">
+        <img src={icons.GitHub} alt="" aria-hidden="true" />
+      </a>
+      <a
+        className="btn btn--icon"
+        href={links.LinkedIn}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="LinkedIn">
+        <img src={icons.LinkedIn} alt="" aria-hidden="true" />
+      </a>
+      <a
+        className="btn btn--icon"
+        href={links.Resume}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Résumé">
+        <img src={icons.Resume} alt="" aria-hidden="true" />
+      </a>
     </div>
 
-    <p className="footer__copy">© {new Date().getFullYear()} Sawyer Diamond</p>
+    <div className="footer__base">
+      <span>© {new Date().getFullYear()} Sawyer Diamond</span>
+      <span className="footer__marks">
+        <span />
+        <span />
+        <span />
+      </span>
+    </div>
   </footer>
 );
 

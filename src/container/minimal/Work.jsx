@@ -4,17 +4,20 @@ import { motion } from "framer-motion";
 import { workHistory } from "../../constants";
 
 const Work = () => (
-  <section className="section" id="Experience">
-    <h2 className="section__label">Work</h2>
+  <section className="depth panel" id="Experience">
+    <div className="panel__head">
+      <span className="panel__chip panel__chip--gold" />
+      <h2 className="panel__title">Work &amp; Education</h2>
+    </div>
 
     <ul className="work">
       {workHistory.map((entry) => (
         <motion.li
-          className="work__row"
+          className={`work__row ${entry.isEducation ? "ring--pink" : "ring--blue"}`}
           key={`${entry.company}-${entry.title}`}
           initial={{ y: 16, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true, amount: 0.4 }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }}>
           <div className="work__logo">
             {entry.logo && <img src={entry.logo} alt={entry.company} loading="lazy" />}

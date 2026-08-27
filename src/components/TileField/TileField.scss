@@ -1,0 +1,82 @@
+.tiles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: clamp(230px, 24vw, 380px);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+// Blue wash anchoring the top-left corner.
+.tiles__glow {
+  position: absolute;
+  top: -25%;
+  left: -10%;
+  width: 70%;
+  height: 145%;
+  background: radial-gradient(
+    ellipse at 22% 28%,
+    rgba(19, 142, 240, 0.3) 0%,
+    rgba(9, 113, 240, 0.1) 40%,
+    rgba(6, 12, 26, 0) 72%
+  );
+}
+
+.tiles__grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(22, 1fr);
+  grid-auto-rows: min-content;
+  grid-auto-flow: row dense;
+  gap: clamp(0.3rem, 0.6vw, 0.6rem);
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+
+  // Fade the mosaic out toward the bottom and right so it sits behind the
+  // header instead of competing with it.
+  -webkit-mask-image:
+    linear-gradient(to bottom, #000 0%, #000 26%, transparent 86%),
+    linear-gradient(to right, #000 0%, rgba(0, 0, 0, 0.7) 60%, transparent 96%);
+  mask-image:
+    linear-gradient(to bottom, #000 0%, #000 26%, transparent 86%),
+    linear-gradient(to right, #000 0%, rgba(0, 0, 0, 0.7) 60%, transparent 96%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+.tiles__tile {
+  aspect-ratio: 1;
+  border-radius: var(--radius-xs);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  &--wide {
+    grid-column: span 2;
+    aspect-ratio: 2 / 1;
+  }
+
+  &--well {
+    background: rgba(255, 255, 255, 0.028);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+  }
+
+  &--blue {
+    background: var(--blue-gradient);
+  }
+  &--gold {
+    background: var(--yellow-gradient);
+  }
+  &--pink {
+    background: var(--pink-gradient);
+  }
+}
+
+@media (max-width: 767px) {
+  .tiles {
+    height: clamp(190px, 42vw, 260px);
+  }
+  .tiles__grid {
+    grid-template-columns: repeat(11, 1fr);
+  }
+}
