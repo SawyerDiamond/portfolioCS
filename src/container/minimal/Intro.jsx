@@ -1,8 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-import { icons, images, links } from "../../constants";
-import TileField from "../../components/TileField/TileField";
+import { icons, links } from "../../constants";
+import IntroBackground from "../../components/IntroBackground/IntroBackground";
 
 const rise = (delay) => ({
   initial: { y: 18, opacity: 0 },
@@ -10,40 +10,33 @@ const rise = (delay) => ({
   transition: { duration: 0.7, delay, ease: [0.25, 0.1, 0.25, 1] },
 });
 
+// Fixed left column of the shell — never swaps out with the tabs.
 const Intro = () => (
-  <header className="intro" id="Home">
-    <TileField />
+  <aside className="intro" id="Home">
+    <IntroBackground />
 
     <div className="intro__inner">
-      <motion.img
-        className="intro__logo"
-        src={images.logo2}
-        alt="Sawyer Diamond"
-        {...rise(0)}
-      />
-
-      <motion.h1 className="intro__name" {...rise(0.06)}>
-        Sawyer Diamond
+      <motion.h1 className="intro__name" {...rise(0)}>
+        Sawyer
+        <br />
+        Diamond
       </motion.h1>
 
-      <motion.p className="intro__role" {...rise(0.13)}>
-        Software Developer <em>&amp;</em> UI Engineer
+      <motion.p className="intro__bio" {...rise(0.13)}>
+        <strong>Software Developer <em>&</em> UI Engineer</strong> building
+        interfaces that hold up under real use — currently shipping dashboards
+        and design systems at Integrated Lifecycle Solutions, and finishing a
+        degree in Computer Science &amp; Interaction Design at George Washington
+        University.
       </motion.p>
 
-      <motion.p className="intro__bio" {...rise(0.2)}>
-        I build interfaces that hold up under real use — currently shipping
-        dashboards and design systems at Integrated Lifecycle Solutions, and
-        finishing a degree in Computer Science &amp; Interaction Design at
-        George Washington University.
-      </motion.p>
-
-      <motion.div className="intro__actions" {...rise(0.27)}>
+      <motion.div className="intro__actions" {...rise(0.2)}>
         <a className="btn btn--primary" href={links.Mail}>
           <img src={icons.Mail} alt="" aria-hidden="true" />
           Email me
         </a>
         <a
-          className="btn"
+          className="btn btn--pink"
           href={links.Resume}
           target="_blank"
           rel="noopener noreferrer">
@@ -51,7 +44,7 @@ const Intro = () => (
           Résumé
         </a>
         <a
-          className="btn btn--icon"
+          className="btn btn--icon btn--gold"
           href={links.GitHub}
           target="_blank"
           rel="noopener noreferrer"
@@ -67,13 +60,8 @@ const Intro = () => (
           <img src={icons.LinkedIn} alt="" aria-hidden="true" />
         </a>
       </motion.div>
-
-      <motion.p className="intro__location" {...rise(0.34)}>
-        <span className="intro__dot" />
-        Long Island / Washington, D.C.
-      </motion.p>
     </div>
-  </header>
+  </aside>
 );
 
 export default Intro;
