@@ -1,6 +1,9 @@
-// Minimal layout built on card-like surfaces. The depth treatment (inset top
-// highlight, bottom bevel, layered drop shadow, gradient corner rings) is a
-// spin-off of the ILS Hub material system, retuned for this palette.
+// Minimal layout. The document never scrolls: a topbar sits on the deep page
+// background, and a single raised, rounded shell fills the rest of the
+// viewport. Inside the shell the hero is pinned left and the tab panel on the
+// right scrolls on its own. Depth treatment (inset top highlight, bottom
+// bevel, layered drop shadow) is a spin-off of the ILS Hub material system,
+// retuned for this palette.
 
 @font-face {
   font-family: "Jeko";
@@ -14,37 +17,169 @@
   --ink: #ffffff;
   --ink-muted: rgba(255, 255, 255, 0.64);
   --ink-faint: rgba(255, 255, 255, 0.4);
+  --ink-body: rgba(255, 255, 255, 0.8);
 
+  // --page is the true background; --shell is the lighter raised slab on top
+  // of it, and cards sit lighter again on the shell.
   --page: #050a16;
-  --surface: rgba(13, 25, 48, 0.72);
-  --surface-solid: #0a1428;
-  --surface-raised: rgba(18, 33, 60, 0.8);
+  --shell: #0b1729;
+  // Nested surfaces step in small increments — a big jump between a container
+  // and its contents reads as one being wrong rather than as depth.
+  --surface-low: #101c31;
+  --surface-solid: #16243d;
+
+  // Translucent counterparts. Each sits over the aurora field on the page, so
+  // the blur has something worth picking up.
+  --glass-shell: rgba(11, 23, 41, 0.62);
+  --glass-low: rgba(16, 28, 49, 0.5);
+  --glass-card: rgba(22, 36, 61, 0.46);
+  --surface-raised: rgba(30, 50, 86, 0.9);
   --edge: rgba(255, 255, 255, 0.07);
   --edge-strong: rgba(255, 255, 255, 0.11);
 
-  // Corner tints for the gradient rings, one per accent.
-  --ring-blue: rgba(19, 142, 240, 0.55);
-  --ring-gold: rgba(252, 192, 10, 0.45);
-  --ring-pink: rgba(233, 56, 192, 0.45);
+  --radius-card: var(--radius-lg);
+  --radius-card-lg: var(--radius-xl);
+  --radius-chip: var(--radius-sm);
 
-  --depth: 0 1px 2px rgba(2, 6, 16, 0.55), 0 12px 28px -14px rgba(2, 6, 16, 0.8);
-  --depth-lifted: 0 1px 2px rgba(2, 6, 16, 0.6), 0 22px 44px -18px rgba(2, 6, 16, 0.9);
+  // Ambient shadows only. The lit-top/dark-bottom bevel is reserved for
+  // buttons now — on flat card surfaces it just read as plastic.
+  --depth: 0 1px 2px rgba(2, 6, 16, 0.4), 0 10px 24px -16px rgba(2, 6, 16, 0.9);
+  --depth-lifted: 0 1px 2px rgba(2, 6, 16, 0.45), 0 18px 36px -20px rgba(2, 6, 16, 0.95);
+  --bevel: inset 0 1px 0 rgba(255, 255, 255, 0.11), inset 0 -1.5px 0 rgba(0, 0, 0, 0.3);
 
   --measure: 58rem;
+  --frame: clamp(0.6rem, 1.4vw, 1.1rem);
+  --topbar-h: 4rem;
+}
+
+// Single-element glass material — no inner wrapper. Translucent fill over the
+// page aurora, an even hairline, and a grain field pitched to be felt rather
+// than seen.
+@mixin glass(
+  $fill: var(--glass-card),
+  $blur: 20px,
+  $edge: var(--edge),
+  $grain: 0.014
+) {
+  position: relative;
+  isolation: isolate;
+  background-color: $fill;
+  backdrop-filter: blur($blur) saturate(1.3);
+  -webkit-backdrop-filter: blur($blur) saturate(1.3);
+  border: 1px solid $edge;
+  box-shadow: var(--depth);
+
+  // 256px tile rendered at 128 so the grain stays crisp on 2x displays;
+  // scaling the full-size source down turned it to mush. Anchored to the
+  // viewport so it reads as one film over the UI, not per-card tiles.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background-image: url("../assets/noise-tile.avif");
+    background-size: 128px;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    opacity: $grain;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
 }
 
 html,
 body {
+  height: 100%;
   background-color: var(--page);
+  overflow: hidden;
+}
+
+// Set on body, not on the layout wrapper, so portalled UI (the project modal)
+// inherits it too.
+body {
+  color: var(--ink);
+  font-family: "Gilroy", Helvetica, Arial, sans-serif;
+}
+
+// Form elements opt out of inheritance by default — that's what left button
+// text rendering black in the system font inside the project list and modal.
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+#root {
+  height: 100%;
 }
 
 .site {
   position: relative;
-  min-height: 100vh;
+  box-sizing: border-box;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--frame) var(--frame);
   color: var(--ink);
   font-family: "Gilroy", Helvetica, Arial, sans-serif;
-  overflow-x: hidden;
+  overflow: hidden;
 
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  // Aurora field. Sits behind everything and is what the glass surfaces blur
+  // and tint — without it, translucency over a flat colour shows nothing.
+  &::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        ellipse 62% 48% at 12% 8%,
+        rgba(19, 142, 240, 0.22) 0%,
+        rgba(9, 113, 240, 0) 62%
+      ),
+      radial-gradient(
+        ellipse 52% 46% at 88% 22%,
+        rgba(233, 56, 192, 0.15) 0%,
+        rgba(233, 56, 192, 0) 60%
+      ),
+      radial-gradient(
+        ellipse 58% 44% at 72% 92%,
+        rgba(247, 153, 29, 0.12) 0%,
+        rgba(247, 153, 29, 0) 62%
+      ),
+      radial-gradient(
+        ellipse 70% 55% at 30% 78%,
+        rgba(9, 113, 240, 0.14) 0%,
+        rgba(9, 113, 240, 0) 66%
+      );
+  }
+
+  // Grain over the deep background itself, matching the card material.
+  &::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: url("../assets/noise-tile.avif");
+    background-size: 128px;
+    background-repeat: repeat;
+    opacity: 0.018;
+    mix-blend-mode: overlay;
+  }
+
+  // Neutralises the global type scale in index.css. Kept off `font-family` so
+  // it can't outrank the display face on the name.
   h1,
   h2,
   h3,
@@ -53,10 +188,19 @@ body {
   a,
   span,
   li {
-    font-family: "Gilroy", Helvetica, Arial, sans-serif;
     color: inherit;
     font-synthesis: none;
     letter-spacing: normal;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  a,
+  li {
+    font-family: "Gilroy", Helvetica, Arial, sans-serif;
   }
 
   a {
@@ -70,62 +214,200 @@ body {
   }
 }
 
-.site__main {
+/* ---------------------------------------------------------------- topbar */
+
+// Not a floating bar — just the strip of deep background left above the shell.
+.topbar {
   position: relative;
   z-index: 1;
-  width: min(100%, var(--measure));
-  margin: 0 auto;
-  padding: 0 clamp(1rem, 4vw, 2rem) clamp(3rem, 7vw, 5rem);
+  flex-shrink: 0;
+  height: var(--topbar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 clamp(0.4rem, 1.2vw, 0.9rem);
+}
+
+.topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.topbar__logo {
+  position: relative;
+  display: block;
+  width: 2.1rem;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 0.7rem;
+  box-shadow: var(--depth);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.site .topbar__name {
+  font-family: "Jeko", "Gilroy", Helvetica, Arial, sans-serif;
+  font-size: 1.02rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.topbar__tabs {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.25rem;
+  border-radius: var(--radius-card);
+  @include glass(rgba(255, 255, 255, 0.04), 18px);
+}
+
+.topbar__tab {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 0;
+  background: transparent;
+  padding: 0 0.95rem;
+  height: 2.15rem;
+  border-radius: calc(var(--radius-card) - 0.25rem);
+  font-family: inherit;
+  font-size: 0.87rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--ink);
+  }
+
+  &.is-active {
+    color: var(--ink);
+  }
+}
+
+// Sliding fill, animated between tabs by framer's shared layout id.
+.topbar__pill {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--surface-raised);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1.5px 0 rgba(0, 0, 0, 0.3),
+    0 6px 16px -8px rgba(2, 6, 16, 0.9);
+}
+
+// Only present on the active tab, so inactive tabs carry no leftover gap.
+.topbar__tab-mark {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+
+  .shape-icon {
+    width: 1.05rem;
+    height: 1.05rem;
+  }
+}
+
+.topbar__tab-label {
+  position: relative;
+  white-space: nowrap;
+}
+
+/* ----------------------------------------------------------------- shell */
+
+.shell {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  overflow: hidden;
+  border-radius: var(--radius-2xl);
+  @include glass(var(--glass-shell), 32px, var(--edge-strong));
+  box-shadow: var(--depth-lifted);
+}
+
+.shell__panel {
+  position: relative;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: clamp(1.25rem, 2.5vw, 2rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  // Auto margins rather than justify-content, so overflowing content still
+  // scrolls to its top edge instead of being clipped.
+  &--center .shell__panel-inner {
+    margin-block: auto;
+    flex: 1;
+    justify-content: center;
+  }
+
+  // Sections in a centred panel stretch and distribute, so the column reads as
+  // deliberately filled instead of floating in dead space.
+  &--center section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 0;
+  }
+
+  // The card stack sizes itself to the column, so the panel must not scroll.
+  // The height chain has to stay unbroken all the way down to the cards —
+  // without a definite height there is no free space for them to grow into,
+  // and every card just renders at its collapsed basis.
+  &--fill {
+    overflow: hidden;
+  }
+
+  &--fill .shell__panel-inner {
+    flex: 1;
+    min-height: 0;
+  }
+
+  &--fill section {
+    flex: 1;
+    min-height: 0;
+  }
+}
+
+.shell__panel-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 /* -------------------------------------------------------------- material */
 
-// Base card: layered surface, hairline border, top highlight, drop shadow.
-.depth {
-  position: relative;
-  border-radius: var(--radius-xl);
-  background: var(--surface);
-  -webkit-backdrop-filter: blur(28px) saturate(140%);
-  backdrop-filter: blur(28px) saturate(140%);
-  border: 1px solid var(--edge);
-  box-shadow: var(--depth);
-
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  }
-}
-
-// Gradient corner ring, drawn as a border-box background so the fill stays flat.
-@mixin ring($corner) {
-  border: 1px solid transparent;
-  background:
-    linear-gradient(var(--surface-solid), var(--surface-solid)) padding-box,
-    linear-gradient(
-        135deg,
-        #{$corner} 0%,
-        var(--edge) 26%,
-        var(--edge) 74%,
-        rgba(255, 255, 255, 0.14) 100%
-      )
-      border-box;
-}
-
-.ring--blue {
-  @include ring(var(--ring-blue));
-}
-.ring--gold {
-  @include ring(var(--ring-gold));
-}
-.ring--pink {
-  @include ring(var(--ring-pink));
+.card {
+  @include glass;
+  border-radius: var(--radius-card);
 }
 
 /* --------------------------------------------------------------- buttons */
@@ -139,7 +421,7 @@ body {
   height: 2.75rem;
   padding: 0 1.15rem;
   border: 0;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-card);
   background: transparent;
   font-size: 0.92rem;
   font-weight: 600;
@@ -195,8 +477,12 @@ body {
     pointer-events: none;
   }
 
+  &:hover {
+    transform: translateY(-1px);
+  }
+
   &:hover::after {
-    background-color: rgba(28, 50, 88, 0.9);
+    background-color: rgba(28, 50, 88, 0.92);
   }
 
   &:active {
@@ -217,8 +503,50 @@ body {
       box-shadow:
         inset 0 -1.5px 0 rgba(0, 0, 0, 0.28),
         0 1px 2px rgba(2, 6, 16, 0.5),
-        0 14px 30px -8px rgba(9, 113, 240, 0.75);
+        0 16px 32px -8px rgba(9, 113, 240, 0.8);
     }
+  }
+
+  &--pink {
+    &::after {
+      background: var(--pink-gradient);
+      box-shadow:
+        inset 0 -1.5px 0 rgba(0, 0, 0, 0.28),
+        0 1px 2px rgba(2, 6, 16, 0.5),
+        0 12px 26px -10px rgba(233, 56, 192, 0.5);
+    }
+
+    &:hover::after {
+      background: var(--pink-gradient);
+      box-shadow:
+        inset 0 -1.5px 0 rgba(0, 0, 0, 0.28),
+        0 1px 2px rgba(2, 6, 16, 0.5),
+        0 16px 32px -8px rgba(233, 56, 192, 0.75);
+    }
+  }
+
+  &--gold {
+    &::after {
+      background: var(--yellow-gradient);
+      box-shadow:
+        inset 0 -1.5px 0 rgba(0, 0, 0, 0.28),
+        0 1px 2px rgba(2, 6, 16, 0.5),
+        0 12px 26px -10px rgba(247, 153, 29, 0.5);
+    }
+
+    &:hover::after {
+      background: var(--yellow-gradient);
+      box-shadow:
+        inset 0 -1.5px 0 rgba(0, 0, 0, 0.28),
+        0 1px 2px rgba(2, 6, 16, 0.5),
+        0 16px 32px -8px rgba(247, 153, 29, 0.75);
+    }
+  }
+
+  // Gold is light enough that the white glyph needs help holding its edge.
+  &--gold img {
+    opacity: 1;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.45));
   }
 
   &--icon {
@@ -232,41 +560,42 @@ body {
 
 .intro {
   position: relative;
-  padding: clamp(14rem, 25vw, 24rem) 0 clamp(1.5rem, 3.5vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .intro__inner {
   position: relative;
   z-index: 1;
-  width: min(100%, var(--measure));
-  margin: 0 auto;
-  padding: 0 clamp(1rem, 4vw, 2rem);
+  margin-top: auto;
+  width: 100%;
+  padding: clamp(1.25rem, 2.5vw, 2rem) clamp(1.5rem, 3vw, 2.5rem)
+    clamp(1.75rem, 3.5vw, 2.75rem);
 }
 
-.intro__logo {
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: var(--radius-md);
-  box-shadow:
-    var(--depth-lifted),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
-  display: block;
-}
-
-.intro__name {
-  margin-top: 1.75rem;
+.site .intro__name {
+  margin-top: 0;
   font-family: "Jeko", "Gilroy", Helvetica, Arial, sans-serif;
-  font-size: clamp(2.4rem, 6.5vw, 4rem);
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
   font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1;
+  letter-spacing: -0.025em;
+  line-height: 0.98;
 }
 
-.intro__role {
-  margin-top: 0.75rem;
-  font-size: clamp(1.05rem, 2.4vw, 1.25rem);
-  font-weight: 600;
+.intro__bio {
+  margin-top: 1.1rem;
+  max-width: 34rem;
+  font-size: clamp(0.92rem, 1.1vw, 1.02rem);
+  font-weight: 400;
+  line-height: 1.65;
   color: var(--ink-muted);
+
+  strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
 
   em {
     font-style: normal;
@@ -274,146 +603,53 @@ body {
   }
 }
 
-.intro__bio {
-  margin-top: 1.35rem;
-  max-width: 38rem;
-  font-size: 1.02rem;
-  font-weight: 400;
-  line-height: 1.7;
-  color: var(--ink-muted);
-}
-
 .intro__actions {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
 }
 
-.intro__location {
-  margin-top: 1.75rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.45rem 0.9rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--edge);
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--ink-muted);
-}
-
-.intro__dot {
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: 50%;
-  background: var(--yellow-gradient);
-  box-shadow: 0 0 10px rgba(252, 192, 10, 0.7);
-}
-
-/* ---------------------------------------------------------------- panels */
-
-.panel {
-  padding: clamp(1.25rem, 3vw, 1.85rem);
-}
-
-.panel__head {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  margin-bottom: clamp(1.25rem, 2.5vw, 1.65rem);
-}
-
-.panel__chip {
-  width: 1.6rem;
-  height: 1.6rem;
-  border-radius: var(--radius-xs);
-  flex-shrink: 0;
-
-  &--blue {
-    background: var(--blue-gradient);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.25),
-      0 4px 14px -4px rgba(9, 113, 240, 0.7);
-  }
-  &--gold {
-    background: var(--yellow-gradient);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.25),
-      0 4px 14px -4px rgba(247, 153, 29, 0.6);
-  }
-  &--pink {
-    background: var(--pink-gradient);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.25),
-      0 4px 14px -4px rgba(233, 56, 192, 0.6);
-  }
-}
-
-.panel__title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-.panel__count {
-  margin-left: auto;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--ink-faint);
-}
+/* -------------------------------------------------------------- sections */
 
 /* -------------------------------------------------------------- projects */
 
-.projects__head {
+.pstack-wrap {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0 0.25rem;
-  margin-bottom: 0.85rem;
+  flex: 1;
+  min-height: 0;
+}
 
-  .panel__chip {
-    width: 1.9rem;
-    height: 1.9rem;
-  }
+.pstack {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: 0.55rem;
+  outline: none;
 
-  .panel__title {
-    font-size: clamp(1.2rem, 2.6vw, 1.45rem);
+  &:focus-visible {
+    outline: 2px solid var(--light-blue);
+    outline-offset: 4px;
+    border-radius: var(--radius-card-lg);
   }
 }
 
-.bento {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: clamp(8.5rem, 15vw, 13.5rem);
-  gap: clamp(0.65rem, 1.4vw, 1rem);
-}
-
-.bento__tile {
+// Collapsed cards hold this height; the active one grows into what's left.
+.pstack__card {
   position: relative;
-  padding: 0;
+  flex-basis: 4.6rem;
+  flex-shrink: 0;
+  min-height: 0;
+  border-radius: var(--radius-card);
   overflow: hidden;
-  border: 0;
-  border-radius: var(--radius-xl);
   background: var(--surface-solid);
   box-shadow: var(--depth);
-  cursor: pointer;
   transition:
-    transform 400ms var(--ease-spring),
-    box-shadow 400ms var(--ease-smooth);
+    border-radius var(--transition-base),
+    box-shadow var(--transition-base);
 
-  img {
-    position: relative;
-    z-index: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 700ms var(--ease-smooth);
-  }
-
-  // Top highlight and inner hairline, above the image.
+  // Even hairline over the image.
   &::after {
     content: "";
     position: absolute;
@@ -421,297 +657,573 @@ body {
     z-index: 2;
     border-radius: inherit;
     pointer-events: none;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.14),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
   }
 
-  // Colour wash that blooms in on hover, one accent per tile.
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    border-radius: inherit;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 400ms var(--ease-smooth);
-    background: linear-gradient(
-      to top,
-      var(--tile-wash, rgba(9, 113, 240, 0.35)) 0%,
-      transparent 55%
-    );
+  &.is-active {
+    border-radius: var(--radius-card-lg);
+    box-shadow: var(--depth-lifted);
   }
 
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow:
-      var(--depth-lifted),
-      0 18px 40px -20px var(--tile-glow, rgba(9, 113, 240, 0.8));
+  &:not(.is-active):hover {
+    box-shadow: var(--depth-lifted);
 
-    img {
-      transform: scale(1.05);
-    }
-
-    &::before {
-      opacity: 1;
+    .pstack__img {
+      opacity: 0.85;
     }
   }
-
-  &:active {
-    transform: translateY(-1px);
-  }
-
-  &--blue {
-    --tile-wash: rgba(9, 113, 240, 0.4);
-    --tile-glow: rgba(9, 113, 240, 0.85);
-  }
-  &--gold {
-    --tile-wash: rgba(247, 153, 29, 0.35);
-    --tile-glow: rgba(247, 153, 29, 0.7);
-  }
-  &--pink {
-    --tile-wash: rgba(233, 56, 192, 0.35);
-    --tile-glow: rgba(233, 56, 192, 0.7);
-  }
-
-  &--lg {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-
-  &--wide {
-    grid-column: span 2;
-  }
-
-  &--sm {
-    grid-column: span 1;
-  }
 }
 
-/* ------------------------------------------------------------------ work */
-
-.work {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+.pstack__hit {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
 }
 
-.work__row {
-  display: grid;
-  grid-template-columns: 3rem 1fr;
-  gap: 1rem;
-  align-items: start;
-  padding: 1.15rem;
-  border-radius: var(--radius-lg);
+.pstack__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity var(--transition-fast);
 }
 
-.work__logo {
-  width: 3rem;
-  height: 3rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--edge-strong);
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+// Collapsed cards read as a strip: the thumbnail dimmed back behind a label.
+.pstack__preview {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1rem;
+  background: linear-gradient(
+    to right,
+    rgba(5, 10, 22, 0.92) 0%,
+    rgba(5, 10, 22, 0.72) 55%,
+    rgba(5, 10, 22, 0.5) 100%
+  );
+}
+
+.pstack__preview-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pstack__preview-tools {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.3rem;
+
+  img {
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0.3rem;
+    box-sizing: border-box;
+    object-fit: contain;
+    border-radius: var(--radius-xs);
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow:
+      inset 0 1px 2px rgba(0, 0, 0, 0.4),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+  }
+}
+
+/* ------------------------------------------------------------ experience */
+
+.xp {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   justify-content: center;
+  gap: 1.5rem;
+}
+
+.xp__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.xp__label {
+  margin: 0 0 0.1rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+// Outer card is the chrome layer. It sits one small step above the shell, and
+// the panel inside sits one small step above it — no big jumps in either
+// direction, so neither layer reads as the odd one out.
+.xp__record {
+  --xp-pad: 0.5rem;
+
+  position: relative;
+  padding: var(--xp-pad);
+  border-radius: var(--radius-card);
+  @include glass(var(--glass-low), 24px);
+  transition: box-shadow var(--transition-base);
+
+  &:hover {
+    box-shadow: var(--depth-lifted);
+  }
+}
+
+/* --- chrome --- */
+
+.xp__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.5rem 0.8rem;
+}
+
+.xp__logo {
+  position: relative;
+  flex-shrink: 0;
+  width: 1.95rem;
+  height: 1.95rem;
+  border-radius: var(--radius-xs);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--edge);
   overflow: hidden;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    padding: 0.35rem;
+    padding: 0.28rem;
+    box-sizing: border-box;
+    display: block;
   }
 }
 
-.work__head {
+// For marks that already carry their own backdrop — let them fill the tile
+// edge to edge instead of floating in it.
+.xp__logo--fill {
+  background: none;
+  border: 0;
+
+  img {
+    object-fit: cover;
+    padding: 0;
+  }
+}
+
+// Role and employer read as one statement, on one line — nowrap plus a shared
+// size, so only weight and colour separate them.
+.xp__ident {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
+  flex-wrap: nowrap;
+  gap: 0.35rem;
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  white-space: nowrap;
 }
 
-.work__title {
-  font-size: 1.02rem;
+.xp__role {
+  flex-shrink: 0;
+  font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: -0.01em;
+  line-height: 1.35;
+  color: var(--ink);
 }
 
-.work__period {
+.xp__at {
   flex-shrink: 0;
-  padding: 0.25rem 0.6rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--edge);
-  font-size: 0.75rem;
-  font-weight: 500;
+  font-size: 0.82rem;
+  font-weight: 400;
   color: var(--ink-faint);
 }
 
-.work__company {
-  margin-top: 0.2rem;
-  font-size: 0.9rem;
+.xp__org {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.82rem;
   font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
   color: var(--light-blue);
+}
 
-  span {
+.xp__record--gold .xp__org {
+  color: var(--light-gold);
+}
+
+.xp__period {
+  flex-shrink: 0;
+  align-self: center;
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: right;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+// Plain text, no pill — the strip is quiet metadata, not a control.
+.xp__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0.55rem 0.15rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.xp__type {
+  color: var(--ink-muted);
+}
+
+/* --- content --- */
+
+// Inner radius is the outer radius minus the padding, so the curves stay
+// concentric rather than the inner corner looking pinched.
+.xp__panel {
+  position: relative;
+  padding: 0.95rem 1.05rem;
+  border-radius: calc(var(--radius-card) - var(--xp-pad));
+  @include glass(var(--glass-card), 14px);
+}
+
+.xp__points {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    position: relative;
+    padding-left: 0.9rem;
+    font-size: 0.82rem;
     font-weight: 500;
-    color: var(--ink-faint);
+    line-height: 1.6;
+    color: var(--ink-body);
+
+    // Hanging dash, optically aligned to the first line's x-height.
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 0.35rem;
+      height: 1.5px;
+      border-radius: 1px;
+      background: var(--ink-faint);
+    }
   }
 }
 
-.work__desc {
-  margin-top: 0.65rem;
-  font-size: 0.9rem;
-  font-weight: 400;
-  line-height: 1.65;
-  color: var(--ink-muted);
+.xp__prose {
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--ink-body);
 }
 
 /* ----------------------------------------------------------------- stack */
 
 .stack {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
-  gap: 0.75rem;
-}
-
-.stack__group {
-  padding: 1rem 1.1rem;
-  border-radius: var(--radius-lg);
-}
-
-.stack__label {
-  display: block;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-bottom: 0.85rem;
-}
-
-.stack__icons {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-evenly;
+  gap: 1.4rem;
 }
 
-.stack__icon {
+.stack__group-head {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 2.1rem;
-  height: 2.1rem;
-  border-radius: var(--radius-xs);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--edge);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  gap: 0.65rem;
+  margin-bottom: 0.7rem;
+}
+
+// Short gradient tick, tone cycles with the group.
+.stack__group-tick {
+  width: 1.15rem;
+  height: 0.3rem;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: var(--group-accent, var(--blue-gradient));
+}
+
+.stack__group-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.stack__group-rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--edge), transparent);
+}
+
+.stack__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.stack__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.35rem;
+  padding: 0.35rem 0.95rem 0.35rem 0.45rem;
+  border-radius: var(--radius-card);
+  @include glass(var(--glass-card), 14px);
   transition:
     transform 300ms var(--ease-spring),
-    border-color var(--transition-fast),
-    background var(--transition-fast);
+    box-shadow 300ms var(--ease-smooth);
 
   &:hover {
     transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.07);
-    border-color: rgba(19, 142, 240, 0.4);
+    box-shadow:
+      var(--depth-lifted),
+      0 12px 26px -16px var(--group-glow, rgba(9, 113, 240, 0.8));
   }
+}
+
+.stack__pill-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  flex-shrink: 0;
 
   img {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1.15rem;
+    height: 1.15rem;
     object-fit: contain;
   }
-
-  &--rounded img {
-    border-radius: 0.2rem;
-  }
 }
 
-/* ---------------------------------------------------------------- footer */
+.stack__pill-label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
 
-.footer {
-  overflow: hidden;
-  padding: clamp(1.75rem, 4vw, 2.5rem);
-  text-align: center;
+/* --------------------------------------------------------------- contact */
+
+.contact {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  flex: 1;
+  justify-content: center;
+  gap: 1.15rem;
 }
 
-.footer__glow {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 70% 120% at 15% 0%, rgba(9, 113, 240, 0.22), transparent 60%),
-    radial-gradient(ellipse 60% 110% at 85% 10%, rgba(233, 56, 192, 0.14), transparent 62%);
-}
-
-.footer__logo {
-  position: relative;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: var(--radius-sm);
-  box-shadow:
-    var(--depth),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
-}
-
-.footer__title {
-  position: relative;
-  margin-top: 1.15rem;
-  font-family: "Jeko", "Gilroy", Helvetica, Arial, sans-serif;
-  font-size: clamp(1.5rem, 4vw, 2.1rem);
+.contact__title {
+  font-size: clamp(1.6rem, 3.6vw, 2.2rem);
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.028em;
+  line-height: 1.05;
 }
 
-.footer__note {
-  position: relative;
-  margin-top: 0.6rem;
-  max-width: 28rem;
-  font-size: 0.95rem;
+.contact__note {
+  margin-top: 0.65rem;
+  max-width: 26rem;
+  font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
   color: var(--ink-muted);
 }
 
-.footer__actions {
+/* Primary action: the address itself, not a button that hides it. */
+
+.contact__mail {
   position: relative;
-  margin-top: 1.65rem;
+  isolation: isolate;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.65rem;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 0.35rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  transition: transform 300ms var(--ease-spring);
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--blue-gradient);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      inset 0 -1.5px 0 rgba(0, 0, 0, 0.28),
+      0 1px 2px rgba(2, 6, 16, 0.5),
+      0 14px 30px -12px rgba(9, 113, 240, 0.6);
+    transition: box-shadow var(--transition-base);
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &:hover::after {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      inset 0 -1.5px 0 rgba(0, 0, 0, 0.28),
+      0 1px 2px rgba(2, 6, 16, 0.5),
+      0 20px 40px -12px rgba(9, 113, 240, 0.85);
+  }
 }
 
-.footer__base {
-  position: relative;
-  margin-top: 2rem;
-  padding-top: 1.25rem;
-  width: 100%;
-  border-top: 1px solid var(--edge);
+.contact__mail-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: var(--radius-xs);
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+  img {
+    width: 1.05rem;
+    height: 1.05rem;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35));
+  }
+}
+
+.contact__mail-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+  min-width: 0;
+}
+
+.contact__mail-label {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.contact__mail-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Secondary: three equal tiles, one per accent. */
+
+.contact__socials {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.contact__social {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 0.5rem 0.85rem;
+  border-radius: var(--radius-card);
+  @include glass(var(--glass-card), 16px);
+  transition:
+    transform 300ms var(--ease-spring),
+    box-shadow var(--transition-base);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      var(--depth-lifted),
+      0 16px 32px -18px var(--social-glow);
+  }
+
+  &--blue {
+    --social-fill: var(--blue-gradient);
+    --social-glow: rgba(9, 113, 240, 0.85);
+  }
+  &--gold {
+    --social-fill: var(--yellow-gradient);
+    --social-glow: rgba(247, 153, 29, 0.7);
+  }
+  &--pink {
+    --social-fill: var(--pink-gradient);
+    --social-glow: rgba(233, 56, 192, 0.7);
+  }
+}
+
+.contact__social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: var(--radius-xs);
+  background: var(--social-fill);
+
+  img {
+    width: 1.1rem;
+    height: 1.1rem;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.4));
+  }
+}
+
+.contact__social-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-muted);
+}
+
+.contact__base {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  font-size: 0.78rem;
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
   font-weight: 500;
   color: var(--ink-faint);
 }
 
-.footer__marks {
+.contact__marks {
   display: flex;
   gap: 0.35rem;
 
   span {
     width: 1.5rem;
-    height: 0.32rem;
+    height: 0.34rem;
     border-radius: 999px;
 
     &:nth-child(1) {
@@ -728,29 +1240,61 @@ body {
 
 /* ------------------------------------------------------------ responsive */
 
+// Below this the split stops working: the shell stacks and the document
+// scrolls normally again.
+@media (max-width: 900px) {
+  html,
+  body {
+    height: auto;
+    overflow: visible;
+  }
+
+  .site {
+    height: auto;
+    min-height: 100dvh;
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    height: auto;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.75rem clamp(0.4rem, 1.2vw, 0.9rem);
+    background: var(--page);
+  }
+
+  .topbar__tabs {
+    flex: 1;
+    justify-content: space-between;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .topbar__tab {
+    padding: 0 0.7rem;
+  }
+
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .intro {
+    min-height: 60vh;
+  }
+
+  .shell__panel {
+    overflow: visible;
+  }
+}
+
 @media (max-width: 767px) {
-  .bento {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: clamp(7rem, 26vw, 9rem);
-  }
-
-  .work__row {
-    grid-template-columns: 2.5rem 1fr;
-    gap: 0.85rem;
-  }
-
-  .work__logo {
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-
-  .work__head {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.4rem;
-  }
-
-  .footer__base {
+  .contact__base {
     flex-direction: column;
     gap: 0.75rem;
   }

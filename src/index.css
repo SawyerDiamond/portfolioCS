@@ -12,12 +12,12 @@
   --gold-glass: rgba(247, 153, 29, 0.5);
 
   /*--<RADII>--*/
-  --radius-xs: 0.65rem;
-  --radius-sm: 1rem;
-  --radius-md: 1.25rem;
-  --radius-lg: 1.5rem;
-  --radius-xl: 2rem;
-  --radius-2xl: 2.5rem;
+  --radius-xs: 0.75rem;
+  --radius-sm: 1.125rem;
+  --radius-md: 1.375rem;
+  --radius-lg: 1.625rem;
+  --radius-xl: 1.875rem;
+  --radius-2xl: 2.25rem;
 
   /*--<SHADOWS>--*/
   --white-shadow: 0px 0px 20px rgba(255, 255, 255, 0.25);
@@ -119,24 +119,14 @@ body {
   background-size: cover;
 }
 
+/* Type defaults only. Sizing, weight and tracking belong to the components —
+   the viewport-relative sizes that used to live here leaked into anything
+   rendered outside the layout wrapper, such as the portalled project modal. */
 h1,
 h2,
-h3 {
-  font-family: "Gilroy", Helvetica, Arial, sans-serif;
-  font-synthesis: none;
-}
-h1 {
-  font-size: 5vw;
-  font-weight: 900;
-  font-style: normal;
-}
-h2 {
-  font-size: 3vw;
-  font-weight: 600;
-  font-style: bold;
-  letter-spacing: 0.1rem;
-}
+h3,
+h4,
 p {
   font-family: "Gilroy", Helvetica, Arial, sans-serif;
-  font-weight: 600;
+  font-synthesis: none;
 }
