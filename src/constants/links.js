@@ -3,7 +3,7 @@ const links = {
   GitHub: "https://github.com/SawyerDiamond",
   Resume:
     "https://drive.google.com/drive/folders/1NndzQSv-8ihHEga-tO9Se0ibH0eAM0jo?usp=share_link",
-  Mail: "mailto:sawyerrdiamond@gmail.com",
+  Mail: "mailto:sawyerdiamond@outlook.com",
 };
 
 export default links;
