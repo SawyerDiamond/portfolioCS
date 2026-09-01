@@ -32,6 +32,25 @@
   --pink-gradient: linear-gradient(135deg, #e938c0 0%, #f15f79 100%);
   --yellow-gradient: linear-gradient(135deg, #fcc00a 0%, #f7991d 100%);
 
+  /*--<SURFACES>--*/
+  /* Carried over from the minimal redesign: a solid card fill, a raised fill
+     for controls, and hairlines light enough to read as an edge rather than a
+     border. Nested surfaces step in small increments. */
+  --surface-solid: #16243d;
+  --surface-raised: rgba(30, 50, 86, 0.9);
+  --edge: rgba(255, 255, 255, 0.07);
+  --edge-strong: rgba(255, 255, 255, 0.11);
+  --ink-muted: rgba(255, 255, 255, 0.64);
+
+  /*--<DEPTH>--*/
+  /* Ambient shadows for surfaces; the lit-top/dark-bottom bevel is reserved
+     for controls, where it reads as a raised key rather than as plastic. */
+  --depth: 0 1px 2px rgba(2, 6, 16, 0.4), 0 10px 24px -16px rgba(2, 6, 16, 0.9);
+  --depth-lifted: 0 1px 2px rgba(2, 6, 16, 0.45),
+    0 18px 36px -20px rgba(2, 6, 16, 0.95);
+  --bevel: inset 0 1px 0 rgba(255, 255, 255, 0.11),
+    inset 0 -1.5px 0 rgba(0, 0, 0, 0.3);
+
   /*--<TRANSITIONS>--*/
   --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
   --ease-spring: cubic-bezier(0.34, 1.2, 0.64, 1);
@@ -39,10 +58,68 @@
   --transition-fast: 250ms var(--ease-smooth);
   --transition-base: 400ms var(--ease-smooth);
   --transition-slow: 600ms var(--ease-smooth);
+
+  /*--<SECTION SYSTEM>--*/
+  /* Ported from frame.io's PageSection/ModuleWrapper CSS. Their root is
+     `font-size: 62.5%`, so their `--spacer-84: 8.4rem` is 84px — the values
+     below are those pixel figures, written as px because this project's root
+     stays at the browser default. */
+
+  /* Vertical rhythm between panels. frame.io steps the scale at 768 and
+     1240px; the same two breakpoints are used further down. */
+  --section-pad-top: 84px;
+  --section-pad-bottom: 84px;
+
+  /* The corner radius each panel is tucked into the one above it by. */
+  --section-radius: 20px;
+
+  /* Parallax travel: how far the incoming panel starts below its resting
+     position, and how far the outgoing one carries on past it.
+
+     frame.io runs 192px/248px here, but their sections are several viewports
+     tall, so that distance is a small fraction of a panel. Against sections
+     this size it dominated the join, so the travel is scaled down to keep the
+     same gesture at this page's proportions. The padding either side of it is
+     still frame.io's, unchanged. */
+  --parallax-start-y: 64px;
+
+  /*--<FRAME.IO EASING>--*/
+  /* Their registered GSAP eases, verbatim. `--ease-frame` is the one their
+     reveal timeline runs on, and is the same curve as the existing
+     --ease-smooth; it is named separately so the reveal reads as a unit. */
+  --ease-frame: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-frame-out: cubic-bezier(0.28, 0.44, 0.49, 1);
+  --ease-frame-embellishment: cubic-bezier(0.42, 0, 0, 1);
+  --ease-frame-micro-bounce: cubic-bezier(0, 0.44, 0.6, 1);
+
+  /*--<SECTION BACKGROUNDS>--*/
+  /* Alternating panel fills. frame.io alternates near-blacks that differ by
+     only a few points of lightness — enough to separate the panels without
+     reading as stripes. These do the same in this project's navy family. */
+  --section-1: radial-gradient(125% 90% at 50% 0%, #12203c 0%, #0b162c 58%, #08111f 100%);
+  --section-2: radial-gradient(110% 120% at 100% 8%, #16294c 0%, #101d36 44%, #0c1729 100%);
+  --section-3: radial-gradient(115% 100% at 0% 0%, #0e1c34 0%, #0a1428 55%, #070f1e 100%);
+  --section-4: radial-gradient(120% 115% at 50% 100%, #16294b 0%, #101d36 52%, #0a1425 100%);
+}
+
+/* frame.io steps the section scale at exactly these two widths. */
+@media (min-width: 768px) {
+  :root {
+    --section-pad-top: 96px;
+    --section-pad-bottom: 124px;
+    --parallax-start-y: 96px;
+  }
+}
+
+@media (min-width: 1240px) {
+  :root {
+    --section-pad-top: 124px;
+    --section-pad-bottom: 160px;
+  }
 }
 
 html {
-  background-color: #0b162c;
+  background-color: #08111f;
 }
 * {
   padding: 0;
@@ -109,8 +186,16 @@ html {
 }
 @font-face {
   font-family: "Gilroy";
-  src: url("fonts/Jeko-Extra-Bold.ttf");
+  src: url("fonts/Jeko-Extra-Bold.ttf") format("truetype");
   font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jeko";
+  src: url("fonts/Jeko-Extra-Bold.ttf") format("truetype");
+  font-weight: 800;
   font-style: normal;
   font-display: swap;
 }
