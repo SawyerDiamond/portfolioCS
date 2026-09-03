@@ -1,0 +1,75 @@
+// Panel stacking, ported from frame.io's PageSection module.
+//
+// The wrapper holds the stacking order and the negative tuck; the panel holds
+// the fill and the transform. Keeping them on separate elements matters: the
+// panel is what moves, so the wrapper stays available as a stable box to
+// measure scroll against.
+.page-section__wrapper {
+  position: relative;
+  width: 100%;
+
+  // frame.io's `.hasOverlapTop`. Each panel starts one corner-radius early,
+  // so its rounded top sits *on* the previous panel rather than below it and
+  // the join has no seam.
+  &--overlap {
+    margin-top: calc(var(--section-radius) * -1);
+  }
+}
+
+.page-section {
+  position: relative;
+  width: 100%;
+  background: var(--section-background);
+  // Their `.pageSection` sets this too — the panels are transformed on every
+  // scroll frame, so they want their own layer for the duration.
+  will-change: transform;
+
+  // Clips this panel's own decorative art (the Experience bolt, the Contact
+  // marks) to the panel's *real* box — padding included — rather than to
+  // whatever height the inner content section happens to be. Anything meant
+  // to bleed off an edge now bleeds to here, not to wherever the copy ends.
+  overflow: hidden;
+
+  padding-top: var(--section-pad-top);
+  padding-bottom: var(--section-pad-bottom);
+
+  // frame.io masks the corners rather than clipping them, so a section can
+  // still let art bleed out of its sides. Only the top is rounded on panels
+  // that cover: the bottom is always underneath the next panel.
+  &--covers {
+    border-top-left-radius: var(--section-radius);
+    border-top-right-radius: var(--section-radius);
+  }
+}
+
+// Last panel: tighten the top gap (the overlap tuck + overscan already do a
+// lot of the join work) and make sure the bottom still breathes above the nav.
+.page-section--contact {
+  --section-pad-top: 72px;
+  --section-pad-bottom: 112px;
+
+  @media (min-width: 768px) {
+    --section-pad-top: 80px;
+    --section-pad-bottom: 140px;
+  }
+
+  @media (min-width: 1240px) {
+    --section-pad-top: 96px;
+    --section-pad-bottom: 180px;
+  }
+}
+
+// Glued to the panel's real bottom edge, painted in the same fill, sized to
+// exactly the distance the next panel's entrance travels. Deliberately a
+// sibling of `.page-section` rather than a child of it — a child would be cut
+// off by the `overflow: hidden` above, which is the one thing this element
+// can't afford, since its whole job is to bleed past that edge.
+.page-section__overscan {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: var(--parallax-start-y);
+  background: var(--section-background);
+  pointer-events: none;
+}
