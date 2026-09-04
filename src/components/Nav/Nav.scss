@@ -1,160 +1,133 @@
 // <NAVIGATION> //
+// Floating bar pinned to the bottom of the viewport, centred horizontally.
+// Brand on the left, sliding tabs beside it — the tabs share the bar's own
+// surface, so the only fill inside it is the pill on the active tab.
 
-.navbar {
-  width: 94%;
-  height: 4rem;
+.bottombar {
   position: fixed;
-  margin-top: 1.6rem;
-  margin-left: 2%;
-
-  border-radius: var(--radius-lg);
+  left: 50%;
+  bottom: clamp(1rem, 2.75vw, 2.25rem);
   z-index: 1000;
 
-  @media screen and (min-width: 2400px) {
-    height: 6rem;
-    border-radius: var(--radius-xl);
-  }
-}
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
 
-.navbar__logo {
-  box-sizing: border-box;
-  padding: 0.9rem;
-  padding-right: 2.2rem;
+  padding: 0.4rem 0.4rem 0.4rem 0.7rem;
   border-radius: var(--radius-lg);
-  background: var(--navy-primary);
-  -webkit-backdrop-filter: blur(12px) saturate(150%);
-  backdrop-filter: blur(12px) saturate(150%);
-  font-size: 1.35rem;
-  transition: box-shadow var(--transition-base);
+  background-color: var(--navy-nav);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid var(--edge);
+  box-shadow: var(--depth-lifted);
+}
 
-  &:hover {
-    box-shadow: 0 0 16px rgba(15, 35, 77, 0.5);
-  }
+.bottombar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
 
-  @media screen and (min-width: 2400px) {
-    padding: 1.25rem;
-    padding-right: 2.85rem;
-    border-radius: var(--radius-xl);
-    h3 {
-      font-size: 2.5rem;
-    }
-  }
+.bottombar__logo {
+  position: relative;
+  display: block;
+  width: 1.7rem;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 0.7rem;
+  box-shadow: var(--depth);
+
   img {
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: var(--radius-sm);
-    margin-left: 1.2rem;
-    margin-right: 0.8rem;
-    box-shadow: var(--blue-shadow);
-    transition: box-shadow var(--transition-base);
-
-    @media screen and (min-width: 2400px) {
-      width: 3.5rem;
-      border-radius: var(--radius-md);
-      margin-left: 1.6rem;
-      margin-right: 1.2rem;
-    }
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 }
 
-.navbar__links {
-  li {
-    &:nth-child(odd) {
-      a:hover .navbar__button-icon {
-        background: var(--yellow-gradient);
-        box-shadow: 0 0 10px rgba(252, 192, 10, 0.3);
-      }
-    }
-
-    &:nth-child(even) {
-      a:hover .navbar__button-icon {
-        background: var(--pink-gradient);
-        box-shadow: 0 0 10px rgba(233, 56, 192, 0.3);
-      }
-    }
-  }
-}
-.navbar__button {
-  padding: 0.5rem;
-  font-weight: bold;
-  a {
-    display: flex;
-    align-items: center;
-  }
-
-  @media screen and (min-width: 2400px) {
-    padding: 0.8rem;
-  }
+.bottombar__name {
+  // Optical nudge: the cap-height sits a hair high against the tab labels.
+  padding-top: 1px;
+  font-family: "Jeko", "Gilroy", Helvetica, Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
-.navbar__button-icon {
-  width: 16px;
-  height: 16px;
-  padding: 0.5rem;
-  margin-right: 0.65rem;
-  border-radius: var(--radius-sm);
-  transition:
-    background 400ms var(--ease-smooth),
-    box-shadow 400ms var(--ease-smooth);
-
-  @media (max-width: 1024px) {
-    margin-right: 4vw;
-  }
-  @media screen and (min-width: 2400px) {
-    width: 24px;
-    height: 24px;
-    padding: 0.8rem;
-    margin-right: 1.2rem;
-    border-radius: var(--radius-md);
-  }
+.bottombar__tabs {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
 }
 
-.navbar__button-label {
-  margin-right: 1.5rem;
-  font-weight: bold;
+.bottombar__tab {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 0;
+  background: transparent;
+  padding: 0 0.95rem;
+  height: 2.15rem;
+  border-radius: calc(var(--radius-lg) - 0.25rem);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  cursor: pointer;
   transition: color var(--transition-fast);
 
-  @media screen and (min-width: 2400px) {
-    font-size: 1.6rem;
+  &:hover {
+    color: #fff;
+  }
+
+  &.is-active {
+    color: #fff;
   }
 }
 
-.navbar__contact {
-  margin-right: 0.75rem;
-  padding-right: 1rem;
-  border-radius: var(--radius-md);
-  transition:
-    background 400ms var(--ease-smooth),
-    box-shadow 400ms var(--ease-smooth);
+// Sliding fill, animated between tabs by framer's shared layout id.
+.bottombar__pill {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--surface-raised);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1.5px 0 rgba(0, 0, 0, 0.3),
+    0 6px 16px -8px rgba(2, 6, 16, 0.9);
+}
 
-  img {
-    width: 16px;
-    height: 16px;
-    padding: 0.8rem;
+// Only present on the active tab, so inactive tabs carry no leftover gap.
+.bottombar__tab-mark {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+
+  .shape-icon {
+    width: 0.95rem;
+    height: 0.95rem;
+  }
+}
+
+.bottombar__tab-label {
+  position: relative;
+  white-space: nowrap;
+}
+
+@media (max-width: 1024px) {
+  .bottombar {
+    gap: 0.7rem;
   }
 
-  &:hover {
-    background: var(--blue-gradient);
-    box-shadow: var(--blue-shadow);
-  }
-
-  &:active {
-    transform: scale(0.96);
-    transition: transform 150ms var(--ease-smooth);
-  }
-
-  @media screen and (min-width: 2400px) {
-    margin-right: 1rem;
-    padding-right: 1.5rem;
-    border-radius: var(--radius-lg);
-
-    h3 {
-      font-size: 1.75rem;
-    }
-    img {
-      width: 28px;
-      height: 28px;
-      padding: 1.2rem;
-    }
+  .bottombar__tab {
+    padding: 0 0.7rem;
   }
 }
