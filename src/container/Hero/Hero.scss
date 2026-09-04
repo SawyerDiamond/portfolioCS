@@ -51,13 +51,16 @@
 }
 .bg {
   width: 98vw;
-  border-radius: var(--radius-xl);
+  // Top corners only: the section below tucks its own rounded top up into the
+  // hero's bottom edge (the `PageSection` overlap), so a rounded bottom here
+  // would put two curves back to back right at that seam.
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   height: auto;
   top: 0;
   z-index: -1;
   @media (max-width: 767px) {
     width: 100vw;
-    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   }
 }
 .hero__container {
@@ -121,8 +124,8 @@
 
 .hero__desc {
   width: 34vw;
-  line-height: 0.925;
-  font-size: 2.75vw;
+  line-height: 1.15;
+  font-size: 2.5vw;
   @media (max-width: 1024px) {
     text-align: center;
     width: 55vw;
@@ -136,33 +139,18 @@
     text-align: center;
   }
 }
-.hero__location {
-  position: absolute;
+// Vertical rail of raised social buttons on desktop, a row underneath the
+// intro everywhere else.
+.hero__socials {
   display: flex;
-  flex-direction: row;
-  height: 2.5rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-md);
-  bottom: 3rem;
-  width: 17rem;
-  transition:
-    box-shadow 400ms var(--ease-smooth),
-    transform 400ms var(--ease-spring);
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-left: 2vw;
 
-  p {
-    font-size: 0.9rem;
-    letter-spacing: 0.02em;
-    opacity: 0.9;
-  }
-
-  &:hover {
-    box-shadow: var(--navy-shadow);
-    transform: scale(1.03);
-  }
-
-  @media (max-width: 768px) {
-    display: none;
+  @media (max-width: 1024px) {
+    flex-direction: row;
+    margin-left: 0;
+    gap: 1rem;
   }
 }
 
@@ -180,7 +168,9 @@
   width: 12.5vw;
   height: 12.5vw;
 
-  border-radius: 26%;
+  // The nav logo's corner-to-side ratio (0.7rem on a 1.7rem box), pulled back
+  // 2px — at this size the exact ratio reads a touch rounder than the small one.
+  border-radius: calc(41% - 2px);
 
   box-shadow: var(--blue-shadow);
   transition:

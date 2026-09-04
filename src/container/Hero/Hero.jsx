@@ -1,42 +1,73 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import { Wrap } from "../../wrapper";
 import "./Hero.scss";
 import { images, icons, links } from "../../constants";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
+
+const SOCIALS = [
+  { name: "LinkedIn", tone: "primary" },
+  { name: "GitHub", tone: "pink" },
+  { name: "Resume", tone: "gold" },
+];
+
+const bobAnimation = {
+  y: [0, -30, 0],
+  transition: {
+    duration: 2,
+    repeat: Infinity,
+    ease: "easeInOut",
+  },
+};
 
 const Hero = () => {
   const { isMobile, isTablet, isDesktop } = useDeviceDetect();
-  const textAnimationDesktop = isDesktop
-    ? { y: [-300, 0], opacity: [0, 1] }
-    : {};
-  const shelfAnimationDesktop = isDesktop
-    ? { y: [300, 0], opacity: [0, 1] }
-    : {};
-  const textAnimationResponsive = !isDesktop
-    ? { y: [-300, 0], opacity: [0, 1] }
-    : {};
-  const shelfAnimationResponsive = !isDesktop
-    ? { y: [300, 0], opacity: [0, 1] }
-    : {};
+  const reduceMotion = useReducedMotion();
+  const heroRef = useRef(null);
 
-  const bobAnimation = {
-    y: [0, -30, 0],
-    transition: {
-      duration: 2,
-      repeat: Infinity,
-      ease: "easeInOut",
-    },
-  };
+  // One progress line for the hero's full lifecycle — entering from below,
+  // resting in view, leaving upward — so scrolling back up reverses cleanly
+  // instead of whileInView snapping to a finished state.
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start end", "end start"],
+  });
+
+  const leftY = useTransform(scrollYProgress, [0, 0.32, 0.68, 1], [140, 0, 0, -140]);
+  const leftOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.22, 0.32, 0.68, 0.78, 1],
+    [0, 0, 1, 1, 0, 0],
+  );
+  const rightY = useTransform(scrollYProgress, [0, 0.32, 0.68, 1], [-140, 0, 0, 140]);
+  const rightOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.22, 0.32, 0.68, 0.78, 1],
+    [0, 0, 1, 1, 0, 0],
+  );
+  const petalsOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.25, 0.35, 0.65, 0.75, 1],
+    [0, 0, 1, 1, 0, 0],
+  );
+  const petalsY = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [80, 0, 0, -80]);
+
+  const leftMotion = reduceMotion ? {} : { y: leftY, opacity: leftOpacity };
+  const rightMotion = reduceMotion ? {} : { y: rightY, opacity: rightOpacity };
+  const petalsMotion = reduceMotion ? {} : { y: petalsY, opacity: petalsOpacity };
 
   return (
     <>
-      <section className="hero flex--col">
+      <section className="hero flex--col" ref={heroRef}>
         <motion.div
           className={`petals ${!isDesktop ? "hidden" : ""}`}
-          whileInView={shelfAnimationDesktop}
-          transition={{ duration: 1 }}>
+          style={petalsMotion}>
           <motion.img
             className="petals-blue"
             src={images.bluepetal}
@@ -66,11 +97,7 @@ const Hero = () => {
           className={`hero__container ${
             isDesktop ? "flex--around" : "flex--col"
           }`}>
-          <motion.header
-            animate={textAnimationResponsive}
-            whileInView={textAnimationDesktop}
-            transition={{ duration: 1 }}
-            className="hero__left">
+          <motion.header style={leftMotion} className="hero__left">
             <h1 className="hero__intro">
               <span>Hi.</span>
               <span>I'm</span>
@@ -79,38 +106,28 @@ const Hero = () => {
             <h2 className="hero__desc">a Software Developer & UI Engineer. </h2>
           </motion.header>
 
-          <motion.div
-            animate={shelfAnimationResponsive}
-            whileInView={shelfAnimationDesktop}
-            transition={{ duration: 1 }}
-            className="hero__right">
+          <motion.div style={rightMotion} className="hero__right">
             <img
               src={images.logo2}
               className={`hero__logo ${isDesktop ? "" : "hidden"}`}
               alt="logo"
             />
-            <ul className={`shelf tertiary-bg ${isDesktop ? "" : "flex--h"}`}>
-              {Object.keys(links)
-                .filter((item) => item !== "Mail")
-                .map((item) => (
-                  <li className="shelf--item" key={item}>
-                    <a
-                      href={links[item]}
-                      target="_blank"
-                      rel="noopener noreferrer">
-                      <img src={icons[item]} alt={item} />
-                    </a>
-                  </li>
-                ))}
+            <ul className={`hero__socials ${isDesktop ? "" : "flex--h"}`}>
+              {SOCIALS.map(({ name, tone }) => (
+                <li key={name}>
+                  <a
+                    className={`btn btn--icon${tone ? ` btn--${tone}` : ""}`}
+                    href={links[name]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={name}>
+                    <img src={icons[name]} alt="" aria-hidden="true" />
+                  </a>
+                </li>
+              ))}
             </ul>
           </motion.div>
         </div>
-        <motion.div
-          animate={{ y: [150, 0], opacity: [0, 1] }}
-          transition={{ duration: 1 }}
-          className="hero__location nav-bg">
-          <p>📍 Long Island / Washington, D.C.</p>
-        </motion.div>
         <img
           src={images.hero_bg}
           className={`bg ${isDesktop ? "" : "hidden"}`}
