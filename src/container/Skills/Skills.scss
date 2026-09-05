@@ -6,9 +6,10 @@
   h1 {
     font-weight: 800;
   }
-  position: relative;
-  overflow: hidden;
-  padding: 6.5vw 0;
+  // Deliberately not a positioning context: the bolt below is `position:
+  // absolute` and needs to size and clip against the enclosing `.page-section`
+  // panel, not against this content box — the panel is what owns the section's
+  // real edges, this element is only ever as tall as its own copy.
 }
 
 .skills__container {
@@ -27,15 +28,18 @@
   display: flex;
   margin-bottom: 2rem;
   align-items: center;
-  img {
-    width: 4.6vw;
-    height: 5.8vw;
+  h1 {
+    font-size: 3.5vw;
+  }
+  .skills__header-icon {
+    width: 3vw;
+    height: 3.7vw;
     margin-right: 0.25rem;
   }
   @media (max-width: 1024px) {
-    img {
-      width: 4.2rem;
-      height: 4.2rem;
+    .skills__header-icon {
+      width: 2.8rem;
+      height: 2.8rem;
     }
   }
   @media (max-width: 767px) {
@@ -43,11 +47,11 @@
     border-radius: var(--radius-md);
     margin-bottom: 1.25rem;
     h1 {
-      font-size: 3.5rem;
+      font-size: 2.4rem;
     }
-    img {
-      width: 2.8rem;
-      height: 2.8rem;
+    .skills__header-icon {
+      width: 1.9rem;
+      height: 1.9rem;
     }
   }
 }
@@ -78,6 +82,37 @@
   align-items: center;
   gap: 0.75rem;
   align-self: center;
+
+  // Stacked, the two columns are laid out by a `align-items: flex-start`
+  // parent, which otherwise sizes them to their content — and the work cards'
+  // max-content width runs well past a phone.
+  @media (max-width: 767px) {
+    width: 100%;
+    align-self: stretch;
+  }
+}
+
+// Petal corner modifiers, shared by the skill-group cards and the work-tree
+// cards below: whichever corner is named stays at the card's base radius,
+// every other corner is pulled tight to --radius-xs. Applied per card in
+// Skills.jsx, cycling tl → tr → br → bl, so the pinch moves around instead of
+// sitting in the same spot down the whole column.
+// Each rule pulls in only the corner it's named for — the other three stay at
+// whatever base radius the card already declared. (These previously tightened
+// the *other* three corners and left the named one large — backwards from
+// "three rounded, one pinched" the comment above describes and the hero petal
+// marks actually show.)
+.petal--tl {
+  border-top-left-radius: var(--radius-xs);
+}
+.petal--tr {
+  border-top-right-radius: var(--radius-xs);
+}
+.petal--br {
+  border-bottom-right-radius: var(--radius-xs);
+}
+.petal--bl {
+  border-bottom-left-radius: var(--radius-xs);
 }
 
 .skills__group {
@@ -86,7 +121,11 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.6rem 1.2rem;
-  border-radius: var(--radius-md);
+  // Petal: three corners rounded well past the old radius, the fourth pulled
+  // tight — the same asymmetry as the petal marks in the hero. Which corner is
+  // tight is set by a `.petal--*` modifier, cycled per card in Skills.jsx, so
+  // the column doesn't repeat the same pinch all the way down.
+  border-radius: var(--radius-lg);
   width: 100%;
   max-width: 400px; // Set a reasonable max width based on the largest row
   transition:
@@ -206,6 +245,12 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-width: 0;
+
+  @media (max-width: 767px) {
+    width: 100%;
+    align-self: stretch;
+  }
 }
 
 .skills__tree-node {
@@ -252,7 +297,12 @@
 
 .skills__tree-card {
   flex: 1;
-  border-radius: var(--radius-lg);
+  // A flex item's default `min-width: auto` refuses to shrink past its
+  // content's minimum, and the nowrap title below makes that minimum wide
+  // enough to push the card off a phone screen.
+  min-width: 0;
+  // Petal, same corner-cycling scheme as .skills__group but a size up.
+  border-radius: var(--radius-xl);
   padding: 1rem 1.25rem;
   margin-bottom: 0.75rem;
   display: flex;
@@ -333,7 +383,14 @@
   font-weight: 700;
   color: white;
   margin: 0;
+  // Held on one line where there is room for it; on a phone there isn't, and
+  // the longest of these ("Bachelor's in Computer Science & Interaction
+  // Design") is what sets the card's minimum width.
   white-space: nowrap;
+
+  @media (max-width: 767px) {
+    white-space: normal;
+  }
 }
 
 .skills__tree-company {
@@ -342,6 +399,10 @@
   opacity: 0.4;
   color: white;
   white-space: nowrap;
+
+  @media (max-width: 767px) {
+    white-space: normal;
+  }
 }
 
 .skills__tree-desc {
@@ -354,27 +415,32 @@
 }
 
 // ===========================
-// Background icons
+// Background bolt
 // ===========================
-.skills__bg {
-  position: absolute;
-  display: flex;
-  z-index: -1;
-
-  @media (max-width: 767px) {
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: repeat(3, 1fr);
-    height: 40rem;
-  }
-}
-
+// Was a row of six of these running across the section; now it's one, stood
+// against the right edge at the same size and in the same flat navy as before.
+// It hangs off the right so the mark reads as a crop of something larger.
+// `.skills` has no positioning context of its own (see above), so this sizes
+// and centers against the full `.page-section` panel, and the panel's own
+// `overflow: hidden` is what cuts it off — at the panel's real edge, not at
+// wherever this section's copy happens to end.
 .skills__bg-icon {
+  position: absolute;
+  top: 50%;
+  right: -4vw;
+  transform: translateY(-50%);
   width: 33vw;
-  margin-right: 2vw;
+  height: auto;
+  z-index: -1;
+  pointer-events: none;
+
+  @media (max-width: 1024px) {
+    right: -12vw;
+    width: 44vw;
+  }
 
   @media (max-width: 767px) {
-    width: 50vw;
-    margin-right: 0;
+    right: -20vw;
+    width: 62vw;
   }
 }

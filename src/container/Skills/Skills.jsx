@@ -2,31 +2,31 @@ import React from "react";
 import { Wrap } from "../../wrapper";
 import "./Skills.scss";
 import { icons, skillGroups, workHistory } from "../../constants";
-import { motion } from "framer-motion";
-import useMotionAnimation from "../../hooks/useMotionAnimation";
+import Reveal, { RevealGroup } from "../../components/Reveal/Reveal";
+import ShapeIcon from "../../components/ShapeIcon/ShapeIcon";
+
+// Cycles the "petal" cards through which corner stays tight, so the column
+// doesn't repeat the same pinched corner down its whole length.
+const PETAL_CORNERS = ["tl", "tr", "br", "bl"];
+const petalClass = (index) => `petal--${PETAL_CORNERS[index % PETAL_CORNERS.length]}`;
 
 const Skills = () => {
-  const { getAnimationProps } = useMotionAnimation();
-  const iconArray = Array(6).fill(icons.SkillsBG);
-
   return (
     <section className="skills" id="Experience">
       <div className="skills__container">
-        <motion.header
-          className="skills__header"
-          {...getAnimationProps("slideRight")}>
-          <img src={icons.SkillsHeader} alt="Header Icon" />
+        <Reveal as="header" className="skills__header" distance="column">
+          <ShapeIcon name="bolt" tone="gold" className="skills__header-icon" />
           <h1>Experience</h1>
-        </motion.header>
+        </Reveal>
 
         <div className="skills__body">
           {/* Left: grouped skill cards */}
-          <div className="skills__left">
-            {skillGroups.map((group) => (
-              <motion.div
+          <RevealGroup className="skills__left">
+            {skillGroups.map((group, index) => (
+              <Reveal
                 key={group.label}
-                className="skills__group primary-bg"
-                {...getAnimationProps("slideRight")}>
+                index={index}
+                className={`skills__group primary-bg ${petalClass(index)}`}>
                 <span className="skills__group-label">{group.label}</span>
                 <div className="skills__group-icons">
                   {group.items.map(({ name, Icon, src, rounded, small }) => (
@@ -41,24 +41,24 @@ const Skills = () => {
                     </div>
                   ))}
                 </div>
-              </motion.div>
+              </Reveal>
             ))}
-          </div>
+          </RevealGroup>
 
           {/* Right: work / education timeline */}
-          <div className="skills__right">
+          <RevealGroup className="skills__right">
             {workHistory.map((entry, index) => (
-              <motion.div
+              <Reveal
                 key={index}
-                className="skills__tree-node"
-                {...getAnimationProps("slideUp")}>
+                index={index}
+                className="skills__tree-node">
                 <div className="skills__tree-rail">
                   <div className={`skills__tree-dot${entry.isEducation ? " skills__tree-dot--edu" : ""}`} />
                   {index < workHistory.length - 1 && (
                     <div className="skills__tree-line" />
                   )}
                 </div>
-                <div className="skills__tree-card primary-bg">
+                <div className={`skills__tree-card primary-bg ${petalClass(index + 1)}`}>
                   <div className="skills__tree-top">
                     <div
                       className={`skills__tree-logo${
@@ -78,23 +78,20 @@ const Skills = () => {
                     <p className="skills__tree-desc">{entry.description}</p>
                   )}
                 </div>
-              </motion.div>
+              </Reveal>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </div>
 
-      <div className="skills__bg">
-        {iconArray.map((icon, index) => (
-          <img
-            src={icon}
-            className="skills__bg-icon"
-            key={index}
-            alt=""
-            aria-hidden="true"
-          />
-        ))}
-      </div>
+      {/* The same background mark as before, just the one of it, held against
+          the right edge instead of repeated across the section. */}
+      <img
+        src={icons.SkillsBG}
+        className="skills__bg-icon"
+        alt=""
+        aria-hidden="true"
+      />
     </section>
   );
 };
