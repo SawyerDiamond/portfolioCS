@@ -1,10 +1,12 @@
-import React, { useRef, useState, useCallback } from "react";
+import React, { useState } from "react";
 import { Wrap } from "../../wrapper";
+import { BlossomCarousel } from "@blossom-carousel/react";
+import "@blossom-carousel/react/style.css";
 import "./Projects.scss";
 import { icons, projects } from "../../constants";
 import { motion, AnimatePresence } from "framer-motion";
-import useDeviceDetect from "../../hooks/useDeviceDetect";
-import useMotionAnimation from "../../hooks/useMotionAnimation";
+import Reveal, { RevealGroup } from "../../components/Reveal/Reveal";
+import ShapeIcon from "../../components/ShapeIcon/ShapeIcon";
 
 const ProjectModal = ({ project, onClose }) => {
   if (!project) return null;
@@ -92,87 +94,63 @@ const ProjectModal = ({ project, onClose }) => {
 };
 
 const Projects = React.memo(() => {
-  const { getAnimationProps } = useMotionAnimation();
-  const { isMobile, isTablet } = useDeviceDetect();
   const [selectedProject, setSelectedProject] = useState(null);
-
-  const itemRef = useRef();
-  const textArray = Array(6).fill("P R O J E C T S");
-
-  const getItemClass = useCallback(
-    (project) => {
-      return isMobile && !project.projectLink ? "hidden" : "project__item";
-    },
-    [isMobile],
-  );
+  // Two lines, not six: the watermark is clipped to the section box, and at
+  // this size — big enough to run off the sides on purpose — three lines
+  // stood taller than the section does, so the top and bottom ones only ever
+  // rendered as sliced half-lines. Running off the *sides* is fine; that's
+  // the point. Getting sliced top and bottom isn't.
+  const textArray = Array(2).fill("P R O J E C T S");
 
   return (
     <section className="project">
-      <div className="project__container">
-        <motion.div
-          className="project__header"
-          id="Projects"
-          {...getAnimationProps("slideRight")}>
-          <img src={icons.ProjectsHeader} alt="Header Icon" />
+      <RevealGroup className="project__container">
+        <Reveal className="project__header" id="Projects" distance="column">
+          <ShapeIcon name="burst" tone="pink" className="project__header-icon" />
           <h1>Projects</h1>
-        </motion.div>
-        <div className="project__grid">
+        </Reveal>
+
+        {/* Blossom enhances the native scroller with drag rather than replacing
+            it, so the row keeps real scrolling, keyboard access and momentum.
+            The carousel arrives as one block on the header's heels — the cards
+            scroll horizontally, so staggering them individually would leave
+            whatever is off-screen to pop in later. */}
+        <Reveal>
+        <BlossomCarousel as="ul" className="pcarousel">
           {projects.map((project, index) => (
-            <motion.div
-              onClick={() => setSelectedProject(project)}
-              ref={itemRef}
-              whileInView={{ opacity: [0, 1] }}
-              transition={{ duration: 0.5 }}
-              key={project.title ? project.title + index : index}
-              className={`${getItemClass(project)} project__item primary-bg`}>
-              <img
-                src={project.imgUrl}
-                loading="lazy"
-                className="project__item-img"
-                alt={
-                  project.title ? project.title : "Placeholder Project Image"
-                }
-              />
-              <motion.div
-                className="project__item-info"
-                {...getAnimationProps("slideRight")}>
-                <div className="project__shelf">
-                  <div className="project__shelf-block">
-                    <h2 className="project__title">{project.title}</h2>
-                    {project.images && project.images.length > 0 && (
-                      <div className="project__tools ">
-                        {project.images.map((image, index) => (
-                          <img
-                            className="project__tools-img primary-bg"
-                            key={index}
-                            src={image}
-                            alt={`${project.title} - Image ${index + 1}`}
-                            loading="lazy"
-                          />
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <p className="project__description">{project.description}</p>
-              </motion.div>
-            </motion.div>
+            <li
+              className="pcarousel__slide"
+              data-blossom-slide
+              key={project.title ? project.title + index : index}>
+              <button
+                type="button"
+                className="pcard"
+                aria-label={`Open ${project.title}`}
+                onClick={() => setSelectedProject(project)}>
+                <img
+                  className="pcard__img"
+                  src={project.imgUrl}
+                  alt=""
+                  loading="lazy"
+                />
+
+                <span className="pcard__meta">
+                  <span className="pcard__title">{project.title}</span>
+                  {project.images?.length > 0 && (
+                    <span className="pcard__tools">
+                      {project.images.slice(0, 4).map((image, toolIndex) => (
+                        <img key={toolIndex} src={image} alt="" />
+                      ))}
+                    </span>
+                  )}
+                </span>
+              </button>
+            </li>
           ))}
-          {Array(4 - projects.length)
-            .fill()
-            .map((_, index) => (
-              <div
-                key={`placeholder-${index}`}
-                className={
-                  isMobile || isTablet
-                    ? "hidden"
-                    : `project__item ${
-                        (index + 1) % 3 === 0 ? "primary-bg" : "tertiary-bg"
-                      }`
-                }></div>
-            ))}
-        </div>
-      </div>
+        </BlossomCarousel>
+        </Reveal>
+      </RevealGroup>
+
       <div className="project__bg">
         {textArray.map((text, index) => (
           <span className="project__bg-text" key={index}>
